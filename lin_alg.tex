@@ -1,0 +1,512 @@
+\documentclass[12pt]{amsart}
+
+\usepackage{amssymb,amsmath,amsthm}
+
+% theorem styles (I like everything to have the same counter)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{exercise}[theorem]{Exercise}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% some numbering settings
+\numberwithin{equation}{section}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\title{Multilinear Algebra}
+\author{Alexander Duncan}
+
+\maketitle
+
+Here we review and introduce standard facts from (multi)linear algebra.
+See \cite{Lang} or \cite{DF} for proofs.
+
+\section{Endomorphisms}
+
+Let $k$ be a field.
+
+\begin{definition}
+A \emph{$k$-algebra} $A$ is both a $k$-vector space and a unital ring
+such that $r(ab)=(ra)b=a(rb)$ for all $r \in k$ and $a,b \in A$.
+A \emph{morphism of $k$-algebras} $f \colon A \to B$ is both a
+$k$-linear transformation and a ring homomorphism.
+\end{definition}
+
+An alternative (equivalent) definition of $k$-algebra is as a
+unital ring $A$ along with ring homomorphism $\pi : k \to A$,
+called the \emph{structure morphism}, whose image is contained in
+the center of $A$.  Using this definition,
+a morphism of $k$-algebras is a ring homomorphism $f\colon A \to B$ such
+that $\pi_B = f \circ \pi_A$, where $\pi_A$ and $\pi_B$ are the
+respective structure morphisms of $A$ and $B$.
+
+\begin{exercise}
+Prove the two definitions of $k$-algebra and $k$-algebra morphism are
+equivalent.
+\end{exercise}
+
+\begin{definition}
+Let $\operatorname{M}_{n,m}(k)$ be the set of
+$n \times m$ matrices with coefficients in $k$ and
+let $\operatorname{M}_{n}(k) = \operatorname{M}_{n,n}(k)$. 
+\end{definition}
+
+The set of matrices $\operatorname{M}_{n,m}(k)$ is a $k$-vector space
+and the set of square matrices $\operatorname{M}_n(k)$ is a $k$-algebra
+under matrix multiplication.
+
+\begin{definition}
+For $k$-vector spaces $V,W$, let
+$\operatorname{Hom}_k(V,W)$ be set of $k$-linear
+transformations from $V$ to $W$.
+We write $\operatorname{End}_k(V) = \operatorname{Hom}_k(V,V)$
+for the set of \emph{endomorphisms} of $V$.
+We write $V^\vee = \operatorname{Hom}_k(V,k)$
+for \emph{dual space} of $V$.
+\end{definition}
+
+The set $\operatorname{Hom}_k(V,W)$ is a $k$-vector space and the set
+$\operatorname{End}_k(V)$ is moreover a $k$-algebra under composition.
+
+Given a matrix $A \in \operatorname{M}_{n,m}(k)$, we obtain
+two canonical maps.
+Namely, we have \emph{left multiplication}
+$L_A \in \operatorname{Hom}(k^m,k^n)$ via $L_A(v)=Av$
+viewing $v$ as a column vector
+and \emph{right multiplication}
+$R_A \in \operatorname{Hom}(k^n,k^m)$ via $R_A(v)=vA$
+viewing $v$ as a row vector.
+
+\begin{theorem}
+Suppose $\psi: k^n \to V$ and $\phi : k^m \to W$ are isomorphisms of
+vector spaces.
+Then there is an vector space isomorphism
+$\operatorname{M}_{n,m}(k) \to \operatorname{Hom}_k(V,W)$ given by
+$A \mapsto \phi \circ L_A \circ \psi^{-1}$.
+In the case where $W=V$ and $\phi=\psi$, this becomes a $k$-algebra
+isomorphism $\operatorname{M}_n(k) \to \operatorname{End}_k(V)$.
+\end{theorem}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\subsection{Dual Spaces}
+
+If $V$ is a vector space with finite basis
+$\beta_1, \ldots, \beta_n$, the there is a unique \emph{dual basis}
+$\beta^\vee_1, \ldots, \beta^\vee_n$
+for $V^\vee$ such that $\beta_i^\vee(\beta_j)=\delta_{ij}$,
+where $\delta_{ij}$ is the Kronecker delta.
+
+In particular, for a finite-dimensional vector space $V$,
+there is a \emph{non-canonical} isomorphism $V \cong V^\vee$,
+which depends on a choice of basis.
+In contrast, there is a \emph{canonical} isomorphism
+$V \cong (V^\vee)^\vee$ by taking a vector $v \in V$ to the
+``evaluation'' functional $\operatorname{ev}_v : f \mapsto f(v)$. 
+
+\subsection{Characteristic Polynomial}
+
+\begin{definition}
+Given a square matrix $A \in \operatorname{M}_n(k)$, the
+\emph{characteristic polynomial} $\chi_A(t) \in k[t]$ is defined by the
+determinant $\det(tI-A)$.  We use the sign convention ensuring that the
+characteristic polynomial is always monic.
+The \emph{minimal polynomial} $m_A(t) \in k[t]$ is the monic generator
+of the principal ideal $\ker(\psi_A)$ where
+$\psi_A : k[t] \to \operatorname{M}_n(k)$ is the $k$-algebra
+homomorphism determined by $\psi_A(t)=A$.
+\end{definition}
+
+\begin{theorem}[Cayley-Hamilton]
+$m_A(t)$ divides $\chi_A(t)$
+\end{theorem}
+
+\begin{definition}
+The multiset of \emph{eigenvalues} of $A \in \operatorname{M}_n(k)$ is
+the multiset of roots of $\chi_A(t)$ over the algebraic closure
+$\overline{k}$ of $k$.
+\end{definition}
+
+If $\lambda_1, \ldots, \lambda_n$ are the eigenvalues of $\chi_A(t)$,
+then we have
+\[
+\chi_A(t) = t^n - e_1 t + e_2 t^2 - e_3 t^3 + \cdots \pm e_n
+\]
+where $e_1,\ldots, e_n$ are the \emph{elementary symmetric functions}
+in $\lambda_1,\ldots, \lambda_n$.
+
+As a formula, we have that the elementary symmetric function $e_i$
+is given by
+\[
+e_i = \sum_{S \in \Lambda_k} \prod_{i \in S} \lambda_i
+\]
+where $\Lambda_k$ is the set of subsets of $\{1,\ldots,n\}$ of size
+$k$.
+
+Important special cases are the trace
+\[
+\operatorname{tr}(A) = e_1 = \lambda_1 + \ldots + \lambda_n
+\]
+and the determinant
+\[
+\det(A) = e_n = \lambda_1 \cdot \lambda_2 \cdots \lambda_n .
+\]
+
+Recall that two matrices $A,B \in \operatorname{M}_n(k)$ are \emph{similar}
+if there exists a matrix $P$ such that $A=PBP^{-1}$.
+Given an endomorphism $f$ of a $n$-dimensional vector space $V$,
+one obtains different representing matrices for $f$ depending on the
+choice of basis.  However, the set of matrices representing $f$ is
+a similarity class in $\operatorname{M}_n(k)$.
+
+The minimal polynomial, characteristic polynomial, eigenvalues,
+trace, and determinant are all invariant under similarity.
+Thus, one can define the minimal polynomial,
+characteristic polynomial, eigenvalues, trace, and determinant of an
+endomorphism in a canonical way that does not depend on the choice of
+basis.
+
+\subsection{Jordan Canonical Form}
+
+The \emph{Jordan block of size $n$ with eigenvalue $\lambda$} is the
+$n$-dimensional matrix
+\[
+J_n(\lambda) = \begin{pmatrix}
+\lambda & 1 & 0 & \cdots & 0 & 0\\
+0 & \lambda & 1 & \cdots & 0 & 0\\
+0 & 0& \lambda & \cdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & 0 & \cdots & \lambda & 1\\
+0 & 0 & 0 & \cdots & 0 & \lambda\\
+ \end{pmatrix} .
+\]
+
+\begin{definition}
+A matrix $A$ is in \emph{Jordan Canonical Form} if $A$ is of block
+diagonal form with the blocks being Jordan blocks:
+\[
+A = \begin{pmatrix}
+J_{n_1}(\lambda_1) & \cdots & 0\\
+\vdots & \ddots & \vdots\\
+0 & \cdots & J_{n_r}(\lambda_r)\\
+\end{pmatrix} 
+\]
+where $n_1,\ldots,n_r$ and $\lambda_1,\ldots,\lambda_r$
+are not necessarily distinct.
+\end{definition}
+
+Note that \emph{diagonal matrices} are precisely those in Jordan
+canonical form where $n_1=\ldots=n_r=1$.
+A matrix is \emph{diagonalizable} if it is similar to a diagonal matrix.
+
+\begin{theorem}
+Suppose $A$ is a square matrix whose eigenvalues are defined over $k$.
+Then $A$ is similar to matrix in Jordan Canonical Form,
+which is unique up to reordering the Jordan blocks.
+\end{theorem}
+
+Note that the condition in the theorem above always holds when the
+field $k$ is algebraically closed.
+
+\begin{exercise}
+\[J_n(\lambda)^m =
+\begin{pmatrix}
+\lambda^m & \binom{m}{1}\lambda^{m-1} & \binom{m}{2}\lambda^{m-2}
+& \cdots & \binom{m}{n-2}\lambda^{m-n-2} & \binom{m}{n-1}\lambda^{m-n-1}\\
+0 & \lambda^m & \binom{m}{1}\lambda^{m-1}
+& \cdots & \binom{m}{n-3}\lambda^{m-n-3} & \binom{m}{n-2}\lambda^{m-n-2}\\
+0 & 0 & \lambda^m & \cdots &
+\binom{m}{n-4}\lambda^{m-n-4} & \binom{m}{n-3}\lambda^{m-n-3}\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & 0 & \cdots & \lambda^m & \binom{m}{1}\lambda^{m-1}\\
+0 & 0 & 0 & \cdots & 0 & \lambda^m\\
+ \end{pmatrix} .\]
+\end{exercise}
+
+\begin{corollary}
+Suppose $k$ is an algebraically closed field
+and $m$ is an integer coprime to the characteristic.
+If $A \in \operatorname{M}_n(k)$ has order $m$,
+then $A$ is diagonalizable and its eigenvalues are $m$th roots of unity.
+\end{corollary}
+
+\begin{proof}
+The order of a matrix is a similarity invariant since
+$A=PBP^{-1}$ implies $A^m=PB^mP^{-1}$.
+Thus, we may assume that $A$ is in Jordan Canonical Form.
+Since we know $A^m=I$, from the exercise we conclude that
+for every eigenvalue $\lambda_i$ of $A$, we have
+$\lambda_i^m = 1$
+and moreover $m\lambda_i^{m-1}=0$ if the corresponding Jordan block is
+not $1\times 1$.
+The first condition forces all the eigenvalues to be $m$th roots of
+unity, while the second forces all the blocks to be $1 \times 1$
+(since $m\ne 0$).
+\end{proof}
+
+The condition that the integer $m$ is coprime to the characteristic is
+necessary.  If $k$ has characteristic $p$, then the matrix
+\[
+\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} 
+\]
+has order $p$, but is not diagonalizable. 
+
+\subsection{Rational Canonical Form}
+
+TODO: This may be filled in later when we begin working over non-closed
+fields.
+
+\section{Bilinear Maps}
+
+\begin{definition}
+Let $V$ and $W$ be $k$-vector spaces.
+A \emph{bilinear map} $b: V \times W \to k$,
+is a function such that
+\begin{itemize}
+\item $b(\lambda v_1+v_2,w) = \lambda b(v_1,w) + b(v_2,w)$, and
+\item $b(v,\lambda w_1+w_2) = \lambda b(v,w_1) + b(v,w_2)$
+\end{itemize}
+for all $v,v_1,v_2 \in V$, $w,w_1,w_2 \in W$ and $\lambda \in k$.
+\end{definition}
+
+The set $\operatorname{Bil}_k(V,W)$ of bilinear maps is a $k$-vector
+space.
+We have a canonical isomorphism
+\[
+\operatorname{Bil}_k(V,W) \cong
+\operatorname{Hom}_k(V,W^\vee)
+\]
+where $b \in \operatorname{Bil}_k(V,W)$ is taken to $b_1 : V \to W^\vee$
+by defining $b_1(v) = b(v,-)$ for each $v \in V$.
+Similarly, we have a canonical isomorphism
+\[
+\operatorname{Bil}_k(V,W) \cong
+\operatorname{Hom}_k(W,V^\vee)
+\]
+where $b \in \operatorname{Bil}_k(V,W)$ is taken to $b_2 : W \to V^\vee$
+by defining $b_2(w) = b(-,w)$ for each $w \in W$.
+
+Suppose $V$ has basis $v_1,\ldots,v_n$ and $W$ has basis $w_1,\ldots, w_m$,
+then we can form the \emph{matrix} $B$ of the bilinear map $b$ by defining
+$B_{ij} = b(v_i,w_i)$.
+
+\begin{exercise}
+For a choice of basis for $V$ and $W$, then the following are equivalent
+\begin{itemize}
+\item $b_1 : W \to V^\vee$ is an isomorphism.
+\item $b_2 : V \to W^\vee$ is an isomorphism.
+\item $B$ is an invertible matrix.
+\end{itemize}
+If any of these conditions hold, then we say the bilinear map
+is \emph{non-degenerate}.
+\end{exercise}
+
+\subsection{Bilinear Forms}
+
+A \emph{bilinear form} on $V$ is a bilinear map $b : V \times V \to k$.
+In other words, both components of the product in the domain are the
+same vector space.
+In this case, the \emph{matrix} $B$ of a bilinear $b$ is usually formed
+with respect to the same basis for both components of the product.
+
+\begin{definition}
+A bilinear form $b: V \times V \to k$ is
+\begin{itemize}
+\item \emph{symmetric} if $b(v,w)=b(w,v)$ for all $v,w \in V$.
+\item \emph{skew-symmetric} or \emph{antisymmetric}
+if $b(v,w)=-b(w,v)$ for all $v,w \in V$.
+\item \emph{alternating} if $b(v,v)=0$ for all $v \in V$.
+\end{itemize}
+\end{definition}
+
+\begin{exercise}
+The set of symmetric (resp. skew-symmetric, resp. alternating) bilinear
+forms is a subspace of $\operatorname{Bil}_k(V,V)$.
+\end{exercise}
+
+If $b: V \times V \to k$ is a symmetric bilinear form,
+then the two canonical maps $b_1 : V \to V^\vee$ and $b_2 : V \to
+V^\vee$ are equal.  Thus, a choice of isomorphism $V \to V^\vee$
+is equivalent to a choice of symmetric bilinear form on $V$.
+
+\begin{example}
+The \emph{dot product} on $k^n$ is a symmetric bilinear form.
+In the case where $k$ does not have characteristic $2$, the form is
+non-degenerate and the corresponding isomorphism
+$k^n \to (k^n)^\vee$ can be thought of as the
+transpose operation, which takes column vectors to row vectors and vice
+versa.
+\end{example}
+
+\begin{example}
+Consider the $2n \times 2n$ block matrix
+\[
+J = \begin{pmatrix} 0 & I_n \\ -I_n & 0 \end{pmatrix} 
+\]
+in $k^{2n}$.
+The corresponding bilinear form is a non-degenerate alternating bilinear
+form.
+\end{example}
+
+\begin{example}
+If $k$ has characteristic $2$, then the ``dot product''
+on $k^n$ is a \emph{degenerate} symmetric bilinear form.
+It is also an example of a skew-symmetric bilinear form that is not
+alternating.
+\end{example}
+
+\begin{proposition}
+Every alternating form is skew-symmetric.
+\end{proposition}
+
+\begin{proof}
+If $b$ is alternating, then
+\begin{align*}
+0 &= b(v+w,v+w)\\
+&= b(v,v) + b(v,w) + b(w,v) + b(w,w)\\
+&= b(v,w)+b(w,v)
+.\end{align*}
+Thus, we conclude that $b$ is skew-symmetric.
+\end{proof}
+
+\begin{proposition}
+If $k$ does \emph{not} have characteristic $2$, then a bilinear form is
+alternating if and only if it is skew-symmetric.
+\end{proposition}
+
+\begin{proof}
+If $b$ is skew-symmetric, then $b(v,v)=-b(v,v)$ for all $v \in V$.
+Thus $2b(v,v)=0$ and, since $\frac{1}{2} \in k$,
+we see $b$ is alternating.
+\end{proof}
+
+\begin{proposition}
+If $k$ has characteristic $2$, then a bilinear form is
+symmetric if and only if it is skew-symmetric.
+In particular, every alternating form is symmetric.
+\end{proposition}
+
+\begin{proof}
+Clear.
+\end{proof}
+
+\subsection{Sesquilinear Forms}
+
+In this section, we work over the complex numbers.
+There are extensions of these ideas to quadratic extensions of other
+fields, but we do not want to get too far afield.
+Below, if $z=a+bi \in \mathbb{C}$, then we write
+$\overline{z}=a-bi$ for its complex conjugate.
+
+\begin{definition}
+Let $V$ and $W$ be $\mathbb{C}$-vector spaces.
+A \emph{sesquilinear map} $s: V \times W \to \mathbb{C}$,
+is a function such that
+\begin{itemize}
+\item $s(\lambda v_1+v_2,w) = \overline{\lambda} s(v_1,w) + s(v_2,w)$, and
+\item $s(v,\lambda w_1+w_2) = \lambda s(v,w_1) + s(v,w_2)$
+\end{itemize}
+for all $v,v_1,v_2 \in V$, $w,w_1,w_2 \in W$ and $\lambda \in \mathbb{C}$.
+\end{definition}
+
+A sesquilinear map is \emph{not} bilinear form as it is conjugate
+linear in the first entry rather than linear.
+We use the ``physics convention'' where the first entry is conjugate
+linear rather than the second.  This disagrees with many areas of
+mathematics, which decrees that the \emph{second} entry is conjugate linear.
+The former is much more natural in view of the standard matrix
+conventions and seems to ``winning'' in more modern texts.
+
+\begin{definition}
+A \emph{sesquilinear form} is a sesquilinear map $s: V \times V \to
+\mathbb{C}$.
+A sesquilinear form is \emph{hermitian} if $s(v,w)=\overline{s(w,v)}$
+for all $v,w \in V$.
+A hermitian form is \emph{positive definite} if $s(v,v) > 0$ if and only
+if $v \ne 0$.
+\end{definition}
+
+If we restrict a sequilinear form to a vector space over a totally real
+subfield $k \subseteq \mathbb{R}$, then hermitian restricts to symmetric
+and positive definite restricts to non-degenerate.
+
+\subsection{Classical Groups}
+
+TODO
+
+\subsection{Multilinear Maps}
+
+\begin{definition}
+Let $V_1,\ldots, V_n$ be $k$-vector spaces.
+A \emph{multilinear map} $m: V_1 \times \cdots \times V_n \to k$,
+is a function that is linear in each entry; in other words,
+\begin{align*}
+&m(v_1,\ldots,v_{i-1},\lambda v_i + v_i',v_{i+1},\ldots,v_n)\\
+=& \lambda m(v_1,\ldots,v_{i-1},v_i,v_{i+1},\ldots,v_n)
++ m(v_1,\ldots,v_{i-1},v_i',v_{i+1},\ldots,v_n)
+\end{align*}
+for ever index $i$ and all $v_j,v_j' \in V_j$, $\lambda \in k$.
+A \emph{multilinear form} is a multilinear map where $V_1 = \cdots = V_n$.
+\end{definition}
+
+\begin{definition}
+A multilinear form is
+\emph{symmetric} if
+\[
+m(\cdots,v_i,\cdots,v_j,\cdots) = m(\cdots,v_j,\cdots,v_i,\cdots)
+\]
+for all pairs of indices $i,j$.
+\end{definition}
+
+\begin{definition}
+A multilinear form is \emph{skew-symmetric} or \emph{antisymmetric} if
+\[
+m(\cdots,v_i,\cdots,v_j,\cdots) = -m(\cdots,v_j,\cdots,v_i,\cdots)
+\]
+for all distinct pairs of indices $i,j$.
+\end{definition}
+
+\begin{definition}
+A multilinear form is \emph{alternating} if
+\[
+m(v_1,\ldots,v_n) = 0
+\]
+whenever $v_i=v_j$ for some $i \ne j$.
+\end{definition}
+
+As in the bilinear case, multilinear maps form a vector space and the
+symmetric, skew-symmetric, and alternating forms are subspaces of the
+space of multilinear forms.
+
+\begin{exercise}
+Prove that
+\begin{itemize}
+\item alternating forms are skew-symmetric,
+\item if $\operatorname{char}(k) \ne 2$, then skew-symmetric forms are
+alternating, and
+\item if $\operatorname{char}(k) = 2$, then skew-symmetric forms are
+symmetric and conversely.
+\end{itemize}
+\end{exercise}
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{alpha}
+\bibliography{rep_theory}
+
+\end{document}
+
+
