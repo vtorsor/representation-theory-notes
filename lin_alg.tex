@@ -1,4 +1,4 @@
-\documentclass[12pt]{amsart}
+\documentclass[12pt]{article}
 
 \usepackage{amssymb,amsmath,amsthm}
 
@@ -19,6 +19,24 @@
 % some numbering settings
 \numberwithin{equation}{section}
 
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{15.2pt}
+\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+\setlength{\footskip}{30pt}
+\pagestyle{fancy}
+
+\makeatletter
+\let\ps@plain\ps@fancy 
+\makeatother
+
+\lhead{MATH 742}
+\chead{Multilinear Algebra}
+\rhead{Spring 2023}
+\lfoot{Last Revised: \today}
+\cfoot{}
+\rfoot{\thepage\ of \pageref{LastPage} }
+
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%
@@ -28,8 +46,16 @@
 
 \maketitle
 
-Here we review and introduce standard facts from (multi)linear algebra.
-See \cite{Lang} or \cite{DF} for proofs.
+Here we review and/or introduce standard facts from (multi)linear algebra.
+Much of this should have been seen in undergraduate linear algebra or the
+standard algebra qualifying exam sequence, but some ideas (such as
+tensor products) may not have been.
+
+Two standard references for graduate level algebra are
+\cite{DF} and \cite{Lang}.  We focus on the case where the base ring is
+a field, since this is our main application.
+Many of these ideas can be generalized or extended to arbitrary rings,
+but we do not do so here.
 
 \section{Endomorphisms}
 
@@ -51,7 +77,7 @@ that $\pi_B = f \circ \pi_A$, where $\pi_A$ and $\pi_B$ are the
 respective structure morphisms of $A$ and $B$.
 
 \begin{exercise}
-Prove the two definitions of $k$-algebra and $k$-algebra morphism are
+Prove the two definitions of $k$-algebra (resp. $k$-algebra morphism) are
 equivalent.
 \end{exercise}
 
@@ -72,7 +98,7 @@ transformations from $V$ to $W$.
 We write $\operatorname{End}_k(V) = \operatorname{Hom}_k(V,V)$
 for the set of \emph{endomorphisms} of $V$.
 We write $V^\vee = \operatorname{Hom}_k(V,k)$
-for \emph{dual space} of $V$.
+for the \emph{dual space} of $V$.
 \end{definition}
 
 The set $\operatorname{Hom}_k(V,W)$ is a $k$-vector space and the set
@@ -104,7 +130,7 @@ Exercise.
 \subsection{Dual Spaces}
 
 If $V$ is a vector space with finite basis
-$\beta_1, \ldots, \beta_n$, the there is a unique \emph{dual basis}
+$\beta_1, \ldots, \beta_n$, then there is a unique \emph{dual basis}
 $\beta^\vee_1, \ldots, \beta^\vee_n$
 for $V^\vee$ such that $\beta_i^\vee(\beta_j)=\delta_{ij}$,
 where $\delta_{ij}$ is the Kronecker delta.
@@ -119,10 +145,15 @@ $V \cong (V^\vee)^\vee$ by taking a vector $v \in V$ to the
 \subsection{Characteristic Polynomial}
 
 \begin{definition}
-Given a square matrix $A \in \operatorname{M}_n(k)$, the
-\emph{characteristic polynomial} $\chi_A(t) \in k[t]$ is defined by the
-determinant $\det(tI-A)$.  We use the sign convention ensuring that the
+Given a square matrix $A \in \operatorname{M}_n(k)$, we define the
+\emph{characteristic polynomial}:
+\[
+\chi_A(t) = \det(tI-A)
+\]
+which is an element of $k[t]$.
+We use the sign convention ensuring that the
 characteristic polynomial is always monic.
+
 The \emph{minimal polynomial} $m_A(t) \in k[t]$ is the monic generator
 of the principal ideal $\ker(\psi_A)$ where
 $\psi_A : k[t] \to \operatorname{M}_n(k)$ is the $k$-algebra
@@ -140,9 +171,10 @@ $\overline{k}$ of $k$.
 \end{definition}
 
 If $\lambda_1, \ldots, \lambda_n$ are the eigenvalues of $\chi_A(t)$,
+counted with multiplicity,
 then we have
 \[
-\chi_A(t) = t^n - e_1 t + e_2 t^2 - e_3 t^3 + \cdots \pm e_n
+\chi_A(t) = t^n - e_1 t^{n-1} + e_2 t^{n-2} - e_3 t^{n-3} + \cdots \pm e_n
 \]
 where $e_1,\ldots, e_n$ are the \emph{elementary symmetric functions}
 in $\lambda_1,\ldots, \lambda_n$.
@@ -150,9 +182,9 @@ in $\lambda_1,\ldots, \lambda_n$.
 As a formula, we have that the elementary symmetric function $e_i$
 is given by
 \[
-e_i = \sum_{S \in \Lambda_k} \prod_{i \in S} \lambda_i
+e_i = \sum_{X \in S(n,k)} \left(\prod_{i \in X} \lambda_i\right)
 \]
-where $\Lambda_k$ is the set of subsets of $\{1,\ldots,n\}$ of size
+where $S(n,k)$ is the set of subsets of $\{1,\ldots,n\}$ of size
 $k$.
 
 Important special cases are the trace
@@ -161,7 +193,7 @@ Important special cases are the trace
 \]
 and the determinant
 \[
-\det(A) = e_n = \lambda_1 \cdot \lambda_2 \cdots \lambda_n .
+\det(A) = e_n = \lambda_1 \lambda_2 \cdots \lambda_{n-1} \lambda_n .
 \]
 
 Recall that two matrices $A,B \in \operatorname{M}_n(k)$ are \emph{similar}
@@ -265,8 +297,7 @@ has order $p$, but is not diagonalizable.
 
 \subsection{Rational Canonical Form}
 
-TODO: This may be filled in later when we begin working over non-closed
-fields.
+TODO
 
 \section{Bilinear Maps}
 
@@ -318,7 +349,7 @@ is \emph{non-degenerate}.
 A \emph{bilinear form} on $V$ is a bilinear map $b : V \times V \to k$.
 In other words, both components of the product in the domain are the
 same vector space.
-In this case, the \emph{matrix} $B$ of a bilinear $b$ is usually formed
+In this case, the \emph{matrix} $B$ of a bilinear form $b$ is usually formed
 with respect to the same basis for both components of the product.
 
 \begin{definition}
@@ -421,7 +452,7 @@ is a function such that
 for all $v,v_1,v_2 \in V$, $w,w_1,w_2 \in W$ and $\lambda \in \mathbb{C}$.
 \end{definition}
 
-A sesquilinear map is \emph{not} bilinear form as it is conjugate
+A sesquilinear map is \emph{not} a bilinear form as it is conjugate
 linear in the first entry rather than linear.
 We use the ``physics convention'' where the first entry is conjugate
 linear rather than the second.  This disagrees with many areas of
@@ -438,7 +469,7 @@ A hermitian form is \emph{positive definite} if $s(v,v) > 0$ if and only
 if $v \ne 0$.
 \end{definition}
 
-If we restrict a sequilinear form to a vector space over a totally real
+Informally, if we restrict a sequilinear form to a vector space over a totally real
 subfield $k \subseteq \mathbb{R}$, then hermitian restricts to symmetric
 and positive definite restricts to non-degenerate.
 
