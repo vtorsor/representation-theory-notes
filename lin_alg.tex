@@ -532,6 +532,202 @@ symmetric and conversely.
 \end{itemize}
 \end{exercise}
 
+\section{Tensor Products}
+
+We direct the reader to \cite[10.4]{DF} or \cite[XVI]{Lang}
+for more details about the properties of tensor products in the general
+module-theoretic setting.
+Here we focus on the case of finite-dimensional vector spaces,
+which is somewhat easier.
+
+We define tensor products in terms of their universal mapping property.
+
+\begin{definition}
+Let $V_1,\ldots, V_n$ be vector spaces over $k$.
+A \emph{tensor product} $V_1 \otimes_k V_2 \otimes \cdots \otimes_k V_n$
+is a $k$-vector space along with a multilinear map
+\[
+\pi : V_1 \times \cdots \times V_n
+\to  V_1 \otimes_k \cdots \otimes_k V_n
+\]
+such that for any multilinear map $\phi : V_1 \times \cdots \times V_n
+\to W$ there exists a unique linear map
+$\psi : V_1 \otimes_k \cdots \otimes_k V_n \to W$ such that
+$\phi = \psi \circ \pi$.
+\end{definition}
+
+When the base field $k$ is clear, we will often omit it from the
+notation; in other words $V \otimes U$ is shorthand for $V \otimes_k U$.
+We may also use the shorthand notation
+\[
+\bigotimes_{i=1}^n V_i := V_1 \otimes \cdots \otimes V_n .
+\]
+
+Given $(v_1,\ldots, v_n) \in V_1 \times \cdots \times V_n$,
+let $v_1 \otimes v_2 \otimes \cdots \otimes v_n$ denote the image
+$\pi(v_1,\ldots,v_n)$ in $V_1 \otimes_k \cdots \otimes_k V_n$.
+We call these elements \emph{simple tensors}.
+
+\begin{theorem}
+Tensor products exist and are unique up to unique isomorphism.
+\end{theorem}
+
+\begin{proof}
+We prove existence by construction.
+Let $\Omega$ be the free $k$-vector space with basis given by the elements of
+$V_1 \times \cdots \times V_n$.  Let $[x]$ be the basis element
+corresponding to $x$.
+Let $I$ be the subspace of $\Omega$ spanned by
+\[
+[(v_1, \ldots, (\lambda v_i + v'_i), \ldots, v_n)]
+-
+\lambda[(v_1, \ldots,v_i, \ldots, v_n)] -
+[(v_1, \ldots, v'_i, \ldots, v_n)]
+\]
+for every index $i$, every $\lambda \in k$ and all $v_j,v'_j \in V_j$
+for every $j$.
+Define $V_1 \otimes \cdots \otimes V_n$ as the quotient space
+$\Omega/I$ with $\pi$ the composition of the canonical inclusion
+$\prod_{i=1}^n V_i \to \Omega$ and the quotient $\Omega \to
+\bigotimes_{i=1}^n V_i$.
+
+We leave the remaining conditions as an exercise.
+\end{proof}
+
+We have the following corollaries:
+
+\begin{corollary}
+The vector space $V_1 \otimes_k \cdots \otimes_k V_n$
+is spanned by its simple tensors.
+The relation
+\begin{align*}
+&v_1 \otimes \cdots \otimes (\lambda v_i + v'_i) \otimes \cdots \otimes
+v_n\\
+=&
+\lambda(v_1 \otimes \cdots \otimes v_i \otimes \cdots \otimes v_n) +
+v_1 \otimes \cdots \otimes v'_i \otimes \cdots \otimes v_n
+\end{align*}
+holds
+for every index $i$, every $\lambda \in k$ and all $v_j,v'_j \in V_j$.
+\end{corollary}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{proposition}
+If $B_1,\ldots B_n$ are bases for $V_1,\ldots,V_n$, then
+\[
+\{ b_1 \otimes \cdots \otimes b_n \mid b_1 \in B_1, \ldots, b_n \in B_n
+\}
+\]
+is a basis for $V_1 \otimes_k \cdots \otimes_k V_n$.
+\end{proposition}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{remark}
+One frequently defines linear transformations by
+``extension by linearity.''
+Suppose we have vector spaces $V,W$ and we have a spanning
+set $S$ for $V$.  If we define a function $f : S \to W$,
+then there is at most one linear transformation $F : V \to W$
+extending $f$.  When $S$ is a \emph{basis}, the extension $F$ always exists,
+but when $S$ is not linearly independent there is something to check.
+In the case of tensor products, the set $S$ is frequently taken to be
+the set of simple tensors.
+\end{remark}
+
+\begin{theorem}
+For a finite-dimensional vector space $V$ and an arbitrary vector space
+$W$, we have a canonical isomorphism
+\[
+V^\vee \otimes W \cong \operatorname{Hom}_k(V,W) .
+\]
+\end{theorem}
+
+\begin{proof}
+Define $\psi : V^\vee \otimes W \cong \operatorname{Hom}_k(V,W)$
+by defining
+\[
+\psi(f \otimes w)(v) = f(v)w
+\]
+for $f \in V^\vee$, $w \in W$, $v \in V$, and extending by linearity.
+(Exercise: check that extension by linearity is valid here!)
+
+We explicitly construct an inverse map $\phi$.
+Let $v_1,\ldots, v_n$ be a basis for $V$.
+Given a linear map $g : V \to W$, define
+\[
+\phi(g) = \sum_{i=1}^n v^\vee_i \otimes g(v_i) \ .
+\]
+(Exercise: check that $\phi \circ \psi$ and $\psi \circ \phi$ are
+identities.)
+\end{proof}
+
+\begin{exercise}
+Identifying $V^\vee \otimes V \cong \operatorname{Hom}_k(V,V)$,
+the linear map $T: V^\vee \otimes V \to k$ defined by
+\[
+T\left( \sum_{i=1}^n f_i \otimes v_i\right)
+= \sum_{i=1}^n f_i(v_i)
+\]
+can be identified with the trace $\operatorname{tr} :
+\operatorname{Hom}_k(V,V) \to k$.
+\end{exercise}
+
+\begin{corollary}
+For finite-dimensional vector spaces $V, W$,
+we have a canonical isomorphism
+\[
+V^\vee \otimes W^\vee \cong \operatorname{Bil}_k(V,W) .
+\]
+\end{corollary}
+
+\begin{proof}
+Both are canonically isomorphic to $\operatorname{Hom}_k(V,W^\vee)$.
+\end{proof}
+
+\begin{proposition}
+Suppose $U,V,W$ are finite-dimensional vector spaces.
+There are canonical isomorphisms as follows:
+\begin{enumerate}
+\item $V \otimes W \cong W \otimes V$
+\item $U \otimes (V \oplus W) \cong (U \otimes V) \oplus (U \otimes W)$
+\item $U \otimes V \otimes W \cong U \otimes (V \otimes W)
+\cong (U \otimes V) \otimes W$
+\item $V \otimes k \cong V$
+\item $(V \otimes W)^\vee \cong V\vee \otimes W^\vee$
+\item $\operatorname{Hom}(U,\operatorname{Hom}(V,W)
+\cong \operatorname{Hom}(U \otimes V, W)$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+We leave these all as exercises.
+One helpful hint is that
+$(V \otimes W)^\vee = \operatorname{Hom}(V \otimes W,k)$
+is canonically isomorphic to $\operatorname{Bil}(V,W)$
+by the Universal Mapping Property of tensor products.
+\end{proof}
+
+\begin{proposition}
+Let $L/k$ be a field extension.
+If $V$ is a $k$-vector space, then $V \otimes_k L$ is an $L$-vector space.
+If $A$ is a $k$-algebra, then $A \otimes_k L$ is an $L$-algebra.
+\end{proposition}
+
+\begin{proof}
+The set $V \otimes_k L$ is already an abelian group.
+We define scalar multiplication by extending by linearity
+the formula $\lambda(v\otimes l)=v \otimes \lambda l$
+for $\lambda, l \in L$ and $v \in V$.
+To see $A$ is an $L$-algebra, we need to define the ring multiplication.
+We see that $(a_1 \otimes l_1)(a_2 \otimes l_2)=a_1a_2 \otimes l_1l_2$. 
+\end{proof}
+
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
 
