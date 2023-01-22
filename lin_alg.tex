@@ -369,8 +369,8 @@ forms is a subspace of $\operatorname{Bil}_k(V,V)$.
 
 If $b: V \times V \to k$ is a symmetric bilinear form,
 then the two canonical maps $b_1 : V \to V^\vee$ and $b_2 : V \to
-V^\vee$ are equal.  Thus, a choice of isomorphism $V \to V^\vee$
-is equivalent to a choice of symmetric bilinear form on $V$.
+V^\vee$ are equal.  Thus, a symmetric bilinear form gives rise to
+a single choice $V \to V^\vee$ of isomorphism (rather than a pair).
 
 \begin{example}
 The \emph{dot product} on $k^n$ is a symmetric bilinear form.
@@ -480,16 +480,16 @@ TODO
 \subsection{Multilinear Maps}
 
 \begin{definition}
-Let $V_1,\ldots, V_n$ be $k$-vector spaces.
-A \emph{multilinear map} $m: V_1 \times \cdots \times V_n \to k$,
+Let $V_1,\ldots, V_d$ be $k$-vector spaces.
+A \emph{multilinear map} $m: V_1 \times \cdots \times V_d \to k$,
 is a function that is linear in each entry; in other words,
 \begin{align*}
-&m(v_1,\ldots,v_{i-1},\lambda v_i + v_i',v_{i+1},\ldots,v_n)\\
-=& \lambda m(v_1,\ldots,v_{i-1},v_i,v_{i+1},\ldots,v_n)
-+ m(v_1,\ldots,v_{i-1},v_i',v_{i+1},\ldots,v_n)
+&m(v_1,\ldots,v_{i-1},\lambda v_i + v_i',v_{i+1},\ldots,v_d)\\
+=& \lambda m(v_1,\ldots,v_{i-1},v_i,v_{i+1},\ldots,v_d)
++ m(v_1,\ldots,v_{i-1},v_i',v_{i+1},\ldots,v_d)
 \end{align*}
 for ever index $i$ and all $v_j,v_j' \in V_j$, $\lambda \in k$.
-A \emph{multilinear form} is a multilinear map where $V_1 = \cdots = V_n$.
+A \emph{multilinear form} is a multilinear map where $V_1 = \cdots = V_d$.
 \end{definition}
 
 \begin{definition}
@@ -512,7 +512,7 @@ for all distinct pairs of indices $i,j$.
 \begin{definition}
 A multilinear form is \emph{alternating} if
 \[
-m(v_1,\ldots,v_n) = 0
+m(v_1,\ldots,v_d) = 0
 \]
 whenever $v_i=v_j$ for some $i \ne j$.
 \end{definition}
@@ -544,15 +544,15 @@ We define tensor products in terms of their universal mapping property.
 
 \begin{definition}
 Let $V_1,\ldots, V_n$ be vector spaces over $k$.
-A \emph{tensor product} $V_1 \otimes_k V_2 \otimes \cdots \otimes_k V_n$
+A \emph{tensor product} $V_1 \otimes_k V_2 \otimes \cdots \otimes_k V_d$
 is a $k$-vector space along with a multilinear map
 \[
-\pi : V_1 \times \cdots \times V_n
-\to  V_1 \otimes_k \cdots \otimes_k V_n
+\pi : V_1 \times \cdots \times V_d
+\to  V_1 \otimes_k \cdots \otimes_k V_d
 \]
-such that for any multilinear map $\phi : V_1 \times \cdots \times V_n
+such that for any multilinear map $\phi : V_1 \times \cdots \times V_d
 \to W$ there exists a unique linear map
-$\psi : V_1 \otimes_k \cdots \otimes_k V_n \to W$ such that
+$\psi : V_1 \otimes_k \cdots \otimes_k V_d \to W$ such that
 $\phi = \psi \circ \pi$.
 \end{definition}
 
@@ -560,12 +560,12 @@ When the base field $k$ is clear, we will often omit it from the
 notation; in other words $V \otimes U$ is shorthand for $V \otimes_k U$.
 We may also use the shorthand notation
 \[
-\bigotimes_{i=1}^n V_i := V_1 \otimes \cdots \otimes V_n .
+\bigotimes_{i=1}^d V_i := V_1 \otimes \cdots \otimes V_d .
 \]
 
-Given $(v_1,\ldots, v_n) \in V_1 \times \cdots \times V_n$,
-let $v_1 \otimes v_2 \otimes \cdots \otimes v_n$ denote the image
-$\pi(v_1,\ldots,v_n)$ in $V_1 \otimes_k \cdots \otimes_k V_n$.
+Given $(v_1,\ldots, v_d) \in V_1 \times \cdots \times V_d$,
+let $v_1 \otimes v_2 \otimes \cdots \otimes v_d$ denote the image
+$\pi(v_1,\ldots,v_d)$ in $V_1 \otimes_k \cdots \otimes_k V_d$.
 We call these elements \emph{simple tensors}.
 
 \begin{theorem}
@@ -575,21 +575,21 @@ Tensor products exist and are unique up to unique isomorphism.
 \begin{proof}
 We prove existence by construction.
 Let $\Omega$ be the free $k$-vector space with basis given by the elements of
-$V_1 \times \cdots \times V_n$.  Let $[x]$ be the basis element
+$V_1 \times \cdots \times V_d$.  Let $[x]$ be the basis element
 corresponding to $x$.
 Let $I$ be the subspace of $\Omega$ spanned by
 \[
-[(v_1, \ldots, (\lambda v_i + v'_i), \ldots, v_n)]
+[(v_1, \ldots, (\lambda v_i + v'_i), \ldots, v_d)]
 -
-\lambda[(v_1, \ldots,v_i, \ldots, v_n)] -
-[(v_1, \ldots, v'_i, \ldots, v_n)]
+\lambda[(v_1, \ldots,v_i, \ldots, v_d)] -
+[(v_1, \ldots, v'_i, \ldots, v_d)]
 \]
 for every index $i$, every $\lambda \in k$ and all $v_j,v'_j \in V_j$
 for every $j$.
 Define $V_1 \otimes \cdots \otimes V_n$ as the quotient space
 $\Omega/I$ with $\pi$ the composition of the canonical inclusion
-$\prod_{i=1}^n V_i \to \Omega$ and the quotient $\Omega \to
-\bigotimes_{i=1}^n V_i$.
+$\prod_{i=1}^d V_i \to \Omega$ and the quotient $\Omega \to
+\bigotimes_{i=1}^d V_i$.
 
 We leave the remaining conditions as an exercise.
 \end{proof}
@@ -597,15 +597,15 @@ We leave the remaining conditions as an exercise.
 We have the following corollaries:
 
 \begin{corollary}
-The vector space $V_1 \otimes_k \cdots \otimes_k V_n$
+The vector space $V_1 \otimes_k \cdots \otimes_k V_d$
 is spanned by its simple tensors.
 The relation
 \begin{align*}
 &v_1 \otimes \cdots \otimes (\lambda v_i + v'_i) \otimes \cdots \otimes
-v_n\\
+v_d\\
 =&
-\lambda(v_1 \otimes \cdots \otimes v_i \otimes \cdots \otimes v_n) +
-v_1 \otimes \cdots \otimes v'_i \otimes \cdots \otimes v_n
+\lambda(v_1 \otimes \cdots \otimes v_i \otimes \cdots \otimes v_d) +
+v_1 \otimes \cdots \otimes v'_i \otimes \cdots \otimes v_d
 \end{align*}
 holds
 for every index $i$, every $\lambda \in k$ and all $v_j,v'_j \in V_j$.
@@ -616,12 +616,12 @@ Exercise.
 \end{proof}
 
 \begin{proposition}
-If $B_1,\ldots B_n$ are bases for $V_1,\ldots,V_n$, then
+If $B_1,\ldots B_d$ are bases for $V_1,\ldots,V_d$, then
 \[
-\{ b_1 \otimes \cdots \otimes b_n \mid b_1 \in B_1, \ldots, b_n \in B_n
+\{ b_1 \otimes \cdots \otimes b_d \mid b_1 \in B_1, \ldots, b_d \in B_d
 \}
 \]
-is a basis for $V_1 \otimes_k \cdots \otimes_k V_n$.
+is a basis for $V_1 \otimes_k \cdots \otimes_k V_d$.
 \end{proposition}
 
 \begin{proof}
@@ -658,10 +658,10 @@ for $f \in V^\vee$, $w \in W$, $v \in V$, and extending by linearity.
 (Exercise: check that extension by linearity is valid here!)
 
 We explicitly construct an inverse map $\phi$.
-Let $v_1,\ldots, v_n$ be a basis for $V$.
+Let $v_1,\ldots, v_d$ be a basis for $V$.
 Given a linear map $g : V \to W$, define
 \[
-\phi(g) = \sum_{i=1}^n v^\vee_i \otimes g(v_i) \ .
+\phi(g) = \sum_{i=1}^d v^\vee_i \otimes g(v_i) \ .
 \]
 (Exercise: check that $\phi \circ \psi$ and $\psi \circ \phi$ are
 identities.)
@@ -671,8 +671,8 @@ identities.)
 Identifying $V^\vee \otimes V \cong \operatorname{Hom}_k(V,V)$,
 the linear map $T: V^\vee \otimes V \to k$ defined by
 \[
-T\left( \sum_{i=1}^n f_i \otimes v_i\right)
-= \sum_{i=1}^n f_i(v_i)
+T\left( \sum_{i=1}^d f_i \otimes v_i\right)
+= \sum_{i=1}^d f_i(v_i)
 \]
 can be identified with the trace $\operatorname{tr} :
 \operatorname{Hom}_k(V,V) \to k$.
@@ -745,20 +745,20 @@ $k$-algebra $k[x_1,\ldots,x_n]$ graded by degree.
 
 \begin{definition}
 Let $V$ be a finite-dimensional $k$-vector space.  For a positive integer
-$n$, we define $\mathcal{T}^n(V)=\bigotimes_{i=1}^n V$ and
+$n$, we define $\mathcal{T}^d(V)=\bigotimes_{i=1}^d V$ and
 $\mathcal{T}^0(V)=k$.  We define the \emph{tensor $k$-algebra on $V$}
 as the graded $k$-algebra
 \[
-\mathcal{T}(V) := \bigoplus_{n \ge 0} \mathcal{T}^n(V)
+\mathcal{T}(V) := \bigoplus_{d \ge 0} \mathcal{T}^d(V)
 \]
 with multiplication
-\[\mathcal{T}^n(V) \times \mathcal{T}^m(V)
-\to \mathcal{T}^{n+m}(V)
+\[\mathcal{T}^d(V) \times \mathcal{T}^e(V)
+\to \mathcal{T}^{d+e}(V)
 \]
 defined via
 \[
-(v_1 \otimes \cdots \otimes v_n) (w_1 \otimes \cdots \otimes w_m)
-=v_1 \otimes \cdots \otimes v_n \otimes w_1 \otimes \cdots \otimes w_m
+(v_1 \otimes \cdots \otimes v_d) (w_1 \otimes \cdots \otimes w_e)
+=v_1 \otimes \cdots \otimes v_d \otimes w_1 \otimes \cdots \otimes w_e
 \]
 and extended to all of $\mathcal{T}(V)$ by linearity. 
 \end{definition}
@@ -808,8 +808,8 @@ where $I$ is the (two-sided) graded ideal
 \[
 I = ( v \otimes w - w \otimes v \mid w,v \in V ).
 \]
-The graded piece $\mathcal{S}^n(V)$ is called the
-\emph{$n$th symmetric power}.
+The graded piece $\mathcal{S}^d(V)$ is called the
+\emph{$d$th symmetric power}.
 \end{definition}
 
 Symmetric powers satisfy a universal mapping property building on the
@@ -818,12 +818,12 @@ one for tensor products:
 \begin{proposition}
 The composition
 \[
-\pi : V^n \to \mathcal{T}^n(V) \to \mathcal{S}^n(V)
+\pi : V^d \to \mathcal{T}^d(V) \to \mathcal{S}^d(V)
 \]
 is a symmetric multilinear map such that for any
 symmetric multilinear map
-$\phi : V^n \to W$ there exists a unique linear map
-$\psi : \mathcal{S}^n(V) \to W$
+$\phi : V^d \to W$ there exists a unique linear map
+$\psi : \mathcal{S}^d(V) \to W$
 such that
 $\phi = \psi \circ \pi$.
 \end{proposition}
@@ -849,7 +849,7 @@ e_{i_1}e_{i_2} \cdots e_{i_d}
 \}
 \]
 is a basis for $\mathcal{S}^d(V)$.
-In particular, $\dim_k\ \mathcal{S}^d(k^n)=\binom{n+k-1}{k}$.
+In particular, $\dim_k\ \mathcal{S}^d(k^n)=\binom{n+d-1}{d}$.
 \end{proposition}
 
 \subsection{Exterior Algebra}
@@ -884,8 +884,8 @@ such that
 $\phi = \psi \circ \pi$.
 \end{proposition}
 
-The image of a simple tensor $v_1 \otimes v_2 \otimes \cdots \otimes v_n$
-is written $v_1 \wedge v_2 \wedge \cdots \wedge v_n$.
+The image of a simple tensor $v_1 \otimes v_2 \otimes \cdots \otimes v_d$
+is written $v_1 \wedge v_2 \wedge \cdots \wedge v_d$.
 Similarly, the multiplication of two elements $f,g \in \Lambda^d(V)$
 is written $f \wedge g$.
 
@@ -903,11 +903,11 @@ Follows immediately from
 \end{proof}
 
 \begin{proposition}
-If $v_1,\ldots,v_n \in V$ and $\sigma \in S_n$,
+If $v_1,\ldots,v_d \in V$ and $\sigma \in S_d$,
 then
-\[v_1 \wedge \cdots \wedge v_n =
+\[v_1 \wedge \cdots \wedge v_d =
 \operatorname{sgn}(\sigma)
-v_{\sigma(n)} \wedge \cdots \wedge v_{\sigma(n)}.
+v_{\sigma(1)} \wedge \cdots \wedge v_{\sigma(d)}.
 \]
 \end{proposition}
 
@@ -918,17 +918,17 @@ transpositions.  Thus, the result follows from the previous proposition.
 \end{proof}
 
 \begin{proposition}
-If $f \in \Lambda^p(V)$ and $g \in \Lambda^q(V)$,
-then $f \wedge g = (-1)^{pq} g \wedge f$.
+If $f \in \Lambda^d(V)$ and $g \in \Lambda^e(V)$,
+then $f \wedge g = (-1)^{de} g \wedge f$.
 \end{proposition}
 
 \begin{proof}
 This follows from the previous proposition in view of the fact that
 the permutation
 \[
-(1,\ldots,p+q) \mapsto (p+1,\ldots,p+q,1,\ldots,p)
+(1,\ldots,d+e) \mapsto (d+1,\ldots,d+e,1,\ldots,d)
 \]
-has sign $(-1)^{pq}$.
+has sign $(-1)^{de}$.
 \end{proof}
 
 \begin{proposition}
@@ -982,8 +982,90 @@ e_{i_1} \wedge \cdots e_{i_2} \cdots \wedge e_{i_d}
 \}
 \]
 is a basis for $\Lambda^d(V)$.
-In particular, $\dim_k\ \Lambda^d(k^n)=\binom{n}{k}$.
+In particular, $\dim_k\ \Lambda^d(k^n)=\binom{n}{d}$.
 \end{proposition}
+
+\subsection{Subspaces of Tensor Powers}
+
+There is a natural left action of the symmetric group $S_d$ on the
+tensor power $\mathcal{T}^d(V)$ given by
+\[
+\sigma(v_1 \otimes v_2 \otimes \cdots \otimes v_n)
+= v_{\sigma^{-1}(1)} \otimes v_{\sigma^{-1}(2)} \otimes \cdots
+\otimes v_{\sigma^{-1}(n)}
+\]
+for $\sigma \in S_d$.
+The inverse is important to guarantee that it is a \emph{left} action,
+but this will not be especially relevant in what follows.
+
+\begin{definition}
+Let $V$ be a vector space on $k$.
+The \emph{space of symmetric $d$-tensors on $V$} is
+\[
+\operatorname{Sym}^d(V) = \operatorname{span}_k
+\left\{ t \in \mathcal{T}^d(V) \mid \sigma(t)=t
+\textrm{ for all } t \in S_d  \right\} .
+\]
+The \emph{space of alternating $d$-tensors on $V$} is
+\[
+\operatorname{Alt}^d(V) = \operatorname{span}_k
+\left\{ t \in \mathcal{T}^d(V) \mid
+\sigma(t)=\operatorname{sgn}(\sigma)t
+\textrm{ for all } t \in S_d  \right\} .
+\]
+\end{definition}
+
+Note that while $\mathcal{S}^d(V)$ and $\Lambda^d(V)$ are
+\emph{quotients} of $\mathcal{T}^d(V)$,
+the spaces $\operatorname{Sym}^d(V)$
+and $\operatorname{Alt}^d(V)$
+are \emph{subspaces}.
+
+\begin{example}
+We have
+\[
+e_1 \otimes e_2 \otimes e_2 + e_2 \otimes e_1 \otimes e_2
++ e_2 \otimes e_2 \otimes e_1 \in \operatorname{Sym}^d(k^5)
+\]
+and
+\[
+3\left(e_1 \otimes e_2 - e_2 \otimes e_1\right)
++ 4\left( e_3 \otimes e_5 - e_5 \otimes e_3 \right) 
+\in \operatorname{Sym}^d(k^7).
+\]
+Observe that the symmetric group does \emph{not} act on the
+vector space $V$.
+\end{example}
+
+\begin{proposition}
+Suppose $\operatorname{char}(k) > d$.  Then the compositions
+\begin{align*}
+\operatorname{Sym}^d(V) &\to \mathcal{T}^d(V) \to \mathcal{S}^d(V)\\
+\operatorname{Alt}^d(V) &\to \mathcal{T}^d(V) \to \Lambda^d(V)\\
+\end{align*}
+are isomorphisms.
+\end{proposition}
+
+\begin{proof}
+We define a \emph{polarization} map
+$P : \mathcal{S}^d(V) \to \operatorname{Sym}^d(V)$ as follows.
+Consider first the map $p : \mathcal{T}^d \to \mathcal{T}^d$
+defined via
+\[
+p(v_1 \otimes v_2 \otimes \cdots \otimes v_d)
+= \frac{1}{d!}\sum_{\sigma \in S_d}
+v_{\sigma(1)} \otimes v_{\sigma(1)} \otimes \cdots \otimes v_{\sigma(d)}
+.
+\]
+Observe that $p$ is a linear projection onto $\operatorname{Sym}^d(V)$
+with kernel precisely $I \cap \mathcal{T}^d(V)$ from the definition
+of $\mathcal{S}^d(V)$.  Thus we obtain the desired map $P$.
+One checks that $P$ is an inverse of the composition in the statement of
+the proposition.
+
+There is a similar construction for $\operatorname{Alt}^d(V)$
+and $\Lambda^d(V)$.
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%
