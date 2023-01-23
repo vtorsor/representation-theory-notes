@@ -1047,11 +1047,12 @@ Observe that the symmetric group does \emph{not} act on the
 vector space $V$.
 \end{example}
 
-\begin{proposition}
-Suppose $\operatorname{char}(k) > d$.  Then the compositions
+\begin{proposition} \label{prop:sym_alt_good_char}
+Suppose either $\operatorname{char}(k) =0$ or $\operatorname{char}(k) > d$.
+Then the compositions
 \begin{align*}
 \operatorname{Sym}^d(V) &\to \mathcal{T}^d(V) \to \mathcal{S}^d(V)\\
-\operatorname{Alt}^d(V) &\to \mathcal{T}^d(V) \to \Lambda^d(V)\\
+\operatorname{Alt}^d(V) &\to \mathcal{T}^d(V) \to \Lambda^d(V)
 \end{align*}
 are isomorphisms.
 \end{proposition}
@@ -1183,6 +1184,98 @@ and the (non-linear)
 diagonal map $\Delta: V \to \operatorname{Sym}^d(V)$
 where $\Delta(v) = v \otimes \cdots \otimes v$.
 We then have $\alpha(f,v) \mapsto f(\Delta(v))$.
+\end{example}
+
+\begin{example}[Quadratic Forms]
+The symmetric bilinear forms on a finite-dimensional vector space $V$
+can be identified with $\operatorname{Sym}^2(V^\vee)$ since the usual
+bilinear forms can be identified with
+$(V \otimes V)^\vee=V^\vee \otimes V^\vee$.
+In contrast, the quadratic forms on $V$ can be identified with
+$\mathcal{S}^2(V^\vee)$ since they are precisely the degree $2$
+homogeneous polynomial functions on $V$.
+
+In view of Proposition~\ref{prop:sym_alt_good_char},
+there is a canonical isomorphism between them when the characteristic is
+not $2$.  When $b$ is a
+symmetric bilinear form and $q$ is the corresponding quadratic form.
+The map $\operatorname{Sym}^2(V^\vee) \to \mathcal{S}^2(V^\vee)$
+corresponds to
+\[
+q(v) = b(v,v)
+\]
+for $v\in V$, while the \emph{polarization} map
+$\mathcal{S}^2(V^\vee) \to \operatorname{Sym}^2(V^\vee)$
+corresponds to
+\[
+b(v,w) = \frac{1}{2}\left( q(v+w)-q(v)-q(v)\right)
+\]
+for $v,w \in V$.
+
+In the two-dimensional case,
+the symmetric bilinear form of the matrix
+$\begin{pmatrix} a & b\\ b&c \end{pmatrix}$ corresponds to the quadratic
+form $ax^2+2bxy+cz^2$.  The isomorphism in a tensor basis corresponds to
+\[
+(e_1^2, e_1e_2, e_2^2) \leftrightarrow
+(e_1 \otimes e_1, e_1 \otimes e_2 + e_2 \otimes e_1, e_2 \otimes e_2)
+\]
+for $e_1, e_2$ a basis for $V$.
+\end{example}
+
+\begin{example}[Volume Form]
+Given an $n$-dimensional vector space $V$,
+a \emph{volume form} is a non-zero element $\omega \in \Lambda^n(V)^\vee$.
+Since $\Lambda^n(V)$ is $1$-dimensional, a volume form is simply a
+choice of isomorphism $\omega : \Lambda^n(V) \cong k$.
+
+(Recall we may identify $\Lambda^n(V^\vee)$
+The reason for this name is in the geometric situation, if
+$v_1,\ldots,v_n$ are vectors in $V$, then
+$\omega(v_1\wedge \cdots \wedge v_n)$ can be thought of as the volume of
+the parallelepiped they generate. 
+
+Given an ordered basis $e_1,\ldots, e_n$, we obtain a volume form
+$\omega = (e_1 \wedge \cdots \wedge e_n)^\vee$.
+Observe that the ordering is necessary or else we only know $\omega$
+up to a sign.
+If $k=\mathbb{R}$, then a volume form $\omega \in \Lambda^n(V)^\vee$
+evaluates to either a positive or negative number on any ordered basis.
+Thus, it can be said that a volume form determines an
+\emph{orientation}.
+The generalizes the distinction between clockwise and counter-clockwise
+for $\mathbb{R}^2$, and the distinction between left hand rule and right
+hand rule for $\mathbb{R}^3$.
+\end{example}
+
+\begin{example}[Wedge Product Pairing]
+Let $V$ be an $n$-dimensional vector space.
+Given a choice of volume form $\omega : \Lambda^n(V) \cong k$,
+we obtain a perfect pairing
+\[
+\Lambda^d(V) \times \Lambda^{n-d}(V) \to
+\Lambda^n(V) \cong k
+\]
+for every $0 \le d \le n$ from the exterior algebra multiplication.
+Thus, $\omega$ determines an isomorphism
+\[
+\omega_d : \Lambda^d(V) \cong \Lambda^{n-d}(V^\vee) \ .
+\]
+A different choice of $\omega$ only changes $\omega_d$ up to a scaling
+factor, so $\omega_d$ is canonical \emph{up to scaling}.
+
+The function $\omega_d$ takes simple $d$-vectors to simple
+$(n-d)$-vectors.  Moreover, suppose $v_1,\ldots,v_d \in V$
+and $\ell_1,\ldots,\ell_{n-d} \in V^\vee$ satisfy
+\[
+\omega_d(v_1 \wedge \ldots \wedge v_n) = \ell_1 \wedge \cdots \wedge
+\ell_{n-d} .
+\]
+The subspace spanned by $v_1,\ldots,v_n$ is exactly the subspace
+of solutions $v$ to the equations
+\[
+\ell_1(v)=\cdots=\ell_{n-d}(v)=0 .
+\]
 \end{example}
 
 %%%%%%%%%%%%%%%%%%
