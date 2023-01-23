@@ -1,0 +1,483 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+
+% theorem styles (I like everything to have the same counter)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{exercise}[theorem]{Exercise}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% some numbering settings
+\numberwithin{equation}{section}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{15.2pt}
+\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+\setlength{\footskip}{30pt}
+\pagestyle{fancy}
+
+\makeatletter
+\let\ps@plain\ps@fancy 
+\makeatother
+
+\lhead{MATH 742}
+\chead{Introduction to Representation Theory}
+\rhead{Spring 2023}
+\lfoot{Last Revised: \today}
+\cfoot{}
+\rfoot{\thepage\ of \pageref{LastPage} }
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\title{Introduction to Representation Theory}
+\author{Alexander Duncan}
+
+\maketitle
+
+\section{Basic Concepts}
+
+Some of the notions discussed here can also be found in
+\cite[\S{1}]{Serre}.
+We will use many other sources for this material,
+but most (correctly!) use the module-theoretic perspective,
+which we want to defer for the moment.
+
+\begin{definition}
+Let $V$ be a vector space over a field $k$.
+The \emph{general linear group of $V$}, denoted $\operatorname{GL}(V)$, is the group
+of invertible linear transformations $V \to V$.
+For a non-negative integer $n$, we use the notation
+$\operatorname{GL}_n(k) := \operatorname{GL}(k^n)$.
+\end{definition}
+
+The group $\operatorname{GL}_n(k)$ can be canonically identified with the set of $n
+\times n$ invertible matrices with entries in $k$.
+
+\begin{definition}
+Suppose $G$ is a group.  A \emph{linear representation of $G$} is a
+group homomorphism $\rho : G \to \operatorname{GL}(V)$ for a vector space $V$.
+The \emph{degree} of a linear representation is the dimension of the
+corresponding vector space $V$.
+A linear representation $\rho$ is \emph{faithful} if $\rho$ is injective
+as a map of sets.
+\end{definition}
+
+We often refer to the ``representation $V$'', indicating its underlying
+vector space, rather than the homomorphism $\rho$.
+We will sometimes write $\rho_g$ instead of $\rho(g)$ as it is easier
+to read.  Later, we will simply write ``$g$'' for $\rho(g)$ when there
+is no danger of confusion.
+
+\begin{example}
+For any group $G$,
+the \emph{zero representation} is the representation of degree
+$0$ (it is unique up to isomorphism).
+\end{example}
+
+\begin{example}
+For any group $G$,
+the \emph{unit} or \emph{trivial representation} is the representation
+\[ \rho: G \to \operatorname{GL}_1(k) \]
+given by
+\[
+\rho(g)=\operatorname{id}_k
+\]
+for all $g \in G$.
+\end{example}
+
+\begin{example}
+Let $G = \langle g \rangle$ be the cyclic group of order $n$.
+There is a representation
+\[ \rho : G \to \operatorname{GL}_1(\mathbb{C}) \]
+defined by
+\[
+\rho(g^k)=e^{\frac{2\pi i}{n}k} \ .
+\]
+\end{example}
+
+\begin{example}
+Let $D_8 = \langle s,r \mid s^2, r^4, (sr)^2 \rangle$
+be the dihedral group of order $8$.
+Over any field of characteristic not $2$, there is a representation
+\[ \rho : G \to \operatorname{GL}_2(k) \]
+defined on generators by
+\[
+\rho(s)=\begin{pmatrix} 0&1\\1&0 \end{pmatrix} ,\quad
+\rho(r)=\begin{pmatrix} 0&-1\\1&0 \end{pmatrix}
+\]
+and extended to other elements by using the fact that $\rho$
+must be a group homomorphism.
+\end{example}
+
+
+\begin{example}
+For any group $G$ with a left action on a set $X$,
+let $V$ be the vector space with basis indexed by $X$:
+\[
+V = \mathrm{span} \{ e_x : x \in X \} \ .
+\]
+Define the \emph{permutation representation} corresponding to $X$
+as the representation
+\[
+\rho : G \to \operatorname{GL}(V)
+\]
+defined such that
+\[
+\rho(g)(e_x) = e_{g(x)}
+\]
+for all $g \in G$ and $x \in X$.
+\end{example}
+
+\begin{example}
+For any group $G$, the \emph{regular representation of $G$}
+is the permutation representation of the action of $G$ on itself by left
+multiplication.
+In other words, 
+$V$ is the vector space with basis indexed by $G$:
+\[
+V = \mathrm{span} \{ e_g : g \in G \}
+\]
+and the representation
+\[
+\rho : G \to \operatorname{GL}(V)
+\]
+is defined such that
+\[
+\rho(g)(e_h) = e_{gh}
+\]
+for all $g,h \in G$.
+\end{example}
+
+\begin{example} \label{ex:lin_alg_is_Z_rep_theory}
+Linear representations $\rho : \mathbb{Z} \to \operatorname{GL}_n(k)$
+are completely determined by the image of $\rho(1)$
+since $\rho(n)=\rho(1)^n$ for all $n \in \mathbb{Z}$.
+This gives a canonical bijection of linear representations of
+$\mathbb{Z}$ of degree $n$ and
+$n \times n$ invertible matrices.
+\end{example}
+
+\subsection{Equivariant Maps}
+
+\begin{definition}
+Let $V$ and $W$ be vector spaces over the same field.
+Suppose
+\begin{align*}
+\rho &: G \to \operatorname{GL}(V), \textrm{ and}\\
+\rho' &: G \to \operatorname{GL}(W)
+\end{align*}
+are linear representations of the same group $G$.
+A linear map $\tau : V \to W$ is \emph{$G$-equivariant} if
+\[
+\rho'(g) \circ \tau = \tau \circ \rho(g)
+\]
+for all $g \in G$.
+The two representations are \emph{similar} or \emph{isomorphic} if there
+exists an invertible $G$-equivariant linear map $\tau : V \to W$.
+Let $\operatorname{Hom}_k^G(V,W)$ be the subset of
+$G$-equivariant linear maps $f : V \to W$.
+\end{definition}
+
+An archaic term for $G$-equivariant map is ``interwining operator,''
+but this is disappearing (thankfully in my view).
+
+\begin{example}
+If $A$ and $B$ are similar invertible matrices, then there exists
+an invertible matrix $P$ such that $A=PMP^{-1}$.
+Recall that $A^n=PB^nP^{-1}$ for all integers $n$.
+In view of Example~\ref{ex:lin_alg_is_Z_rep_theory}, we conclude that
+equivalence classes of linear representations of
+$\mathbb{Z}$ of degree $n$ are in canonical bijection with
+similarity classes of $n \times n$ invertible matrices.
+\end{example}
+
+\begin{example}
+Let $\rho : \mathbb{Z}/4\mathbb{Z} \to
+\operatorname{GL}_1(\mathbb{C})$
+be the representation where $\rho(1)=(i)$
+and let $\sigma : \mathbb{Z}/4\mathbb{Z} \to
+\operatorname{GL}_2(\mathbb{C})$
+be the representation where
+\[
+\sigma(1) = \begin{pmatrix} 0&-1\\1&0 \end{pmatrix} .
+\]
+Define $\rho'(g)=\rho(g^{-1})$
+and $\sigma'(g)=\sigma(g^{-1})$ for all $g \in G$.
+By considering eigenvalues, we conclude that
+$\sigma'$ and $\sigma$ are equivalent, but $\rho'$ and $\rho$ are not.
+\end{example}
+
+\begin{example} \label{ex:S3_decomposition}
+Let $\rho$ be the $3$-dimensional permutation representation associated to
+the action of $S_3$ on $\{1,2,3\}$.
+In the usual basis, we have
+\[
+\rho(23) = \begin{pmatrix} 1&0&0\\ 0&0&1 \\ 0&1&0 \end{pmatrix}
+\textrm{ and }
+\rho(123) = \begin{pmatrix} 0&0&1\\1&0&0\\0&1&0 \end{pmatrix}.
+\]
+Suppose $\zeta \in k$ is a primitive cube root of unity.
+Via the change of basis matrix
+\[
+P = \begin{pmatrix} 1&1&1\\ 1&\zeta^2&\zeta\\1&\zeta&\zeta^2 \end{pmatrix} 
+\]
+we have a new representation $\sigma$ where
+\[
+\sigma(23) = \begin{pmatrix} 1&0&0\\ 0&0&1 \\ 0&1&0 \end{pmatrix}
+\textrm{ and }
+\sigma(123) = \begin{pmatrix} 1&0&0\\ 0&\zeta&0 \\ 0&0&\zeta^2
+\end{pmatrix} .  
+\]
+Observe that $\rho$ and $\sigma$ are similar by construction.
+\end{example}
+
+
+\subsection{Subrepresentations}
+
+\begin{definition}
+Let $\rho : G \to \operatorname{GL}(V)$ be a linear representation.
+A subspace $W \subset V$ is \emph{stable under the action of $G$} if
+$\rho_g(w) \in W$ for all $g \in G$, $w \in W$.
+Define $\rho^W : G \to \operatorname{GL}(W)$ by $\rho^W(g) := \rho(g)|_W$ for all $g
+\in G$.
+We say $\rho^W$ is a \emph{subrepresentation} of $\rho$.
+\end{definition}
+
+We will also say simply ``$W$ is a subrepresentation of $V$'' in the above
+situation.
+
+If $W$ is a subrepresentation of $V$ then
+\[
+\rho_g(v+w) = \rho_g(v) + \rho_g(w) \in \rho_g(v)+W
+\]
+for any $v \in V$, $w \in W$, and $g \in G$.
+This gives rise to a well-defined \emph{quotient representation}
+$\rho' : G \to \operatorname{GL}(V/W)$
+on the quotient space $V/W$.
+
+\begin{definition}
+Given representations $(V,\rho)$, $(W,\sigma)$ of a group $G$,
+the \emph{direct sum representation} $\rho \oplus \sigma$
+is the representation with underlying space $V \oplus W$ given by
+\[ (\rho \oplus \sigma)_g (v,w) := ( \rho_g(v), \sigma_g(v) ) \]
+for all $v \in V$, $w \in W$, and $g \in G$.
+\end{definition}
+
+\begin{proposition}
+Let $V$ and $W$ be representations of $G$, and let
+$f : V \to W$ be a $G$-equivariant map.
+Then $\ker(f)$ is a subrepresentation of $V$.
+\end{proposition}
+
+\begin{example}
+In the notation of
+Example~\ref{ex:S3_decomposition}, we see that $V$ can be written
+as a direct sum $U \oplus W$ where
+\[
+U = \operatorname{span}\left\{ \begin{pmatrix} 1,1,1 \end{pmatrix}^T
+\right\}
+\]
+is a trivial representation, and
+\[
+W = \operatorname{span}\left\{
+\begin{pmatrix}1,\zeta,\zeta^2\end{pmatrix}^T,
+\begin{pmatrix}1,\zeta^2,\zeta\end{pmatrix}^T
+\right\}
+\]
+is a $2$-dimensional faithful representation of $S_3$.
+\end{example}
+
+\begin{example}
+Suppose $G=\langle g \rangle$ is a finite cyclic group.
+Recall that every matrix of finite order can be diagonalized
+over $\mathbb{C}$.
+Thus, every finite-dimensional complex representation of
+$G$ is a direct sum of $1$-dimensional representations.
+\end{example}
+
+\begin{example}
+If $V$ is a representation of $G$, define the \emph{space of invariants}
+\[
+V^G = \{ v \in V \mid gv=v \textrm{ for all } g \in G \}.
+\]
+Observe that $V^G$ is a subrepresentation of $V$ and it is a direct sum
+of trivial representations.
+\end{example}
+
+\begin{definition}
+A linear representation $V$ is \emph{irreducible} if $V \ne 0$ and the only
+subrepresentations of $V$ are $0$ and $V$ itself.
+Otherwise, the representation is \emph{reducible}.
+\end{definition}
+
+\begin{definition}
+A linear representation $V$ is \emph{indecomposable} if $V \ne 0$ and
+$V$ cannot be written as a direct sum $V = W_1 \oplus W_2$ where
+$W_1, W_2$ are non-zero subrepresentations.
+Otherwise, the representation is \emph{decomposable}.
+\end{definition}
+
+A decomposable representation is clearly reducible, but the converse may
+not hold as the next example demonstrates.
+
+\begin{example}
+Let $G=\mathbb{Z}/p\mathbb{Z}$ for a prime $p$
+and consider the two-dimensional representation $\rho$ over $\mathbb{F}_p$
+given by
+\[
+\rho(1) = \begin{pmatrix} 1&1\\0&1 \end{pmatrix} .
+\]
+A vector $\begin{pmatrix} a\\b \end{pmatrix} $ spans a
+$G$-stable subspace only if $b=0$.
+The subspace spanned by $\begin{pmatrix} 1\\0 \end{pmatrix}$
+is a proper non-zero subrepresentation
+of $\rho$, so $\rho$ is reducible.
+However, this is the only subrepresentation so $\rho$
+cannot be written as a direct sum of proper subrepresentations.
+We conclude that $\rho$ is indecomposable.
+\end{example}
+
+\begin{definition}
+A linear representation $V$ is \emph{completely reducible}
+if $V$ is a direct sum of irreducible representations.
+\end{definition}
+
+The following theorem is the main reason why representation theory of finite
+groups in ``good'' characteristic is a completely different story from
+``bad'' characteristic.
+
+\begin{theorem}[Maschke]
+Let $G$ be a finite group of order coprime to the characteristic of $k$.
+(By convention, we this includes all finite groups when the
+characteristic is $0$.)
+Every finite-dimensional representation of $G$ is completely reducible.
+\end{theorem}
+
+This theorem follows by induction and the following lemma:
+
+\begin{lemma}
+Let $G$ be a finite group of order coprime to the characteristic of $k$.
+If $V$ is a representation of $G$ and $W$ is a subrepresentation of $V$,
+then there exists a subrepresentation $U$ of $V$
+such that $V= W \oplus U$.
+\end{lemma}
+
+\begin{proof}
+Let $Q: V \to W$ be a projection from $V$ onto the subspace $W$.
+The projection $Q$ exists for linear algebraic reasons
+and is \emph{not} necessarily $G$-equivariant.
+However, we will tweak it so that it \emph{is} $G$-equivariant.
+Define $P : V \to W$ via
+\[
+P(v) = \frac{1}{|G|} \sum_{g \in G} g\left( Q\left( g^{-1} v\right)\right)
+\]
+for all $v \in V$.  Note that the condition on the characteristic of the
+field is needed to divide by the order of the group.
+
+We claim that $P : V \to W$ is a $G$-equivariant projection onto $W$.
+Since $Q$ restricts to the identity on $W$ and $W$ is $G$-stable,
+we see that
+$g \circ Q \circ g^{-1}$ is a projection onto $W$
+for all $g \in G$.  Thus, we have
+\begin{align*}
+P^2(v) &=
+\frac{1}{|G|^2} \sum_{g,h \in G} gQg^{-1} hQh^{-1}v\\
+&=\frac{1}{|G|^2} \sum_{g,h \in G} hQh^{-1}v\\
+&=\frac{1}{|G|} \sum_{h \in G} hQh^{-1}v = P(v)
+\end{align*}
+and conclude that $P$ is a projection.  Since
+$P|_W=\operatorname{id}_W$, we conclude it is a projection onto $W$.
+
+Now we show that $P$ is equivariant.
+This follows from a reindexing trick $j=h^{-1}g$ in the following:
+\begin{align*}
+P(hv) &=
+\frac{1}{|G|} \sum_{g \in G} gQg^{-1} (hv)\\
+&=\frac{1}{|G|^2} \sum_{j \in G} hjQj^{-1}v\\
+&=h\left(\frac{1}{|G|} \sum_{j \in G} jQj^{-1}v\right) = hP(v).
+\end{align*}
+The kernel of $P$ is the desired $G$-stable complement $U$.
+\end{proof}
+
+\subsection{Constructions}
+
+Suppose $(V,\rho)$ and $(W,\sigma)$ are finite-dimensional linear
+representations of a group $G$ over a field $k$.
+
+Let $\operatorname{Hom}_k(V,W)$ denote the vector space of linear transformations
+$\tau : V \to W$.
+Let $V^\vee$ be the vector space dual to $V$.
+Let $V \otimes W$ be the tensor product over $k$.
+
+\begin{proposition}
+The vector space $\operatorname{Hom}_k(V,W)$ has a canonical structure of a linear
+representation $\tau$ where
+\[
+ \tau_g(f) = \sigma(g) \circ f \circ \rho(g)^{-1}
+\]
+for all $f : V \to W$ and $g \in G$.
+\end{proposition}
+
+The $G$-action defined above has the very useful property that
+the set of $G$-equivariant homomorphisms is precisely the set of invariants of the
+$G$-action on the set of homomorphisms.  In other words,
+\[
+\operatorname{Hom}^G_k(V,W) = \operatorname{Hom}_k(V,W)^G .
+\]
+
+\begin{proposition}
+The dual space $V^\vee$ has a canonical structure of a linear
+representation $\rho^\vee$ where
+\[
+ (\rho^\vee)_g(f) = f \circ \rho(g)^{-1}
+\]
+for $f : V \to k$ and $g \in G$.
+\end{proposition}
+
+Note that the above proposition is a special case of the action on
+homomorphisms since $W=k$ has a trivial $G$-action.
+
+\begin{proposition}
+The tensor product $V \otimes W$ has a canonical structure of a linear
+representation $\rho \otimes \sigma$ where
+\[
+(\rho \otimes \sigma)_g(v \otimes w) = \rho_g(v) \otimes \sigma_g(w)
+\]
+for $v \in V$, $w \in W$ and $g \in G$.
+\end{proposition}
+
+Note that the above proposition agrees with the $G$-action one
+obtains from the canonical isomorphism
+\[
+\operatorname{Hom}_k(W,V) \cong W^\vee \otimes V. 
+\]
+
+\begin{exercise}
+For a vector space $V$,
+determine the actions of $G$ on
+$\mathcal{T}^d(V)$, $\mathcal{S}^d(V)$, $\Lambda^d(V)$,
+$\operatorname{Sym}^n(V)$, and $\operatorname{Alt}^n(V)$.
+Verify that the various canonical maps are equivariant.
+\end{exercise}
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{alpha}
+\bibliography{rep_theory}
+
+\end{document}
+
+
