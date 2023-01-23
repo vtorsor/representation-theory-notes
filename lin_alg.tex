@@ -93,7 +93,7 @@ under matrix multiplication.
 
 \begin{definition}
 For $k$-vector spaces $V,W$, let
-$\operatorname{Hom}_k(V,W)$ be set of $k$-linear
+$\operatorname{Hom}_k(V,W)$ be the set of $k$-linear
 transformations from $V$ to $W$.
 We write $\operatorname{End}_k(V) = \operatorname{Hom}_k(V,V)$
 for the set of \emph{endomorphisms} of $V$.
@@ -122,10 +122,6 @@ $A \mapsto \phi \circ L_A \circ \psi^{-1}$.
 In the case where $W=V$ and $\phi=\psi$, this becomes a $k$-algebra
 isomorphism $\operatorname{M}_n(k) \to \operatorname{End}_k(V)$.
 \end{theorem}
-
-\begin{proof}
-Exercise.
-\end{proof}
 
 \subsection{Dual Spaces}
 
@@ -302,8 +298,8 @@ TODO
 \section{Bilinear Maps}
 
 \begin{definition}
-Let $V$ and $W$ be $k$-vector spaces.
-A \emph{bilinear map} $b: V \times W \to k$,
+Let $U$, $V$ and $W$ be $k$-vector spaces.
+A \emph{bilinear map} $b: V \times W \to U$,
 is a function such that
 \begin{itemize}
 \item $b(\lambda v_1+v_2,w) = \lambda b(v_1,w) + b(v_2,w)$, and
@@ -312,8 +308,10 @@ is a function such that
 for all $v,v_1,v_2 \in V$, $w,w_1,w_2 \in W$ and $\lambda \in k$.
 \end{definition}
 
-The set $\operatorname{Bil}_k(V,W)$ of bilinear maps is a $k$-vector
+The set $\operatorname{Bil}_k(V,W;U)$ of bilinear maps is a $k$-vector
 space.
+We have the shorthand $\operatorname{Bil}_k(V,W)=\operatorname{Bil}_k(V,W;k)$
+when the codomain is $k$.
 We have a canonical isomorphism
 \[
 \operatorname{Bil}_k(V,W) \cong
@@ -334,11 +332,11 @@ then we can form the \emph{matrix} $B$ of the bilinear map $b$ by defining
 $B_{ij} = b(v_i,w_i)$.
 
 \begin{exercise}
-For a choice of basis for $V$ and $W$, then the following are equivalent
+The following are equivalent
 \begin{itemize}
 \item $b_1 : W \to V^\vee$ is an isomorphism.
 \item $b_2 : V \to W^\vee$ is an isomorphism.
-\item $B$ is an invertible matrix.
+\item $B$ is an invertible matrix (regardless of bases chosen).
 \end{itemize}
 If any of these conditions hold, then we say the bilinear map
 is \emph{non-degenerate}.
@@ -446,8 +444,8 @@ Below, if $z=a+bi \in \mathbb{C}$, then we write
 $\overline{z}=a-bi$ for its complex conjugate.
 
 \begin{definition}
-Let $V$ and $W$ be $\mathbb{C}$-vector spaces.
-A \emph{sesquilinear map} $s: V \times W \to \mathbb{C}$,
+Let $U$, $V$ and $W$ be $\mathbb{C}$-vector spaces.
+A \emph{sesquilinear map} $s: V \times W \to U$,
 is a function such that
 \begin{itemize}
 \item $s(\lambda v_1+v_2,w) = \overline{\lambda} s(v_1,w) + s(v_2,w)$, and
@@ -484,8 +482,8 @@ TODO
 \subsection{Multilinear Maps}
 
 \begin{definition}
-Let $V_1,\ldots, V_d$ be $k$-vector spaces.
-A \emph{multilinear map} $m: V_1 \times \cdots \times V_d \to k$,
+Let $U,V_1,\ldots, V_d$ be $k$-vector spaces.
+A \emph{multilinear map} $m: V_1 \times \cdots \times V_d \to U$,
 is a function that is linear in each entry; in other words,
 \begin{align*}
 &m(v_1,\ldots,v_{i-1},\lambda v_i + v_i',v_{i+1},\ldots,v_d)\\
@@ -536,15 +534,11 @@ symmetric and conversely.
 \end{itemize}
 \end{exercise}
 
-\begin{proposition}
+\begin{example}
 The determinant $\det : M_n(k) \to k$ is an alternating multilinear form
 in the rows (or columns) of the matrix.
 Moreover, it is the unique such form such that the identity is $1$.
-\end{proposition}
-
-\begin{proof}
-Omitted.
-\end{proof}
+\end{example}
 
 \section{Tensor Products}
 
@@ -587,7 +581,7 @@ Tensor products exist and are unique up to unique isomorphism.
 \end{theorem}
 
 \begin{proof}
-We prove existence by construction.
+We describe a construction, leaving the remaining details as an exercise.
 Let $\Omega$ be the free $k$-vector space with basis given by the elements of
 $V_1 \times \cdots \times V_d$.  Let $[x]$ be the basis element
 corresponding to $x$.
@@ -604,8 +598,6 @@ Define $V_1 \otimes \cdots \otimes V_n$ as the quotient space
 $\Omega/I$ with $\pi$ the composition of the canonical inclusion
 $\prod_{i=1}^d V_i \to \Omega$ and the quotient $\Omega \to
 \bigotimes_{i=1}^d V_i$.
-
-We leave the remaining conditions as an exercise.
 \end{proof}
 
 We have the following corollaries:
@@ -649,7 +641,8 @@ Suppose we have vector spaces $V,W$ and we have a spanning
 set $S$ for $V$.  If we define a function $f : S \to W$,
 then there is at most one linear transformation $F : V \to W$
 extending $f$.  When $S$ is a \emph{basis}, the extension $F$ always exists,
-but when $S$ is not linearly independent there is something to check.
+but when $S$ is not linearly independent one must make sure any linear
+extension is well-defined.
 In the case of tensor products, the set $S$ is frequently taken to be
 the set of simple tensors.
 \end{remark}
@@ -744,6 +737,10 @@ We see that $(a_1 \otimes l_1)(a_2 \otimes l_2)=a_1a_2 \otimes l_1l_2$.
 
 \section{Tensor Algebras}
 
+We refer to \cite[\S{11.5}]{DF} or \cite{Lang} for some of this
+material.  The material in \cite[\S{A.2}]{Eisenbud} gives an alternate
+perspective that is a bit more general and abstract than what we need.
+
 \begin{definition}
 A \emph{graded $k$-algebra} is a $k$-algebra $A$ with a direct sum
 decomposition
@@ -793,8 +790,8 @@ x_1^3 + 3x_1x_2 - x_2x_1 + 4
 in $k\langle x_1,\ldots, x_n\rangle$.
 \end{example}
 
-The following is less general than descriptions of tensor products
-above, but it is useful to have a contrast to the symmetric and exterior
+The following immediately follows from above,
+but it is useful to have a contrast to the symmetric and exterior
 algebras discussed below.
 
 \begin{proposition}
@@ -872,7 +869,7 @@ In particular, $\dim_k\ \mathcal{S}^d(k^n)=\binom{n+d-1}{d}$.
 Let $V$ be a finite dimensional $k$-vector space.
 The \emph{exterior algebra on $V$} is the graded $k$-algebra
 \[
-\Lambda^d(V) = \mathcal{T}(V)/J
+\Lambda(V) = \mathcal{T}(V)/J
 \]
 where $J$ is the (two-sided) graded ideal
 \[
@@ -900,7 +897,7 @@ $\phi = \psi \circ \pi$.
 
 The image of a simple tensor $v_1 \otimes v_2 \otimes \cdots \otimes v_d$
 is written $v_1 \wedge v_2 \wedge \cdots \wedge v_d$.
-Similarly, the multiplication of two elements $f,g \in \Lambda^d(V)$
+Similarly, the multiplication of two elements $f,g \in \Lambda(V)$
 is written $f \wedge g$.
 
 \begin{proposition}
@@ -926,9 +923,9 @@ v_{\sigma(1)} \wedge \cdots \wedge v_{\sigma(d)}.
 \end{proposition}
 
 \begin{proof}
-Every permutation can be written as a product of adjacent
-transpositions and $\operatorname{sgn}(\sigma)$ is the number of such
-transpositions.  Thus, the result follows from the previous proposition.
+Every permutation can be written as a product of $m$ adjacent
+transpositions and $\operatorname{sgn}(\sigma)=(-1)^m$ by definition.
+Thus, the result follows from the previous proposition.
 \end{proof}
 
 \begin{proposition}
@@ -960,22 +957,21 @@ where $\alpha_1, \ldots, \alpha_{d-1} \in k$.
 Thus
 \[
 v_1 \wedge \cdots \wedge v_d =
-\sum_{i=1}^{d-1} \alpha_i(v_1 \wedge \vdots \wedge v_{d-1} \wedge v_i).
+\sum_{i=1}^{d-1} \alpha_i(v_1 \wedge \cdots \wedge v_{d-1} \wedge v_i).
 \]
 Since $v_i$ occurs twice in each summand, the right hand side is $0$.
-Now, suppose $v_1,\ldots,v_d$ are linearly independent.
 
 Suppose $v_1,\ldots, v_d$ are linearly independent.
 We can complete to a basis $v_1,\ldots,v_n$ for $V$.
 Let $\beta : V \to k^n$ be the corresponding coordinate map.
 Let $f : V^d \to k$ be the function
 \[
-f(w_1,\ldots,w_d) = \det\left(
+f(w_1,\ldots,w_d) = \det
 \begin{pmatrix} \beta(w_1) & \cdots & \beta(w_d)
 & e_{d+1} & \cdots & e_n
 \end{pmatrix}
-\right) .
 \]
+where the $\beta(w_i)$ and $e_j$ are thought of as columns of a matrix.
 Since the determinant is an alternating multilinear map on the columns
 of a square matrix, we see that $f$ is an alternating multilinear map
 such that $f(v_1,\ldots,v_d)=1$.
@@ -1083,13 +1079,14 @@ and $\Lambda^d(V)$.
 \end{proof}
 
 The isomorphisms above are in widespread use, but can be quite
-misleading.  For example, the isomorphisms give an
-algebra structure on $\bigoplus_{d\ge 0}\operatorname{Sym}^d(V)$,
+misleading.  For example, the isomorphisms give a
+graded algebra structure on the infinite direct sum
+$\bigoplus_{d\ge 0}\operatorname{Sym}^d(V)$,
 but the multiplication is \emph{not} the same as the one inherited from
 $\mathcal{T}$.
 
 \begin{proposition}
-$\operatorname{Sym}^d(V^\vee)$ and $\mathcal{S}^d(V)^\vee$
+$\operatorname{Sym}^d(V^\vee)$ and $\left(\mathcal{S}^d(V)\right)^\vee$
 are canonically isomorphic.
 \end{proposition}
 
@@ -1105,10 +1102,11 @@ $\mathcal{S}^d(V)$.  Thus, the isomorphism follows.
 \end{proof}
 
 There cannot be a canonical isomorphism
-$\operatorname{Alt}^d(V^\vee) \cong \Lambda^d(V)^\vee$
+$\operatorname{Alt}^d(V^\vee) \cong \left(\Lambda^d(V)\right)^\vee$
 in all cases.  Indeed,
 $\operatorname{Alt}^d(V^\vee) = \operatorname{Sym}^d(V^\vee)$
-in characteristic $2$.
+in characteristic $2$, which may have a different dimension than
+$\Lambda^d(V)^\vee$.
 However, the following holds in all characteristics.
 
 \begin{proposition}
@@ -1165,7 +1163,7 @@ constants.
 \end{example}
 
 \begin{example}[Coordinate rings]
-If $V$ is a vector space, then a polynomial function $f: V \to k$
+If $V$ is a vector space, then a general polynomial function $f: V \to k$
 is clearly not linear or multilinear.  However, the set of such
 functions is canonically identified with $\mathcal{S}(V^\vee)$.
 This is not at all deep, but it's worth exploring a bit.
@@ -1187,7 +1185,7 @@ can be understood via the (linear) canonical pairing
 and the (non-linear)
 diagonal map $\Delta: V \to \operatorname{Sym}^d(V)$
 where $\Delta(v) = v \otimes \cdots \otimes v$.
-We then have $\alpha(f,v) \mapsto f(\Delta(v))$.
+We then have $\alpha(f,v) = f(\Delta(v))$.
 \end{example}
 
 \begin{example}[Quadratic Forms]
@@ -1212,7 +1210,7 @@ for $v\in V$, while the \emph{polarization} map
 $\mathcal{S}^2(V^\vee) \to \operatorname{Sym}^2(V^\vee)$
 corresponds to
 \[
-b(v,w) = \frac{1}{2}\left( q(v+w)-q(v)-q(v)\right)
+b(v,w) = \frac{1}{2}\left( q(v+w)-q(v)-q(w)\right)
 \]
 for $v,w \in V$.
 
@@ -1232,18 +1230,22 @@ Given an $n$-dimensional vector space $V$,
 a \emph{volume form} is a non-zero element $\omega \in \Lambda^n(V)^\vee$.
 Since $\Lambda^n(V)$ is $1$-dimensional, a volume form is simply a
 choice of isomorphism $\omega : \Lambda^n(V) \cong k$.
-
-(Recall we may identify $\Lambda^n(V^\vee)$
-The reason for this name is in the geometric situation, if
-$v_1,\ldots,v_n$ are vectors in $V$, then
-$\omega(v_1\wedge \cdots \wedge v_n)$ can be thought of as the volume of
-the parallelepiped they generate. 
-
-Given an ordered basis $e_1,\ldots, e_n$, we obtain a volume form
+Given an ordered basis $e_1,\ldots, e_n$ of $V$,
+we obtain a corresponding volume form
 $\omega = (e_1 \wedge \cdots \wedge e_n)^\vee$.
 Observe that the ordering is necessary or else we only know $\omega$
 up to a sign.
-If $k=\mathbb{R}$, then a volume form $\omega \in \Lambda^n(V)^\vee$
+
+Volume forms have a geometric interpretation, justifying their name.
+In $\mathbb{R}^n$, there is a standard volume form
+$\omega=(e_1\wedge \cdots e_n)^\vee$ where
+$e_1,\ldots,e_n$ is the standard basis.
+If $v_1,\ldots,v_n$ are vectors in $\mathbb{R}^n$,
+then $\omega(v_1\wedge \cdots \wedge v_n)$ is the volume of
+the parallelepiped they generate. 
+
+More generally, if $k=\mathbb{R}$,
+then a volume form $\omega \in \Lambda^n(V)^\vee$
 evaluates to either a positive or negative number on any ordered basis.
 Thus, it can be said that a volume form determines an
 \emph{orientation}.
