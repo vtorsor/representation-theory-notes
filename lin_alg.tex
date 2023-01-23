@@ -532,6 +532,16 @@ symmetric and conversely.
 \end{itemize}
 \end{exercise}
 
+\begin{proposition}
+The determinant $\det : M_n(k) \to k$ is an alternating multilinear form
+in the rows (or columns) of the matrix.
+Moreover, it is the unique such form such that the identity is $1$.
+\end{proposition}
+
+\begin{proof}
+Omitted.
+\end{proof}
+
 \section{Tensor Products}
 
 We direct the reader to \cite[10.4]{DF} or \cite[XVI]{Lang}
@@ -1031,7 +1041,7 @@ and
 \[
 3\left(e_1 \otimes e_2 - e_2 \otimes e_1\right)
 + 4\left( e_3 \otimes e_5 - e_5 \otimes e_3 \right) 
-\in \operatorname{Sym}^d(k^7).
+\in \operatorname{Alt}^d(k^7).
 \]
 Observe that the symmetric group does \emph{not} act on the
 vector space $V$.
@@ -1067,6 +1077,113 @@ There is a similar construction for $\operatorname{Alt}^d(V)$
 and $\Lambda^d(V)$.
 \end{proof}
 
+The isomorphisms above are in widespread use, but can be quite
+misleading.  For example, the isomorphisms give an
+algebra structure on $\bigoplus_{d\ge 0}\operatorname{Sym}^d(V)$,
+but the multiplication is \emph{not} the same as the one inherited from
+$\mathcal{T}$.
+
+\begin{proposition}
+$\operatorname{Sym}^d(V^\vee)$ and $\mathcal{S}^d(V)^\vee$
+are canonically isomorphic.
+\end{proposition}
+
+\begin{proof}
+By the universal mapping property of tensor products,
+$\mathcal{T}^d(V^\vee)$ is canonically isomorphic to the space of
+$d$-linear maps $V^d \to k$.
+Thus, $\operatorname{Sym}^d(V^\vee)$ is isomorphic to the
+space of \emph{symmetric} $d$-linear forms $V^d \to k$.
+These are in canonical bijection with linear maps
+$\mathcal{S}^d(V) \to k$ by the universal property of
+$\mathcal{S}^d(V)$.  Thus, the isomorphism follows.
+\end{proof}
+
+There cannot be a canonical isomorphism
+$\operatorname{Alt}^d(V^\vee) \cong \Lambda^d(V)^\vee$
+in all cases.  Indeed,
+$\operatorname{Alt}^d(V^\vee) = \operatorname{Sym}^d(V^\vee)$
+in characteristic $2$.
+However, the following holds in all characteristics.
+
+\begin{proposition}
+$\Lambda^d(V^\vee)$ and $\left(\Lambda^d(V)\right)^\vee$
+are canonically isomorphic.
+\end{proposition}
+
+\begin{proof}
+The isomorphism amounts to a perfect pairing
+\[
+\Lambda^d(V^\vee) \times \Lambda^d(V) \to k
+\]
+defined by
+\[
+(f_1 \wedge \cdots \wedge f_d)(v_1 \wedge \cdots \wedge v_d)
+= \det \begin{pmatrix}
+f_1(v_1) & \cdots & f_d(v_1)\\
+\vdots & \ddots & \vdots\\
+f_1(v_d) & \cdots & f_d(v_d)
+\end{pmatrix} 
+\]
+for all $v_1,\ldots, v_d \in V$ and $f_1,\ldots, f_d \in V^\vee$.
+We leave checking the details as an exercise.
+\end{proof}
+
+\subsection{Examples}
+
+\begin{example}[Algebras]
+A finite-dimensional $k$-algebra $A$ has a multiplication $\mu: A \times
+A \to A$ which is linear in each entry.
+(Addition follows by the distributive property of the underlying ring,
+while scalar multiplication follows from the compatibility property).
+Thus, we can think of an algebra as being a vector space $A$
+along with a choice of tensor $t$ in $A^\vee \otimes A^\vee \otimes A$.
+
+If $e_1,\ldots,e_n$ is a basis for $A$,
+then the \emph{structure constants} of the algebra
+is a collection $\{ a^{ij}_\ell\}$ of $n^3$ elements of $k$ such that
+\[
+e_i\cdot e_j = \sum_{\ell=1}^n a^{ij}_\ell e_\ell
+\]
+for all $1 \le i,j \le n$.
+We can now write the tensor explicitly as
+\[
+t = \sum_{i,k,\ell} a^{ij}_\ell e_i^\vee \otimes e_j^\vee \otimes
+e_\ell.
+\]
+
+The algebra is commutative if and only if $a^{ij}_\ell=a^{ji}_\ell$
+for all possible indices.  Equivalently, the algebra is commutative if
+and only if it is in the subspace $\operatorname{Sym}^2(A^\vee) \otimes A$.
+The associativity condition is \emph{not} linear in the structure
+constants. 
+\end{example}
+
+\begin{example}[Coordinate rings]
+If $V$ is a vector space, then a polynomial function $f: V \to k$
+is clearly not linear or multilinear.  However, the set of such
+functions is canonically identified with $\mathcal{S}(V^\vee)$.
+This is not at all deep, but it's worth exploring a bit.
+
+If $x_1,\ldots,x_n$ is a basis for $V^\vee$, then
+$f$ is a linear combination of elements of the form
+$x_{i_1}\cdots x_{i_d}$.  The function application is carried out
+by extension by linearity of
+\[
+(x_{i_1}\cdots x_{i_d})(v) \mapsto x_{i_1}(v)\cdots x_{i_d}(v)
+\]
+for each $v \in V$.
+
+The map $\alpha : \mathcal{S}^d(V^\vee) \times V \to k$
+can be understood via the (linear) canonical pairing
+\[
+\mathcal{S}^d(V^\vee) \times \operatorname{Sym}^d(V) \to k
+\]
+and the (non-linear)
+diagonal map $\Delta: V \to \operatorname{Sym}^d(V)$
+where $\Delta(v) = v \otimes \cdots \otimes v$.
+We then have $\alpha(f,v) \mapsto f(\Delta(v))$.
+\end{example}
 
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
