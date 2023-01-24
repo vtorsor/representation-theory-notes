@@ -110,7 +110,7 @@ defined by
 \begin{example}
 Let $D_8 = \langle s,r \mid s^2, r^4, (sr)^2 \rangle$
 be the dihedral group of order $8$.
-Over any field of characteristic not $2$, there is a representation
+There is a representation
 \[ \rho : G \to \operatorname{GL}_2(k) \]
 defined on generators by
 \[
@@ -119,6 +119,8 @@ defined on generators by
 \]
 and extended to other elements by using the fact that $\rho$
 must be a group homomorphism.
+Note that $\rho$ is a \emph{faithful} representation if and only if
+$\operatorname{char}(k) \ne 2$.
 \end{example}
 
 
@@ -190,12 +192,12 @@ Let $\operatorname{Hom}_k^G(V,W)$ be the subset of
 $G$-equivariant linear maps $f : V \to W$.
 \end{definition}
 
-An archaic term for $G$-equivariant map is ``interwining operator,''
+An archaic term for $G$-equivariant map is ``intertwining operator,''
 but this is disappearing (thankfully in my view).
 
 \begin{example}
 If $A$ and $B$ are similar invertible matrices, then there exists
-an invertible matrix $P$ such that $A=PMP^{-1}$.
+an invertible matrix $P$ such that $A=PBP^{-1}$.
 Recall that $A^n=PB^nP^{-1}$ for all integers $n$.
 In view of Example~\ref{ex:lin_alg_is_Z_rep_theory}, we conclude that
 equivalence classes of linear representations of
@@ -349,6 +351,67 @@ cannot be written as a direct sum of proper subrepresentations.
 We conclude that $\rho$ is indecomposable.
 \end{example}
 
+\begin{theorem}[Krull-Schmidt]
+Suppose $V$ is a finite-dimensional representation of a finite group $G$.
+All decompositions
+\[
+V \cong W_1 \oplus W_2 \oplus \cdots \oplus W_r
+\]
+into indecomposable representations are unique up to isomorphism
+and reordering.
+\end{theorem}
+
+\begin{proof}
+Deferred for now.  We will prove this in more generality when we discuss
+modules.
+\end{proof}
+
+\begin{remark}
+The Krull-Schmidt theorem fails for representations $G \to
+\operatorname{GL}(\mathbb{Z})$, so the fact we're working
+over a field is vital here.
+\end{remark}
+
+\begin{theorem}[Schur's Lemma]
+If $V$ and $W$ are finite-dimensional irreducible representations
+and $k$ is algebraically closed, then
+\[
+\operatorname{Hom}_k^G(V,W) =
+\begin{cases}
+0 & \textrm{ if } V \not\cong W\\
+k & \textrm{ if } V \cong W.
+\end{cases}
+\]
+\end{theorem}
+
+\begin{proof}
+Let $\phi : V \to W$ be a $G$-equivariant map.
+Since $V$ is irreducible, either $\ker(\phi)=0$ or $\ker(\phi)=V$.
+Since $W$ is irreducible, either $\operatorname{im}(\phi)=0$
+or $\operatorname{im}(\phi)=W$.
+Thus, $\phi$ is either $0$ or an isomorphism.
+
+Thus, we are reduced to the case where $W=V$.
+Now $\operatorname{End}^G_k(V)=\operatorname{Hom}_k^G(V,W)$
+is a $k$-algebra under composition.
+If $\phi \in \operatorname{End}^G_k(V)$ is non-zero, it must be an isomorphism.
+Thus $\phi^{-1}$ is also in $\operatorname{End}^G_k(V)$.
+We conclude that $\operatorname{End}^G_k(V)$ is a division algebra.
+
+It remains to prove that every finite-dimensional division algebra $D$
+over an algebraically closed field $k$ is just the field itself.
+Suppose $a \in D \setminus \{0\} $,
+and let $m_a(t) \in k[t]$ be its minimal polynomial.
+If $m_a$ does not have degree $1$, then $m_a(t)=f(t)g(t)$
+for non-constant polynomials $f,g \in k[t]$ since $k$ is algebraically
+closed.
+The equation $0=m_a(a)=f(a)g(a)$ forces either $f(a)=0$ or $g(a)=0$
+since $D$ is a division algebra.  But this contradicts minimality of
+minimal polynomial.  We conclude that $m_a(t)=t-\lambda$ for some
+$\lambda \in k$.  Thus $a$ is scalar multiplication of $\lambda$
+and thus an element of $k$.
+\end{proof}
+
 \begin{definition}
 A linear representation $V$ is \emph{completely reducible}
 if $V$ is a direct sum of irreducible representations.
@@ -447,7 +510,7 @@ for $f : V \to k$ and $g \in G$.
 \end{proposition}
 
 Note that the above proposition is a special case of the action on
-homomorphisms since $W=k$ has a trivial $G$-action.
+homomorphisms when $W=k$ has a trivial $G$-action.
 
 \begin{proposition}
 The tensor product $V \otimes W$ has a canonical structure of a linear
