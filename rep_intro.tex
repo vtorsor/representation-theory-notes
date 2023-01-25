@@ -370,6 +370,7 @@ modules.
 The Krull-Schmidt theorem fails for representations $G \to
 \operatorname{GL}(\mathbb{Z})$, so the fact we're working
 over a field is vital here.
+Unfortunately, counterexamples are rather subtle!
 \end{remark}
 
 \begin{theorem}[Schur's Lemma]
@@ -417,14 +418,45 @@ A linear representation $V$ is \emph{completely reducible}
 if $V$ is a direct sum of irreducible representations.
 \end{definition}
 
+Suppose $V$ is completely reducible.
+The Krull-Schmidt theorem tells us that there exist irreducible
+representations $W_1, \ldots, W_r$, which are pairwise non-isomorphic,
+such that
+\begin{equation} \label{eq:isotypic_decomposition}
+V = \bigoplus_{i=1}^r V_i
+\end{equation}
+where each $V_i$ is isomorphic to
+\[
+V_i = W_i^{\oplus m_i}
+\]
+for some positive integer $m_i$.
+The expression \eqref{eq:isotypic_decomposition} is called the
+\emph{isotypic decomposition of $V$}.
+The subrepresentations $V_i$ are called the \emph{isotypic components of
+$V$ associated to $W_i$} while the integers $m_i$ are called the
+\emph{multiplicities of $W_i$ in $V$}.
+
+Each $V_i$ is a \emph{canonical} subrepresentation of $V$,
+while classifying subrepresentations isomorphic to $W_i$ may depend on
+arbitrary choices.
+This generalizes how the eigenspaces of a linear transformation
+are canonical, while a basis of eigenvectors
+may depend on arbitrary choices.
+
+\begin{exercise}
+Prove the Krull-Schmidt theorem for the case of completely reducible
+representations $V$ when the field $k$ is algebraically closed.
+(Hint: use Schur's Lemma.)
+\end{exercise}
+
 The following theorem is the main reason why representation theory of finite
 groups in ``good'' characteristic is a completely different story from
 ``bad'' characteristic.
+By convention, every integer is ``coprime to the characteristic of $k$''
+when the characteristic is $0$.
 
 \begin{theorem}[Maschke]
 Let $G$ be a finite group of order coprime to the characteristic of $k$.
-(By convention, we this includes all finite groups when the
-characteristic is $0$.)
 Every finite-dimensional representation of $G$ is completely reducible.
 \end{theorem}
 
