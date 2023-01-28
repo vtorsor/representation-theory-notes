@@ -1,0 +1,181 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+
+% theorem styles (I like everything to have the same counter)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{exercise}[theorem]{Exercise}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% some numbering settings
+\numberwithin{equation}{section}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{15.2pt}
+\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+\setlength{\footskip}{30pt}
+\pagestyle{fancy}
+
+\makeatletter
+\let\ps@plain\ps@fancy 
+\makeatother
+
+\lhead{MATH 742}
+\chead{Character Theory}
+\rhead{Spring 2023}
+\lfoot{Last Revised: \today}
+\cfoot{}
+\rfoot{\thepage\ of \pageref{LastPage} }
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\title{Character Theory}
+\author{Alexander Duncan}
+
+\maketitle
+
+Some of the content here can be found in
+\S 14--15 of \cite{AlperinBell} and
+\S 2 of \cite{Serre}.
+TODO
+
+Throughout this document, we make the standing assumptions that $G$
+is a finite group and $k$ is a field of characteristic coprime to the
+order of $G$.
+This allows us to appeal to Maschke's theorem:
+every finite-dimensional representation is completely reducible.
+Thus, every indecomposable representation is also irreducible.
+
+\section{Representation Ring}
+
+Let $R^+_k(G)$ be the set of isomorphism classes of
+finite-dimensional representations of $G$ over $k$.
+Given representations $V$ and $W$, let $[V]$ and $[W]$ denote their
+images in $R^+_k(G)$.
+We define addition on $R^+_k(G)$ via
+\[ [V] + [W] = [V \oplus W] \]
+and multiplication on $R^+_k(G)$ via
+\[ [V] \cdot [W] = [V \otimes W]. \]
+We write $0$ for $[0]$ and $1$ for $[k]$.
+(One should check that these operations are well-defined.)
+
+For representations $U,V,W$, let $u=[U]$, $v=[V]$, and $w=[W]$.
+Write $0 = [0]$ for the zero representation and $1=[k]$
+for the trivial representation.
+Now, standard isomorphisms give rise to properties of $R^+_k(G)$ as follows:
+\begin{align*}
+U \oplus V &\cong V \oplus U & u+v&=v+u\\
+U \oplus (V \oplus W) &\cong (U \oplus V) \oplus W & u+(v+w)&=(u+v)+w\\
+0 \oplus V &\cong V & 0+v&=v\\
+V \oplus 0 &\cong V & v+0&=v\\
+U \otimes V &\cong V \otimes U & uv&=vu\\
+U \otimes (V \otimes W) &\cong (U \otimes V) \otimes W & u(vw)&=(uv)w\\
+k \otimes V &\cong V & 1v&=v\\
+V \otimes k &\cong V & v1&=v\\
+0 \otimes V &\cong 0 & 0v&=0\\
+V \otimes 0 &\cong 0 & v0&=0\\
+U \otimes (V \oplus W) &\cong (U \otimes V) \oplus (U \otimes W) &
+u(v+w)&=uv+uw\\
+(V \oplus W) \otimes U &\cong (V \otimes U) \oplus (V \otimes U) &
+(v+w)u&=vu+wu
+\end{align*}
+
+We would like to conclude that $R^+_k(G)$ is a ring,
+but we are missing additive inverses.  Indeed, no non-zero
+representation has an additive inverse for dimensional reasons.
+However, $R^+_k(G)$ does have the structure of a commutative \emph{rig}
+(``a riNg without Negatives'').
+In particular, $R^+_k(G)$ is a commutative monoid under addition,
+and the non-zero elements of $R^+_k(G)$ form a commutative monoid under
+multiplication.
+
+Let $S_k(G)$ be the set of isomorphism classes of
+irreducible representations of $G$ over $k$.
+From the Krull-Schmidt theorem, every element $[V]$ of $R^+_G(k)$
+can be written uniquely as a finite linear combination
+\[
+[V] = m_1 [W_1] + \cdots + m_r [W_r]
+\]
+where $[W_1],\ldots,[W_r] \in S_k(G)$ and $m_1,\ldots, m_r$ are
+non-negative integers.
+Thus there is an additive monoid isomorphism
+$R^+_G(k) \cong \mathbb{N}^{\oplus S_k(G)}$ .
+(We will see that $S_k(G)$ is always finite, but we distinguish between
+the direct sum rather and the direct product until we prove this).
+
+However, while the additive structure on $R^+_G(k)$ is very nice,
+the \emph{multiplicative} structure is considerably more subtle.
+Let $X$ be an indexing set for $S_k(G) = \{[W_i]\}_{i \in X}$.
+The multiplicative structure is completely determined by the
+non-negative integers $c^{ij}_\ell$ in the expressions
+\[
+[W_i] \cdot [W_j] = \sum_{\ell \in X} c^{ij}_\ell [W_\ell]
+\]
+where $i,j$ vary independently over all values of $X$.
+
+\begin{remark}
+The numbers $c^{ij}_\ell$ are called the \emph{Clebsch-Gordan numbers}
+for the group $G$.  After selecting bases for the various $W_i$,
+we have explicit matrices defining the isomorphism between
+$W_i \otimes W_j$ and the decomposition into irreducible representations;
+the entries of this matrix are called the \emph{Clebsch-Gordan
+coefficients}.  The case where $G$ is the (infinite) special orthogonal
+group $SO(3)$ is of special interest in quantum physics and quantum
+chemistry.
+\end{remark}
+
+\subsection{Virtual Representations}
+
+A \emph{virtual representation} $X$ is an element of the free abelian
+group on $S_k(G)$.
+More concretely, there is an expression
+\[
+X = m_1 [W_1] + m_2 [W_2] + \cdots + m_r [W_r]
+\]
+where $[W_1],\ldots,[W_r]$ are distinct isomorphism classes of
+irreducible representations
+and $m_1,\ldots, m_r$ are integers.
+If all the elements $m_1,\ldots,m_r$ are non-negative,
+then the virtual representation is an (isomorphism class of) a
+representation via the evident interpretation in $R^+_k(G)$.
+
+\begin{definition}
+The \emph{representation ring $R_k(G)$ of $G$ over $k$} is
+the additive group of virtual representations with multiplication
+obtained by extending the multiplication of $R^+_k(G)$ by linearity.
+\end{definition}
+
+\begin{remark}
+There are way more theorems about \emph{rings} than \emph{rigs}.
+Thus, we ``adjoined negatives'' to make our rig $R^+_k(G)$
+into a ring $R_k(G)$.
+This procedure is an additive analog to forming the ring of fractions of a ring.
+In general, one can similarly construct the \emph{Grothendieck group}
+or \emph{group completion} $G$ from a commutative monoid $M$.
+If the monoid $M$ is a rig, then the group $G$ becomes a ring.
+However, we only get a nice embedding $M \hookrightarrow G$ if
+$M$ is a \emph{cancellative} monoid.
+\end{remark}
+
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{alpha}
+\bibliography{rep_theory}
+
+\end{document}
+
+
