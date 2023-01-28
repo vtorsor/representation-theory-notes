@@ -398,19 +398,27 @@ is a $k$-algebra under composition.
 If $\phi \in \operatorname{End}^G_k(V)$ is non-zero, it must be an isomorphism.
 Thus $\phi^{-1}$ is also in $\operatorname{End}^G_k(V)$.
 We conclude that $\operatorname{End}^G_k(V)$ is a division algebra.
+The result now follows from Lemma~\ref{lem:division_over_kbar}.
+\end{proof}
 
-It remains to prove that every finite-dimensional division algebra $D$
-over an algebraically closed field $k$ is just the field itself.
-Suppose $a \in D \setminus \{0\} $,
-and let $m_a(t) \in k[t]$ be its minimal polynomial.
+\begin{lemma} \label{lem:division_over_kbar}
+If $k$ is an algebraically closed field,
+then every finite-dimensional division $k$-algebra $D$
+is isomorphic to $k$. 
+\end{lemma}
+
+\begin{proof}
+Suppose $a \in D \setminus \{0\} $.
+Since $D$ is finite-dimensional, multiplication by $a$
+has a minimal polynomial $m_a(t) \in k[t]$.
 If $m_a$ does not have degree $1$, then $m_a(t)=f(t)g(t)$
 for non-constant polynomials $f,g \in k[t]$ since $k$ is algebraically
 closed.
 The equation $0=m_a(a)=f(a)g(a)$ forces either $f(a)=0$ or $g(a)=0$
-since $D$ is a division algebra.  But this contradicts minimality of
-minimal polynomial.  We conclude that $m_a(t)=t-\lambda$ for some
-$\lambda \in k$.  Thus $a$ is scalar multiplication of $\lambda$
-and thus an element of $k$.
+since $D$ is a division ring.  But this contradicts minimality of
+the minimal polynomial.  We conclude that $m_a(t)=t-\lambda$ for some
+$\lambda \in k$.  Thus $a$ is scalar multiplication by $\lambda$
+and thus is an element of $k$.
 \end{proof}
 
 \begin{definition}
