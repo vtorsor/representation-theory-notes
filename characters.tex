@@ -187,9 +187,9 @@ consequences.
 Let $G$ be a finite group and $(V,\rho)$ a representation of $G$.
 We define the \emph{character of $\rho$} as the function
 \[
-\chi : G \to \mathbb{C}
+\chi_V : G \to \mathbb{C}
 \]
-given by $\chi(g)=\operatorname{tr}(\rho_g)$ for all $g \in G$.
+given by $\chi_V(g)=\operatorname{tr}(\rho_g)$ for all $g \in G$. 
 \end{definition}
 
 Characters satisfy numerous useful properties.
@@ -197,33 +197,25 @@ Characters satisfy numerous useful properties.
 
 \begin{proposition}
 Let $(V,\rho)$ and $(W,\sigma)$ be representations of a finite group
-$G$ with characters $\phi$ and $\psi$, respectively.
+$G$.
 Then:
 \begin{enumerate}
-\item $\phi(1)=\dim(V)$ where $1$ is identity of $G$,
-\item $\phi(g^{-1}) = \overline{\phi(g)}$
+\item $\chi_V(1)=\dim(V)$ where $1$ is identity of $G$,
+\item $\chi_V(g^{-1}) = \overline{\chi_V(g)}$
 for any $g \in G$, and
-\item $\phi(hgh^{-1})=\phi(g)$, for all $g,h \in G$.
+\item $\chi_V(hgh^{-1})=\chi_V(g)$, for all $g,h \in G$.
 \item
-the character $\chi$ of $V \oplus W$ is given by
-\[
-\chi(g) = \phi(g) + \psi(g) \textrm{ for } g \in G \ .
-\]
+$\displaystyle
+\chi_{V \oplus W}(g) = \chi_V(g) + \chi_W(g)$ for $g \in G$.
 \item
-the character $\chi$ of $V \otimes W$ is given by
-\[
-\chi(g) = \phi(g) \psi(g) \textrm{ for } g \in G \ .
-\]
+$\displaystyle
+\chi_{V \otimes W}(g) = \chi_V(g)\chi_W(g)$ for $g \in G$.
 \item
-the character $\chi$ of $V^\vee$ is given by
-\[
-\chi(g) = \overline{\phi(g)} \textrm{ for } g \in G \ .
-\]
+$\displaystyle
+\chi_{V^\vee}(g) =  \overline{\chi_V(g)}$ for $g \in G$.
 \item
-the character $\chi$ of $\operatorname{Hom}_k(V,W)$ is given by
-\[
-\chi(g) = \overline{\phi(g)} \psi(g) \textrm{ for } g \in G \ .
-\]
+$\displaystyle
+\chi_{\operatorname{Hom}_k(V,W)}(g) = \overline{\chi_V(g)} \chi_W(g)$ for $g \in G$.
 \end{enumerate}
 \end{proposition}
 
@@ -238,13 +230,13 @@ let $f_1, \ldots, f_m$ be a diagonal basis for $\sigma(g)$
 with eigenvalues $\mu_1, \ldots, \mu_m$.
 In particular,
 \[
-\phi(g) = \lambda_1 + \cdots + \lambda_n \textrm{ and }
-\psi(g) = \mu_1 + \cdots + \mu_m.
+\chi_V(g) = \lambda_1 + \cdots + \lambda_n \textrm{ and }
+\chi_W(g) = \mu_1 + \cdots + \mu_m.
 \]
 We now prove each part of the statement
 
 (1.)
-$\phi(1)$ is the $n \times n$ identity matrix where $n=\dim(V)$.
+$\chi_V(1)$ is the $n \times n$ identity matrix where $n=\dim(V)$.
 
 
 (2.)
@@ -332,11 +324,10 @@ The subset of class function $C(G)$ are a subalgebra of this ring.
 If $c(G)$ denotes the number of conjugacy classes of $G$,
 then $C(G)$ is naturally isomorphic to $\mathbb{C}^{c(G)}$.
 
-\begin{example}
-Let $G$ be a finite group and let $\rho$ be the regular representation.
-The character $\chi$ of $\rho$ satisfies
+\begin{example} \label{eg:regular_rep}
+Let $V$ be the regular representation.  Then
 \[
-\chi(g) = \begin{cases}
+\chi_V(g) = \begin{cases}
 |G| & \textrm{for $g=1$},\\
 0 & \textrm{otherwise}
 \end{cases} .
@@ -350,13 +341,13 @@ corollary:
 The assignment of a representation to its character
 induces a ring homomorphism
 \[
-\Omega: R(G) \to C(G)
+\chi_{\bullet}: R(G) \to C(G)
 \]
 from the representation ring to the algebra of class functions on $G$.
 \end{corollary}
 
-We will see shortly that $\Omega$ is \emph{injective}.
-An element in the image of the map $\Omega$ above is called a \emph{virtual
+We will see shortly that $\chi_{\bullet}$ is \emph{injective}.
+An element in the image of the map $\chi_{\bullet}$ above is called a \emph{virtual
 character}.  Note that $R(G)$ is only a ring, while $C(G)$ is a
 $\mathbb{C}$-algebra.  They are never isomorphic, but we will see that
 $R(G) \otimes_\mathbb{Z} \mathbb{C} \cong C(G)$ as $\mathbb{C}$-algebras.
@@ -365,7 +356,7 @@ Since the set of isomorphism classes of irreducible representations of
 $G$ form a $\mathbb{Z}$-basis for $R(G)$
 and the set of conjugacy classes of $G$
 form a $\mathbb{C}$-basis for $C(G)$,
-the map $\Omega$ is totally determined by pairing these two basis.
+the map $\chi_{\bullet}$ is totally determined by pairing these two basis.
 The resulting matrix is called the \emph{character table} of $G$.
 
 \begin{example}
@@ -405,6 +396,253 @@ Computer algebra packages can produce (or look up) character tables
 for finite groups.  The orderings of the rows and the columns of the
 table may not be consistent even if exactly the same program is run on
 exactly the same data!
+
+\section{Orthogonality Relations}
+
+We begin with a lemma in the spirit of Maschke's theorem.
+Recall that if $(V,\rho)$ is a linear representation of a finite group $G$,
+$V^G$ is the invariant subspace of vectors
+$v \in V$ such that $\rho_g(v)=v$ for all $g \in G$.
+
+\begin{lemma}
+If $(V,\rho)$ be a linear representation of a finite group $G$,
+then
+\[ \dim(V^G) = \frac{1}{|G|} \sum_{g \in G} \chi_V(g). \]
+\end{lemma}
+
+\begin{proof}
+By the same argument as in the proof of Maschke's Theorem,
+the linear transformation $\pi : V \to V$ defined by
+\[
+\pi(v) = \frac{1}{|G|} \sum_{g \in G} \rho_g(v)
+\]
+is a $G$-equivariant projection onto $V^G$.
+Choosing an appropriate basis for $V$, the map $\pi$ corresponds to a
+matrix with $\dim(V^G)$ ones on the diagonal and zeroes elsewhere.
+The computation
+\[
+\frac{1}{|G|} \sum_{g \in G} \chi_V(g)
+= \frac{1}{|G|} \sum_{g \in G} \operatorname{tr}( \rho(g) )
+= \operatorname{tr}\left( \frac{1}{|G|} \sum_{g \in G}\rho(g) \right)
+= \operatorname{tr}( \pi ) = \dim(V^G)
+\]
+finishes the argument.
+\end{proof}
+
+\begin{definition} \label{def:innerProduct}
+Define a pairing
+\[
+( \phi , \psi ) := \frac{1}{|G|}
+\sum_{g \in G} \overline{\phi(g)} \psi(g)
+\]
+for any two functions $\phi, \psi : G \to \mathbb{C}$.
+\end{definition}
+
+\begin{proposition}
+The product $(-,-)$ makes $C(G)$ an inner product space.
+\end{proposition}
+
+\begin{proof}
+The pairing $(-,-)$ is conjugate linear in the first variable and linear in
+the second.  Also, $(\psi,\psi)$ is a sum of non-negative real numbers
+which is zero if and only if $\psi(g)=0$ for every $g \in G$.
+\end{proof}
+
+
+The inner product has an important interpretation:
+
+\begin{lemma}
+$\displaystyle
+(\chi_V, \chi_W) = \dim_k\left( \operatorname{Hom}^G_k\left(V,
+W\right)\right)$.
+\end{lemma}
+
+\begin{proof}
+If $\tau$ is the character of $\operatorname{Hom}_k(V,W)$, then
+\[ ( \chi_V , \chi_W ) = \frac{1}{|G|}
+\sum_{g \in G} \overline{\chi_V(g)} \chi_W(g)
+= \frac{1}{|G|} \sum_{g \in G} \tau(g) .
+\]
+Thus:
+\[ ( \chi_V , \chi_W ) =
+\dim_k\left(\left( \operatorname{Hom}_k\left(V,W\right) \right)^G\right) =
+\dim_k( \operatorname{Hom}^G_k(V,W) ) \]
+as desired.
+\end{proof}
+
+A character is \emph{irreducible} if its corresponding representation
+is.
+The main result of this section is as follows:
+
+\begin{theorem}
+The irreducible characters are an orthonormal basis for the space of
+class functions $C(G)$.
+\end{theorem}
+
+\begin{proof}
+Suppose $V$ and $W$ are irreducible.
+Then Schur's Lemma gives us
+\[
+\left( \chi_V, \chi_W \right)
+= \dim_k \operatorname{Hom}^G_k(V,W) =
+\begin{cases}
+1 & V \cong W\\
+0 & V \not\cong W
+\end{cases}.
+\]
+Thus, the irreducible characters are an orthonormal set.
+It remains to show they span $C(G)$.
+
+Let $K_1,\ldots,K_r$ be the conjugacy classes of $G$.
+For any representation $\rho$, observe that
+\[
+P_i = \sum_{g \in K_i} \rho(g)
+\]
+is equivariant linear map.
+If $\rho$ is irreducible, then, $P_i$ is scalar multiplication
+by Schur's Lemma.
+
+Let $\phi \in C(G)$ be orthogonal to every irreducible character
+(thus every character by linearity).
+For a representation $\rho$, define the endomorphism
+\[
+Q = \sum_{g \in G} \overline{\phi(g)} \rho_g \ .
+\]
+The trace of $Q$ is $0$ since $(\phi,\chi)=0$ for every character $\chi$.
+Observe that $Q$ is a linear combination of operators $P_1,\ldots,P_n$
+since $\phi$ is a class function.
+When $\rho$ is irreducible, $Q$ is therefore multiplication by a scalar.
+Since the trace is $0$, we conclude that $Q$ is the zero map
+when $\rho$ is irreducible.  Thus $Q=0$ for all representations $\rho$.
+
+When $\rho$ is the regular representation we obtain
+\[
+Q(e_1)=\sum_{g \in G} \overline{\phi(g)} e_g .
+\]
+We must conclude every $\phi(g)=0$.  Thus no class function is
+orthogonal to every irreducible character.
+\end{proof}
+
+This theorem is enormously powerful.  In particular, it tells us that
+the number of irreducible representations is not only \emph{finite}, but
+exactly how many there are:
+
+\begin{corollary}
+The number of irreducible representations is equal to the number of
+conjugacy classes in $G$.
+\end{corollary}
+
+The character table can be viewed as the ``change of basis'' matrix
+between irreducible representations of $R(G)$ and characteristic
+functions of conjugacy classes in $C(G)$.
+While there exists a bijection between conjugacy classes
+and irreducible representations, we do not explicitly construct one.
+Indeed, there are good reasons to expect that there will never be an
+``effective combinatorial proof'' of this bijection. 
+
+\begin{corollary}
+If $V$ is a representation with isotypic decomposition
+\[
+V \cong W_1^{\oplus m_1} \oplus \cdots \oplus W_r^{\oplus m_r}
+\]
+for irreducible representations $W_1, \ldots, W_r$,
+then we may recover the multiplicities via
+\[
+m_i = \left( \chi_V, \chi_{W_i} \right).
+\]
+\end{corollary}
+
+\begin{corollary}
+A character $\chi$ is irreducible if and only if $(\chi,\chi)=1$.
+\end{corollary}
+
+\begin{lemma}
+Suppose $G$ has irreducible representations $V_1,\ldots,V_r$
+with dimensions $n_1,\ldots, n_r$.  Then the isotypic decomposition of
+the regular representation is
+\[
+V_1^{n_1} \oplus \cdots \oplus V_r^{n_r} .
+\]
+In particular, $|G|=n_1^2 + n_2^2 + \cdots + n_r^2$.
+\end{lemma}
+
+\begin{proof}
+Let $W$ be the regular representation.
+Using Example~\ref{eg:regular_rep}, we compute
+\[
+( \chi_{V_i} , \chi_W ) = \frac{1}{|G|}
+\sum_{g \in G} \overline{\chi_{V_i}(g)} \chi_W(g)
+= \frac{1}{|G|} \overline{\chi_{V_i}(1)} |G|
+= \dim(V_i)=n_i.
+\]
+The second statement follows by comparing the dimensions
+in the regular representation with its isotypic decomposition.
+\end{proof}
+
+\subsection{Computing inner products}
+
+In practice, it is inefficient to compute inner products by summing over
+every element in the group.  We already know that the class functions
+will give the same output for each element of the conjugacy class.
+Therefore, it is convenient to rewrite the inner product to take
+advantage of this.
+
+\begin{proposition}
+Let $K_1, \ldots, K_r$ be the conjugacy classes of $G$
+and let $g_1,\ldots, g_r$ be representatives in each class.
+Then
+\[
+( \psi, \phi ) = \sum_{i=1}^r \frac{|K_i|}{|G|}
+\overline{\psi(g_i)}\phi(g_i)
+\]
+for all class functions $\psi,\phi \in C(G)$.
+\end{proposition}
+
+Recall that an orthogonal matrix has an orthogonal transpose.
+The formula above gives an orthonormal pairing for the
+\emph{rows} of the character table.  We also have orthogonality of the
+\emph{columns} via the following:
+
+Thus, we expect that the \emph{rows}
+
+\newpage
+
+
+\begin{proof}
+We saw above that the irreducible characters form a basis
+of the center of $\mathbb{C} G$ (which is isomorphic to the space of class functions).
+It remains to check that they form an orthogonal basis.
+Let $\chi_1$ and $\chi_2$ be irreducible characters
+corresponding to representations $V_1$ and $V_2$.
+By Schur's Lemma, the space of $G$-equivariant maps is
+$1$-dimensional if $\chi_1=\chi_2$ and $0$ otherwise.
+Thus $(\chi_1,\chi_2)$ is $1$ if $\chi_1=\chi_2$ and $0$ otherwise.
+\end{proof}
+
+Note that the above shows that the \emph{rows} of the character table are
+orthonormal (when appropriately weighted by the number of elements in
+each conjugacy class).  The following theorem proves an orthogonality
+relation among the \emph{columns}.
+
+Let $(V_1, \rho_1), \ldots, (V_r, \rho_r)$ be the irreducible
+representations of $G$ with $\chi_1, \ldots, \chi_r$ the corresponding
+characters.  Let $c(g)$ be the number of elements in the conjugacy class
+of $g \in G$.
+
+\begin{exercise}
+Let $\chi_1,\ldots,\chi_r$ be the irreducible characters.
+Let $K(g)$ denote the number of elements in the conjugacy class of $g \in
+G$.
+We have
+\[
+\sum_{i=1}^r \overline{\chi_i(g)} \chi_i(h) =
+\begin{cases}
+\frac{|G|}{K(g)} & \textrm{if $g$ is conjugate to $h$}\\
+0 & \textrm{otherwise}
+\end{cases}
+\]
+for $g, h \in G$.
+\end{exercise}
 
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
