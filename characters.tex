@@ -157,6 +157,12 @@ the additive group of virtual representations with multiplication
 obtained by extending the multiplication of $R^+_k(G)$ by linearity.
 \end{definition}
 
+\begin{example}
+If $G$ is the trivial group, then representations are just vector spaces.
+In this case, $R^+_k(G) \cong \mathbb{N}$ where $V \mapsto \dim_k(V)$.
+The ring of virtual representations is $R_k(G) \cong \mathbb{Z}$.
+\end{example}
+
 \begin{remark}
 There are way more theorems about \emph{rings} than \emph{rigs}.
 Thus, we ``adjoined negatives'' to make our rig $R^+_k(G)$
@@ -169,6 +175,185 @@ However, we only get a nice embedding $M \hookrightarrow G$ if
 $M$ is a \emph{cancellative} monoid.
 \end{remark}
 
+\section{Characters}
+
+In this section, we assume throughout that $k=\mathbb{C}$.
+Here for $z \in \mathbb{C}$, the expression $\overline{z}$ denotes the
+complex conjugate.  Observe that if $z$ is a root of unity, then
+$\overline{z}=z^{-1}$.  This small observation will have important
+consequences.
+
+\begin{definition}
+Let $G$ be a finite group and $(V,\rho)$ a representation of $G$.
+We define the \emph{character of $\rho$} as the function
+\[
+\chi : G \to \mathbb{C}
+\]
+given by $\chi(g)=\operatorname{tr}(\rho_g)$ for all $g \in G$.
+\end{definition}
+
+Characters satisfy numerous useful properties.
+
+
+\begin{proposition}
+Let $(V,\rho)$ and $(W,\sigma)$ be representations of a finite group
+$G$ with characters $\phi$ and $\psi$, respectively.
+Then:
+\begin{enumerate}
+\item $\phi(1)=\dim(V)$ where $1$ is identity of $G$,
+\item $\phi(g^{-1}) = \overline{\phi(g)}$
+for any $g \in G$, and
+\item $\phi(hgh^{-1})=\phi(g)$, for all $g,h \in G$.
+\item
+the character $\chi$ of $V \oplus W$ is given by
+\[
+\chi(g) = \phi(g) + \psi(g) \textrm{ for } g \in G \ .
+\]
+\item
+the character $\chi$ of $V \otimes W$ is given by
+\[
+\chi(g) = \phi(g) \psi(g) \textrm{ for } g \in G \ .
+\]
+\item
+the character $\chi$ of $V^\vee$ is given by
+\[
+\chi(g) = \overline{\phi(g)} \textrm{ for } g \in G \ .
+\]
+\item
+the character $\chi$ of $\operatorname{Hom}_k(V,W)$ is given by
+\[
+\chi(g) = \overline{\phi(g)} \psi(g) \textrm{ for } g \in G \ .
+\]
+\end{enumerate}
+\end{proposition}
+
+
+\begin{proof}
+Fix an element $g \in G$.
+Since $\rho(g)$ and $\sigma(g)$ are complex matrices of finite order,
+they are both diagonalizable with eigenvalues roots of unity.
+Let $e_1,\ldots,e_n$ be a diagonal basis for $\rho(g)$
+with eigenvalues $\lambda_1, \ldots, \lambda_n$, and
+let $f_1, \ldots, f_m$ be a diagonal basis for $\sigma(g)$
+with eigenvalues $\mu_1, \ldots, \mu_m$.
+In particular,
+\[
+\phi(g) = \lambda_1 + \cdots + \lambda_n \textrm{ and }
+\psi(g) = \mu_1 + \cdots + \mu_m.
+\]
+We now prove each part of the statement
+
+(1.)
+$\phi(1)$ is the $n \times n$ identity matrix where $n=\dim(V)$.
+
+
+(2.)
+Recall $\zeta^{-1}=\overline{\zeta}$ for any root of unity
+$\zeta$.
+Thus
+\[
+\rho_{g^{-1}}(e_i)=\lambda_i^{-1}=\overline{\lambda_i}=\overline{\rho_g(e_i)}
+\]
+for each $g \in G$ and $i \in \{1,\ldots,n\}$.
+Since the trace is simply the sum of the $\lambda_i$, the result
+follows.
+
+(3.) Recall that $\operatorname{tr}(AB)=\operatorname{tr}(BA)$ for any
+matrices $A$ and $B$.  Thus
+$\operatorname{tr}(ABA^{-1})=\operatorname{tr}(A^{-1}AB)=\operatorname{tr}(B)$.
+
+
+
+(4.) Follows from the fact that $e_1, \ldots, e_n, f_1, \ldots, f_m$ is a
+diagonal basis for $(\rho \oplus \sigma)(g)$ and that
+\[
+(\lambda_1 + \cdots + \lambda_n) + (\mu_1 + \cdots + \mu_m) = 
+(\lambda_1 + \cdots + \lambda_n + \mu_1 + \cdots + \mu_m) \ .
+\]
+
+
+
+(5.) Note that $\{ e_i \otimes f_j \}$ is a diagonal basis for
+$(\rho \otimes \sigma)(g)$.  The result follows from the observation
+that
+\[
+(\lambda_1 + \cdots + \lambda_n) (\mu_1 + \cdots + \mu_m)
+= \sum_{i=1}^n \sum_{j=1}^m \lambda_i \mu_j \ .
+\]
+
+
+
+(6.) Denote by $e_1^\vee, \ldots, e_n^\vee$ the dual basis of $e_1,
+\ldots, e_n$.
+Observe that
+\[
+\rho^\vee(g)(e_i^\vee)(e_j)=e_i^\vee(\rho(g^{-1})(e_j))
+= \lambda_i^{-1}\delta_{ij}=\overline{\lambda_i}\delta_{ij} \ .
+\]
+
+
+
+(7.) Follows from the isomorphism
+$\operatorname{Hom}_k(\rho,\sigma) \cong \rho^\vee \otimes \sigma$.
+\end{proof}
+
+
+\begin{exercise}
+The character $\chi$ of $\operatorname{Sym}^2(V) \cong S^2(V)$ is given by
+\[
+\chi(g) = \frac{1}{2}\left(\phi(g)^2 + \phi(g^2)\right)
+\textrm{ for } g \in G \ .
+\]
+The character $\chi$ of $\operatorname{Alt}^2(V) \cong \Lambda^2(V)$ is given by
+\[
+\chi(g) = \frac{1}{2}\left(\phi(g)^2 - \phi(g^2)\right)
+\textrm{ for } g \in G \ .
+\]
+\end{exercise}
+
+The third property above proves that all characters are \emph{class
+functions}:
+
+\begin{definition}
+A function $f : G \to \mathbb{C}$ is called a \emph{class function}
+if $f(hgh^{-1})=f(g)$ for all $g,h \in G$.
+The set of all class functions is denoted $C(G)$.
+\end{definition}
+
+The set of all functions $f : G \to \mathbb{C}$ is a
+$\mathbb{C}$-algebra via pointwise addition and multiplication.
+Alternatively, the ring is the same as the usual ring structure on the
+Cartesian power $\mathbb{C}^G$.
+The subset of class function $C(G)$ are a subalgebra of this ring.
+
+\begin{example}
+Let $G$ be a finite group and let $\rho$ be the regular representation.
+The character $\chi$ of $\rho$ satisfies
+\[
+\chi(g) = \begin{cases}
+|G| & \textrm{for $g=1$},\\
+0 & \textrm{otherwise}
+\end{cases} .
+\]
+\end{example}
+
+The properties proven above about characters imply the following nice
+corollary:
+
+\begin{corollary}
+The assignment of a representation to its character
+induces a ring homomorphism
+\[
+f: R(G) \to C(G)
+\]
+from the representation ring to the algebra of class functions on $G$.
+\end{corollary}
+
+We will see shortly that this map is \emph{injective}.
+An element in the image of the map $f$ above is called a \emph{virtual
+character}.  Note that $R(G)$ is only a ring, while $C(G)$ is a
+$\mathbb{C}$-algebra.  They are never isomorphic, but we will see that
+$R(G) \otimes_\mathbb{Z} \mathbb{C} \cong C(G)$ as $\mathbb{C}$-algebras.
 
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
