@@ -65,9 +65,9 @@ finite-dimensional representations of $G$ over $k$.
 Given representations $V$ and $W$, let $[V]$ and $[W]$ denote their
 images in $R^+_k(G)$.
 We define addition on $R^+_k(G)$ via
-\[ [V] + [W] = [V \oplus W] \]
+\[ [V] + [W] := [V \oplus W] \]
 and multiplication on $R^+_k(G)$ via
-\[ [V] \cdot [W] = [V \otimes W]. \]
+\[ [V] \cdot [W] := [V \otimes W]. \]
 We write $0$ for $[0]$ and $1$ for $[k]$.
 (One should check that these operations are well-defined.)
 
@@ -131,7 +131,7 @@ for the group $G$.  After selecting bases for the various $W_i$,
 we have explicit matrices defining the isomorphism between
 $W_i \otimes W_j$ and the decomposition into irreducible representations;
 the entries of this matrix are called the \emph{Clebsch-Gordan
-coefficients}.  The case where $G$ is the (infinite) special orthogonal
+coefficients}.  Analogs for infinite groups like the special orthogonal
 group $SO(3)$ is of special interest in quantum physics and quantum
 chemistry.
 \end{remark}
@@ -155,12 +155,13 @@ representation via the evident interpretation in $R^+_k(G)$.
 The \emph{representation ring $R_k(G)$ of $G$ over $k$} is
 the additive group of virtual representations with multiplication
 obtained by extending the multiplication of $R^+_k(G)$ by linearity.
+If $k=\mathbb{C}$, then we simply write $R(G)$.
 \end{definition}
 
 \begin{example}
-If $G$ is the trivial group, then representations are just vector spaces.
-In this case, $R^+_k(G) \cong \mathbb{N}$ where $V \mapsto \dim_k(V)$.
-The ring of virtual representations is $R_k(G) \cong \mathbb{Z}$.
+If $G=1$ is the trivial group, then representations are just vector spaces.
+In this case, $R^+_k(1) \cong \mathbb{N}$ where $V \mapsto \dim_k(V)$.
+The ring of virtual representations is $R_k(1) \cong \mathbb{Z}$.
 \end{example}
 
 \begin{remark}
@@ -171,8 +172,8 @@ This procedure is an additive analog to forming the ring of fractions of a ring.
 In general, one can similarly construct the \emph{Grothendieck group}
 or \emph{group completion} $G$ from a commutative monoid $M$.
 If the monoid $M$ is a rig, then the group $G$ becomes a ring.
-However, we only get a nice embedding $M \hookrightarrow G$ if
-$M$ is a \emph{cancellative} monoid.
+However, we only get an embedding $M \hookrightarrow G$ if
+$M$ is \emph{cancellative}.
 \end{remark}
 
 \section{Characters}
@@ -286,24 +287,25 @@ Observe that
 
 
 (7.) Follows from the isomorphism
-$\operatorname{Hom}_k(\rho,\sigma) \cong \rho^\vee \otimes \sigma$.
+$\operatorname{Hom}_k(V,W) \cong V^\vee \otimes W$.
 \end{proof}
 
 
 \begin{exercise}
-The character $\chi$ of $\operatorname{Sym}^2(V) \cong S^2(V)$ is given by
-\[
-\chi(g) = \frac{1}{2}\left(\phi(g)^2 + \phi(g^2)\right)
-\textrm{ for } g \in G \ .
-\]
-The character $\chi$ of $\operatorname{Alt}^2(V) \cong \Lambda^2(V)$ is given by
-\[
-\chi(g) = \frac{1}{2}\left(\phi(g)^2 - \phi(g^2)\right)
-\textrm{ for } g \in G \ .
-\]
+Using notation as the previous proposition.
+\begin{enumerate}
+\item $\displaystyle
+\chi_{\operatorname{Sym}^2(V)}(g)=
+\chi_{\mathcal{S}^2(V)}(g)
+=  \frac{1}{2}\left(\chi(g)^2 + \chi(g^2)\right)$ for $g \in G$.
+\item $\displaystyle
+\chi_{\operatorname{Alt}^2(V)}(g)=
+\chi_{\Lambda^2(V)}(g)
+=  \frac{1}{2}\left(\chi(g)^2 - \chi(g^2)\right)$ for $g \in G$.
+\end{enumerate}
 \end{exercise}
 
-The third property above proves that all characters are \emph{class
+The proposition above proves that all characters are \emph{class
 functions}:
 
 \begin{definition}
@@ -329,9 +331,10 @@ Let $V$ be the regular representation.  Then
 \[
 \chi_V(g) = \begin{cases}
 |G| & \textrm{for $g=1$},\\
-0 & \textrm{otherwise}
-\end{cases} .
+0 & \textrm{otherwise}.
+\end{cases}
 \]
+This follow since $he_g=e_g$ only when $h = 1$ in the natural basis $\{e_g\}_{g \in G}$.
 \end{example}
 
 The properties proven above about characters imply the following nice
@@ -356,7 +359,7 @@ Since the set of isomorphism classes of irreducible representations of
 $G$ form a $\mathbb{Z}$-basis for $R(G)$
 and the set of conjugacy classes of $G$
 form a $\mathbb{C}$-basis for $C(G)$,
-the map $\chi_{\bullet}$ is totally determined by pairing these two basis.
+the map $\chi_{\bullet}$ is totally determined by pairing these two bases.
 The resulting matrix is called the \emph{character table} of $G$.
 
 \begin{example}
@@ -393,7 +396,7 @@ Finally, the conjugacy classes are usually listed in increasing order by
 the order of a representing element.
 
 Computer algebra packages can produce (or look up) character tables
-for finite groups.  The orderings of the rows and the columns of the
+for finite groups.  Warning: the orderings of the rows and the columns of the
 table may not be consistent even if exactly the same program is run on
 exactly the same data!
 
@@ -401,7 +404,7 @@ exactly the same data!
 
 We begin with a lemma in the spirit of Maschke's theorem.
 Recall that if $(V,\rho)$ is a linear representation of a finite group $G$,
-$V^G$ is the invariant subspace of vectors
+then $V^G$ is the invariant subspace of vectors
 $v \in V$ such that $\rho_g(v)=v$ for all $g \in G$.
 
 \begin{lemma}
@@ -556,7 +559,7 @@ m_i = \left( \chi_V, \chi_{W_i} \right).
 A character $\chi$ is irreducible if and only if $(\chi,\chi)=1$.
 \end{corollary}
 
-\begin{lemma}
+\begin{corollary}
 Suppose $G$ has irreducible representations $V_1,\ldots,V_r$
 with dimensions $n_1,\ldots, n_r$.  Then the isotypic decomposition of
 the regular representation is
@@ -564,7 +567,7 @@ the regular representation is
 V_1^{n_1} \oplus \cdots \oplus V_r^{n_r} .
 \]
 In particular, $|G|=n_1^2 + n_2^2 + \cdots + n_r^2$.
-\end{lemma}
+\end{corollary}
 
 \begin{proof}
 Let $W$ be the regular representation.
@@ -600,34 +603,9 @@ for all class functions $\psi,\phi \in C(G)$.
 
 Recall that an orthogonal matrix has an orthogonal transpose.
 The formula above gives an orthonormal pairing for the
-\emph{rows} of the character table.  We also have orthogonality of the
+\emph{rows} of the character table (when appropriately weighted by the number of elements in
+each conjugacy class).  We also have orthogonality of the
 \emph{columns} via the following:
-
-Thus, we expect that the \emph{rows}
-
-\newpage
-
-
-\begin{proof}
-We saw above that the irreducible characters form a basis
-of the center of $\mathbb{C} G$ (which is isomorphic to the space of class functions).
-It remains to check that they form an orthogonal basis.
-Let $\chi_1$ and $\chi_2$ be irreducible characters
-corresponding to representations $V_1$ and $V_2$.
-By Schur's Lemma, the space of $G$-equivariant maps is
-$1$-dimensional if $\chi_1=\chi_2$ and $0$ otherwise.
-Thus $(\chi_1,\chi_2)$ is $1$ if $\chi_1=\chi_2$ and $0$ otherwise.
-\end{proof}
-
-Note that the above shows that the \emph{rows} of the character table are
-orthonormal (when appropriately weighted by the number of elements in
-each conjugacy class).  The following theorem proves an orthogonality
-relation among the \emph{columns}.
-
-Let $(V_1, \rho_1), \ldots, (V_r, \rho_r)$ be the irreducible
-representations of $G$ with $\chi_1, \ldots, \chi_r$ the corresponding
-characters.  Let $c(g)$ be the number of elements in the conjugacy class
-of $g \in G$.
 
 \begin{exercise}
 Let $\chi_1,\ldots,\chi_r$ be the irreducible characters.
