@@ -46,17 +46,18 @@
 
 \maketitle
 
+{\bf
+Throughout this document, we make the standing assumptions that $G$
+is a finite group and $k$ is a field of characteristic coprime to the
+order of $G$.}
+This allows us to appeal to Maschke's theorem:
+every finite-dimensional representation is completely reducible.
+Thus, every indecomposable representation is also irreducible.
+
 Some of the content here can be found in
 \S 14--15 of \cite{AlperinBell} and
 \S 2 of \cite{Serre}.
 TODO
-
-Throughout this document, we make the standing assumptions that $G$
-is a finite group and $k$ is a field of characteristic coprime to the
-order of $G$.
-This allows us to appeal to Maschke's theorem:
-every finite-dimensional representation is completely reducible.
-Thus, every indecomposable representation is also irreducible.
 
 \section{Representation Ring}
 
@@ -402,7 +403,23 @@ exactly the same data!
 
 \section{Orthogonality Relations}
 
-We begin with a lemma in the spirit of Maschke's theorem.
+We begin by pointing out that class functions give rise to
+$G$-equivariant endomorphisms.
+
+\begin{lemma} \label{lem:class_function_endo}
+Let $(V,\rho)$ be a complex representation of a finite group $G$,
+let $f : G \to \mathbb{C}$ be a function, and let $F \in
+\operatorname{End}_k(V)$ be the endomorphism defined by
+\[
+F(v) = \sum_{g \in G} f(g)\rho_g(v) .
+\]
+Then $F$ is $G$-equivariant if and only if $f$ is a class function.
+\end{lemma}
+
+\begin{proof}
+Exercise.  This is the same reindexing argument as in Maschke's Theorem.
+\end{proof}
+
 Recall that if $(V,\rho)$ is a linear representation of a finite group $G$,
 then $V^G$ is the invariant subspace of vectors
 $v \in V$ such that $\rho_g(v)=v$ for all $g \in G$.
@@ -496,33 +513,35 @@ Then Schur's Lemma gives us
 Thus, the irreducible characters are an orthonormal set.
 It remains to show they span $C(G)$.
 
-Let $K_1,\ldots,K_r$ be the conjugacy classes of $G$.
-For any representation $\rho$, observe that
+Let $f \in C(G)$ be orthogonal to every irreducible character
+(thus every character).
+For any representation $(V,\rho)$, the endomorphism
 \[
-P_i = \sum_{g \in K_i} \rho(g)
+F_\rho = \sum_{g \in G} \overline{f(g)} \rho_g
 \]
-is equivariant linear map.
-If $\rho$ is irreducible, then, $P_i$ is scalar multiplication
-by Schur's Lemma.
+is equivariant by Lemma~\ref{lem:class_function_endo}.
+Taking the trace, we find
+\[
+\operatorname{tr}(F_\rho) =
+\sum_{g \in G} \overline{f(g)} \chi_V(g)
+= |G| (f,\chi_V),
+\]
+which is $0$ by the orthogonality condition.
+When $V$ is irreducible,
+$F_\rho$ is scalar multiplication by Schur's Lemma;
+moreover, the trace being zero implies that
+$F_\rho=0$.
+If $W$ is an irreducible subrepresentation of $V$,
+then $F_\rho(W) \subseteq W$ since $F_\rho$ is a linear combination of
+functions satisfying that property.
+Thus, we conclude $F_\rho=0$ for all representations $\rho$.
 
-Let $\phi \in C(G)$ be orthogonal to every irreducible character
-(thus every character by linearity).
-For a representation $\rho$, define the endomorphism
+When $V$ is the regular representation with basis $\{e_g\}_{g \in G}$,
+we obtain
 \[
-Q = \sum_{g \in G} \overline{\phi(g)} \rho_g \ .
+0=F_\rho(e_1)=\sum_{g \in G} \overline{f(g)} e_g .
 \]
-The trace of $Q$ is $0$ since $(\phi,\chi)=0$ for every character $\chi$.
-Observe that $Q$ is a linear combination of operators $P_1,\ldots,P_n$
-since $\phi$ is a class function.
-When $\rho$ is irreducible, $Q$ is therefore multiplication by a scalar.
-Since the trace is $0$, we conclude that $Q$ is the zero map
-when $\rho$ is irreducible.  Thus $Q=0$ for all representations $\rho$.
-
-When $\rho$ is the regular representation we obtain
-\[
-Q(e_1)=\sum_{g \in G} \overline{\phi(g)} e_g .
-\]
-We must conclude every $\phi(g)=0$.  Thus no class function is
+We must conclude $f(g)=0$ for all $g \in G$.  Thus no class function is
 orthogonal to every irreducible character.
 \end{proof}
 
@@ -540,8 +559,8 @@ between irreducible representations of $R(G)$ and characteristic
 functions of conjugacy classes in $C(G)$.
 While there exists a bijection between conjugacy classes
 and irreducible representations, we do not explicitly construct one.
-Indeed, there are good reasons to expect that there will never be an
-``effective combinatorial proof'' of this bijection. 
+Indeed, there are good reasons to not expect an explicit ``combinatorial
+bijection'' in general. 
 
 \begin{corollary}
 If $V$ is a representation with isotypic decomposition
@@ -555,9 +574,17 @@ m_i = \left( \chi_V, \chi_{W_i} \right).
 \]
 \end{corollary}
 
+\begin{proof}
+Exercise.
+\end{proof}
+
 \begin{corollary}
 A character $\chi$ is irreducible if and only if $(\chi,\chi)=1$.
 \end{corollary}
+
+\begin{proof}
+Exercise.
+\end{proof}
 
 \begin{corollary}
 Suppose $G$ has irreducible representations $V_1,\ldots,V_r$
@@ -621,6 +648,7 @@ We have
 \]
 for $g, h \in G$.
 \end{exercise}
+
 
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
