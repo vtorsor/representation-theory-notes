@@ -424,7 +424,7 @@ Recall that if $(V,\rho)$ is a linear representation of a finite group $G$,
 then $V^G$ is the invariant subspace of vectors
 $v \in V$ such that $\rho_g(v)=v$ for all $g \in G$.
 
-\begin{lemma}
+\begin{lemma} \label{lem:proj_onto_invariants}
 If $(V,\rho)$ be a linear representation of a finite group $G$,
 then
 \[ \dim(V^G) = \frac{1}{|G|} \sum_{g \in G} \chi_V(g). \]
@@ -649,6 +649,49 @@ We have
 for $g, h \in G$.
 \end{exercise}
 
+\subsection{Explicit Decomposition}
+
+If we know the characters, then we can explicitly compute the isotypic
+decomposition of linear representation. 
+
+\begin{theorem}
+Let $W_1,\ldots, W_r$ be the irreducible representations of $G$ with
+corresponding characters $\chi_1,\ldots, \chi_r$.
+Let $(V,\rho)$ be a representation and let $V_i$ be the isotypic
+component of $V$ associated to $W_i$.
+Then the map $\pi_i : V \to V$ given by
+\[
+\pi_i(v) := \frac{\chi_i(1)}{|G|} \sum_{g \in G} \overline{\chi_i(g)} \rho_g(v)
+\]
+is the projection onto the isotypic component $V_i$.
+\end{theorem}
+
+\begin{proof}
+From Lemma~\ref{lem:class_function_endo}, we see that
+$\pi_i$ is equivariant.
+Thus $\pi_i(U) \subseteq U$ for every subrepresentation $U$ of $V$.
+By Schur's Lemma, $\pi_i|_U$ is scalar multiplication whenever
+$U$ is irreducible.
+If $\psi$ is the character of an irreducible subrepresentation $U$ of $V$,
+then
+\[
+\operatorname{tr}(\pi_i|_U)=\chi_i(1) ( \chi_i, \psi ) .
+\]
+We conclude that
+\[
+\pi_i|_U = \frac{\chi_i(1)}{\psi(1)} ( \chi_i, \psi ) \ .
+\]
+Thus $\pi_i|_U=0$ if $W_i \not\cong U$ and $\pi_i|_U=\operatorname{id}$
+if $W_i \cong U$.
+\end{proof}
+
+Note that the theorem above generalizes the projection constructed in
+the proof of Lemma~\ref{lem:proj_onto_invariants}.
+
+There are also formulas that can explicitly decompose an
+isotypic representation into irreducible summands.
+Such a decomposition obviously cannot be canonical.
+See \S 2.7 of \cite{Serre}.
 
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
