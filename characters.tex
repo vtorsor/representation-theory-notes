@@ -118,7 +118,7 @@ non-negative integers.
 Thus there is an additive monoid isomorphism
 $R^+_G(k) \cong \mathbb{N}^{\oplus S_k(G)}$ .
 (We will see that $S_k(G)$ is always finite, but we distinguish between
-the direct sum rather and the direct product until we prove this).
+the direct sum and the direct product until we prove this).
 
 However, while the additive structure on $R^+_G(k)$ is very nice,
 the \emph{multiplicative} structure is considerably more subtle.
@@ -137,7 +137,7 @@ we have explicit matrices defining the isomorphism between
 $W_i \otimes W_j$ and the decomposition into irreducible representations;
 the entries of this matrix are called the \emph{Clebsch-Gordan
 coefficients}.  Analogs for infinite groups like the special orthogonal
-group $SO(3)$ is of special interest in quantum physics and quantum
+group $SO(3)$ are of special interest in quantum physics and quantum
 chemistry.
 \end{remark}
 
@@ -170,7 +170,7 @@ The ring of virtual representations is $R_k(1) \cong \mathbb{Z}$.
 \end{example}
 
 \begin{remark}
-There are way more theorems about \emph{rings} than \emph{rigs}.
+The theory of \emph{rings} is far more powerful than that of \emph{rigs}.
 Thus, we ``adjoined negatives'' to make our rig $R^+_k(G)$
 into a ring $R_k(G)$.
 This procedure is an additive analog to forming the ring of fractions of a ring.
@@ -363,13 +363,14 @@ $R(G) \otimes_\mathbb{Z} \mathbb{C} \cong C(G)$ as $\mathbb{C}$-algebras.
 Since the set of isomorphism classes of irreducible representations of
 $G$ form a $\mathbb{Z}$-basis for $R(G)$
 and the set of conjugacy classes of $G$
-form a $\mathbb{C}$-basis for $C(G)$,
+induce a $\mathbb{C}$-basis for $C(G)$,
 the map $\chi_{\bullet}$ is totally determined by pairing these two bases.
 The resulting matrix is called the \emph{character table} of $G$.
 
 \begin{example}
 It turns out the symmetric group $S_4$ has exactly $5$ irreducible
-representations $W_1, \ldots, W_5$.
+representations; label the irreducible characters
+as $\chi_1, \ldots, \chi_5$.
 The character table is as follows:
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -377,15 +378,15 @@ The character table is as follows:
  & $e $ & $(12)$ & $(12)(34)$ & $(123)$ & $(1234)$\\
 \hline 
 \hline 
-$W_1$ & $1$ & $1$ & $1$ & $1$ & $1$\\
+$\chi_1$ & $1$ & $1$ & $1$ & $1$ & $1$\\
 \hline 
-$W_2$ & $1$ & $-1$ & $1$ & $1$ & $-1$\\
+$\chi_2$ & $1$ & $-1$ & $1$ & $1$ & $-1$\\
 \hline 
-$W_3$ & $2$ & $0$ & $2$ & $-1$ & $0$\\
+$\chi_3$ & $2$ & $0$ & $2$ & $-1$ & $0$\\
 \hline 
-$W_4$ & $3$ & $1$ & $-1$ & $0$ & $-1$\\
+$\chi_4$ & $3$ & $1$ & $-1$ & $0$ & $-1$\\
 \hline 
-$W_5$ & $3$ & $-1$ & $-1$ & $0$ & $1$\\
+$\chi_5$ & $3$ & $-1$ & $-1$ & $0$ & $1$\\
 \hline 
 \end{tabular}
 \end{center}
@@ -397,8 +398,8 @@ the trivial representation is the first row and the class of the
 identity is the first column.
 Another convention is that the irreducible representations are listed in
 increasing order by dimension.
-Finally, the conjugacy classes are usually listed in increasing order by
-the order of a representing element.
+Finally, a less common convention is that the conjugacy classes are listed in
+increasing order by the order of any representing element.
 
 Computer algebra packages can produce (or look up) character tables
 for finite groups.  Warning: the orderings of the rows and the columns of the
@@ -696,8 +697,6 @@ There are also formulas that can explicitly decompose an
 isotypic representation into irreducible summands.
 Such a decomposition obviously cannot be canonical.
 See \S 2.7 of \cite{Serre}.
-
-\newpage
 
 \section{Examples}
 
