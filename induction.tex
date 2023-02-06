@@ -1,0 +1,171 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+
+% theorem styles (I like everything to have the same counter)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{exercise}[theorem]{Exercise}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% some numbering settings
+\numberwithin{equation}{section}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{15.2pt}
+\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+\setlength{\footskip}{30pt}
+\pagestyle{fancy}
+
+\makeatletter
+\let\ps@plain\ps@fancy 
+\makeatother
+
+\lhead{MATH 742}
+\chead{Induced Representations}
+\rhead{Spring 2023}
+\lfoot{Last Revised: \today}
+\cfoot{}
+\rfoot{\thepage\ of \pageref{LastPage} }
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\title{Induced Representations}
+\author{Alexander Duncan}
+
+\maketitle
+
+{\bf
+Throughout this document, we make the standing assumptions that $G$
+is a finite group and $k$ is a field of characteristic coprime to the
+order of $G$.}
+
+``The basics'' of induced representations can be found in essentially
+every introductory character theory text.  For example:
+\cite[\S{16}]{AlperinBell},
+\cite[\S{5.8-5.11}]{Etingof},
+\cite[\S{3.3}]{FultonHarris},
+\cite[\S{XVIII.6--9}]{Lang}, or
+\cite[\S{3.3}]{Serre}.
+However, we go a bit further then ``the basics'' here;
+see \cite[\S{7--10}]{Serre}.
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+
+\section{Induced Representations}
+
+\subsection{Non-example}
+
+The following may seem rather technical at the moment, but it will be
+relevant later in the course.  We introduce it now so that we have a
+non-abelian example of a irreducible representation that is
+\emph{not} an induced representation.
+
+Recall that \emph{Hamilton's quaternion algebra} $\mathbb{H}$
+is the division $\mathbb{R}$-algebra
+with basis $\{1,i,j,k\}$ and multiplication determined by
+$ij=k$, $jk=i$, $ki=j$ and $i^2=j^2=k^2=-1$.
+We have an embedding
+$\mathbb{H} \hookrightarrow \operatorname{M}_2(\mathbb{C})$
+by extending
+\[
+1 \mapsto \begin{pmatrix} 1&0\\0&1 \end{pmatrix} \quad
+i \mapsto \begin{pmatrix} i&0\\0&-i \end{pmatrix} \quad
+j \mapsto \begin{pmatrix} 0&1\\-1&0 \end{pmatrix} \quad
+k \mapsto \begin{pmatrix} 0&i\\i&0 \end{pmatrix} \quad
+\]
+by linearity.
+This embedding is a homomorphism of $\mathbb{R}$-algebras.
+(Note that there is no embedding of $\mathbb{H}$ into
+the \emph{real} $2\times 2$ matrices.)
+
+A general element $x$ of $\mathbb{H}$ of the form
+\[
+x = a + bi + cj + dk
+\]
+where $a,b,c,d \in \mathbb{R}$.
+We define the \emph{conjugate} of $x$ as
+\[
+\overline{x} = a -bi-cj-dk,
+\]
+and the \emph{norm} of $x$ as
+\[
+\|x\| = \sqrt{\overline{x} x} = \sqrt{a^2+b^2+c^2+d^2},
+\]
+which is a non-negative real number.
+We see that $\mathbb{H}$ is a division algebra
+since $x^{-1} = \overline{x}/\|x\|$ is an explicit formula for the
+inverse when $x \ne 0$.
+
+A general element $x$ of $\mathbb{H}$
+is a \emph{Lipschitz quaternion} if
+$a,b,c,d \in \mathbb{Z}$.
+The element $x$ is a \emph{Hurwitz quaternion}
+if either $a,b,c,d$ are all integers, or all half-integers.
+The set $L$ of Lipschitz quaternions and the set $H$ of Hurwitz
+quaternions are both subrings of Hamilton's quaternions.
+The unit groups for these rings can be found by observing that the norm of
+an invertible element must be $1$.
+
+The \emph{quaternionic group} $Q_8 = \{\pm 1, \pm i, \pm j, \pm k\}$ is
+the unit group $U(L)$ of the ring $L$.
+It is evident from the embedding
+$\mathbb{H} \to \operatorname{M}_2(\mathbb{C})$ described above
+that $Q_8$ has a representation by ``twisted permutation
+matrices.''
+Namely, there is a choice of basis where the group acts by permuting
+the basis elements and multiplying them by scalars.
+
+The unit group $U(H)$ of the ring $H$ contains $Q_8$ and the 16 elements
+\[
+\frac{ \pm 1 \pm i \pm j \pm k }{2}
+\]
+where all possible sign combinations are permitted.
+One checks that $\frac{1}{2}(1+i+j+k)$ has order $3$, and thus we have a
+representation with image
+\[
+\left\langle \begin{pmatrix} i&0\\0&-i \end{pmatrix},
+\begin{pmatrix} 0&1\\-1&0 \end{pmatrix},
+\frac{1}{2} \begin{pmatrix} 1+i&1+i\\-1+i&1-i \end{pmatrix}\right\rangle
+.
+\]
+This is a representation that \emph{cannot} be written wholly with
+``twisted permutation matrices'' in any basis.
+
+The group $U(H)$ is sometimes called the ``binary tetrahedral group''
+due to the following description.
+
+\begin{exercise}
+Let $Z$ be the center of $U(H)$.
+Prove that the center $Z$ of $U(H)$ has order $2$ and
+$U(H)/Z $ is isomorphic to $A_4$.
+\end{exercise}
+
+\begin{exercise}
+Prove that $U(H)$ is isomorphic to $Q_8 \rtimes (\mathbb{Z}/3\mathbb{Z})$.
+\end{exercise}
+
+\begin{exercise}
+Prove that $U(H)$ is isomorphic to the special linear group
+$\operatorname{SL}_2(\mathbb{F}_3)$ over the field of $3$ elements.
+\end{exercise}
+
+
+\bibliographystyle{alpha}
+\bibliography{rep_theory}
+
+\end{document}
+
+
