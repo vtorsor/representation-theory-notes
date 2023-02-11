@@ -213,11 +213,116 @@ If $G$ is finite, then
 
 \section{Introduction}
 
-\subsection{Permutation Representations}
+Let $H$ be a subgroup of a finite group $G$.
 
-\subsection{Monomial Representations}
+Given a representation $(V,\rho)$ of $G$, we define the \emph{restriction to
+$H$} as the representation $(V,\rho|_H)$ where the underlying vector
+space is the same, but the group homomorphism $\rho|_H : H \to
+\operatorname{GL}(V)$ is obtained from $H$.
+We write $\operatorname{Res}_H^G(V)$ or $V {\downarrow}^G_H$
+even though the vector space is the same.
 
-\section{Example of Non-Induced Representation}
+Induced representations are a method of going in the other direction.
+We begin with a representation of $H$ and produce a representation of
+$G$.
+It is convenient to define induced representations via their universal
+property:
+
+\begin{definition}
+Let $W$ be a representation of $H$ and suppose $H$ is a subgroup of a
+finite group $G$.
+The \emph{induced representation} is a representation
+$\operatorname{Ind}_H^G W$ of $G$ along with an
+$H$-equivariant map $\iota : W \to \operatorname{Ind}_H^G W$ such that
+for any other representation $V$ of $G$ and $H$-equivariant map
+$\varphi : W \to V$, there exists a unique $G$-equivariant map
+$\psi: \operatorname{Ind}_H^G W \to V$ such that
+$\psi = \phi \circ \iota$.
+\end{definition}
+
+An alternative notation for $\operatorname{Ind}_H^G W$ is $W
+{\uparrow}_H^G$.
+
+As usual, the universal property is economical to state and is useful
+theoretically, but it is less easy to see that it exists.
+On the other hand, any explicit construction will have various
+unimportant ``implementation details'' that vary from author to author
+and are not of fundamental importance.
+Nevertheless, a direct construction must be carried out:
+
+\begin{proposition} \label{prop:ind_construction}
+Induced representations exist and are unique up to unique isomorphism.
+\end{proposition}
+
+\begin{proof}
+The uniqueness statement follows from the universal mapping property by
+abstract nonsense.  The interesting part is existence.
+
+We are given a finite group $G$ with subgroup $H$ and a representation
+$(W,\sigma)$ of $H$.
+Choose a system of distinct representatives $X$ for $G/H$.
+Let $V$ be the direct sum $\bigoplus_{x \in X} W$.
+Labeling the $x$th summand of $V$ by $xW$,
+we obtain isomorphisms $\phi_x : W \to xW$.
+
+Fix $g \in G$; we will define a map
+$\rho_g \in \operatorname{End}_k(V)$ by defining its action on each $xW$
+and extending by linearity.
+For every $x \in X$, there is a unique $y \in X$ and $h \in H$
+such that $gx=yh$.  For $w \in xW$, we define
+$\rho_g|_{xW}=\phi_y \circ \sigma_h \circ \phi_x^{-1}$
+as an element of $\operatorname{Hom}_k(xW,yW)$.
+
+It is now tedious, but straightforward, to check that $(V,\rho)$ is linear
+representation of $G$ satisfying the desired universal property.
+\end{proof}
+
+In practice, many representations are induced from a subgroups.  We've
+already seen many examples.  In particular:
+
+\begin{proposition}
+If $V$ is a permutation representation of a finite group $G$,
+then $V$ is a direct sum of representations induced from the trivial
+representation of subgroup.
+\end{proposition}
+
+\begin{proof}
+Recall that $V$ has a basis $\{e_x\}_{x \in X}$ where $X$ is a $G$-set.
+Since all $G$-sets are a disjoint union of transitive $G$-sets,
+we see that $V$ is a direct sum of permutation representations
+corresponding to transitive $G$-sets.  Thus, without loss of generality
+we may assume $X \cong G/H$ for some subgroup $H \subseteq G$.
+
+Choosing a system of distinct representatives $S$ for $G/H$,
+we now identify the direct summands $sW$ in the proof of
+Proposition~\ref{prop:ind_construction} with the spans of
+the basis elements $\{ e_{sH} \}$ in $V$.
+One checks that the group action of $G$ is identical in both cases.
+\end{proof}
+
+\begin{definition}
+A representation $(V,\rho)$ of a group $G$ is a\emph{monomial
+representation} or a \emph{twisted permutation representation} if 
+there exists a basis $\{e_1,\ldots,e_n\}$ of $V$
+such that, for all $1 \le i \le n$ and $g \in G$, there exists
+a $1 \le j \le n$ and $\lambda \in \mathbb{C}^\times$ such that
+$\rho_g(e_i)=\lambda e_j$.
+\end{definition}
+
+Informally, monomial representations are those whose matrices have
+exactly one non-zero element in each row and column.
+Permutation representations are those where that non-zero element is
+always equal to one.
+
+\begin{exercise}
+If $V$ is a monomial representation of a finite group $G$,
+then $V$ is a direct sum of representations induced from one-dimensional
+representations of subgroups.
+\end{exercise}
+
+\section{Examples}
+
+\subsection{Example of Non-Induced Representation}
 
 The following may seem rather technical at the moment, but it will be
 relevant later in the course.  We introduce it now so that we have a
