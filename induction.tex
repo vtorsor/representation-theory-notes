@@ -64,9 +64,160 @@ see \cite[\S{7--10}]{Serre}.
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
 
-\section{Induced Representations}
+\section{Group Actions}
 
-\subsection{Non-example}
+Let $G$ be a group.
+
+\begin{definition}
+A (left) \emph{$G$-set} is a set $X$ with a (left) action of a finite
+group $G$.  Given $G$-sets $X$ and $Y$, a \emph{morphism of $G$-sets}
+or \emph{$G$-equivariant map} is a function $f : X \to Y$
+such that $f(gx)=gf(x)$ for all $x \in X$ and $g \in G$.
+An \emph{isomorphism of $G$-sets} is a $G$-equivariant bijection. 
+\end{definition}
+
+Let $H$ be a subgroup $H$ of $G$.  Recall that a \emph{left coset} is a
+subset of $G$ of the form
+\[
+gH = \{ gh \mid h \in H \}
+\]
+for some $g \in G$.  Recall that the left cosets partition $G$.
+We denote by $G/H$ the set of left cosets of $H$ in $G$.
+We do \emph{not} expect $G/H$ to have a group structure unless $H$ is
+normal.
+
+\begin{proposition}
+The set $G/H$ has a canonical transitive left $G$-action.
+\end{proposition}
+
+\begin{proof}
+The action is defined via
+\[
+g \cdot (aH) := (ga)H
+\]
+for $g,a \in G$.
+Suppose $aH=bH$ for $a,b \in G$.  Then $a=bh$ for some $h \in H$.
+Thus $ga=gbh$ for all $g \in G$.  Thus $gaH=gbH$.
+We conclude that the action is well-defined.
+Checking the remaining two axioms for a group action are left as an exercise.
+\end{proof}
+
+\begin{remark}
+The definition of the left action on $G/H$ is more subtle than the proof
+suggests.  We do \emph{not} have an analogous right action on $G/H$
+since it is not well-defined.  Asking that the right action be
+well-defined is equivalent to asking that $H$ be a normal subgroup.
+\end{remark}
+
+\begin{exercise}
+Let $H,K$ be subgroups of $G$.
+The $G$-sets $G/H$ and $G/K$ are isomorphic if and only if
+$H$ and $K$ are conjugate subgroups of $G$.
+\end{exercise}
+
+Recall that a $G$-set $X$ is \emph{transitive} if $X$ is nonempty
+and, for all $x \in X$ and
+$y \in Y$, there exists a $g \in G$ such that $gx=y$.
+
+\begin{exercise}
+Every $G$-set can be written uniquely as a disjoint union of
+transitive $G$-sets.
+\end{exercise}
+
+\begin{proposition}
+Every non-empty transitive $G$-set $X$ is isomorphic to $G/H$
+for some subgroup $H \subseteq G$.
+\end{proposition}
+
+\begin{proof}
+Since $X$ is non-empty, we may select some $x \in X$.
+Let $H$ be the stabilizer of $x$ in $G$:
+\[
+H = \operatorname{Stab}_G(x) = \{ g \in G \mid gx=x \}.
+\]
+We claim there is a unique $G$-equivariant function
+$f : X \to G/H$ such that $f(x)=H$.
+Indeed, since $G$ acts transitively on $X$,
+the condition $f(gx)=gf(x)$ determines the value of $f$ at every point
+of $X$.  To see that this is well-defined, we simply observe that
+$f(gx)=f(g'x)$ is equivalent to $g^{-1}g'x=x$, which is equivalent to
+$g^{-1}g' \in H$.
+\end{proof}
+
+\subsection{Right actions}
+
+Everything stated above for \emph{left} group actions has a natural
+generalization to \emph{right} group actions, which we mostly leave as
+an exercise for the reader.
+We use the notation $H \backslash G$ for the set of right cosets of $H$
+in $G$.
+
+The following exercises are strongly recommended if you haven't
+though about the distinction of left and right actions before:
+
+\begin{exercise}
+If $X$ is a \emph{left} $G$-set and $G$ is abelian, then there is a
+\emph{right} action on $X$ via $x \cdot g := gx$ for $g \in G$ and $x \in X$.
+\end{exercise}
+
+\begin{exercise}
+If $X$ is a \emph{left} $G$-set, then we obtain a \emph{right}
+action on $X$ via $x \cdot g := g^{-1}x$ for $g \in G$ and $x \in X$.
+\end{exercise}
+
+\begin{exercise}
+The function $f : G/H \to H\backslash G$ given by $f(gH)=Hg$ is a
+well-defined bijection if and only if $H$ is normal in $G$.
+\end{exercise}
+
+\subsection{Double cosets}
+
+Let $H, K$ be subgroups of $G$.
+
+\begin{definition}
+A \emph{(H,K)-double coset of G} is a set of the form
+\[
+HgK := \{ hgk \mid h \in H, k \in K \}
+\]
+for some $g \in G$.
+The set of double cosets of $G$ is denoted
+$H \backslash G / K$.
+\end{definition}
+
+There are several different equivalent perspectives on double cosets.
+Double cosets are the equivalence classes for the equivalence relation
+$g \sim hgk$ for $h \in H$ and $k \in K$.
+Double cosets are the orbits of the left $H$-action on $G/K$.
+Double cosets are the orbits of the right $K$-action on $H\backslash G$.
+Finally, double cosets are the orbits of the \emph{left} action
+of $H \times K$ on $G$ via $(h,k)\cdot g := hgk^{-1}$.
+
+Each of these perspectives is useful in different contexts.
+An immediate consequence is that double cosets partition $G$;
+in other words, $HgK$ and $Hg'K$ are either disjoint or equal
+and every element of $G$ is contained in some double coset.
+Another consequence is that each double coset is both a union of
+right cosets of $H$ in $G$ and a union of left cosets of $K$ in $G$.
+
+Note that unlike ordinary cosets, double cosets are not guaranteed to
+all have the same size.  However, their size can be easily computed
+from the orbit stabilizer theorem:
+
+\begin{exercise}
+If $G$ is finite, then
+\[
+|HgK| = \frac{|H| |K|}{|H \cap g K g^{-1}|}=
+\frac{|H| |K|}{|g^{-1}Hg \cap K|}.
+\]
+\end{exercise}
+
+\section{Introduction}
+
+\subsection{Permutation Representations}
+
+\subsection{Monomial Representations}
+
+\section{Example of Non-Induced Representation}
 
 The following may seem rather technical at the moment, but it will be
 relevant later in the course.  We introduce it now so that we have a
@@ -84,7 +235,7 @@ by extending
 1 \mapsto \begin{pmatrix} 1&0\\0&1 \end{pmatrix} \quad
 i \mapsto \begin{pmatrix} i&0\\0&-i \end{pmatrix} \quad
 j \mapsto \begin{pmatrix} 0&1\\-1&0 \end{pmatrix} \quad
-k \mapsto \begin{pmatrix} 0&i\\i&0 \end{pmatrix} \quad
+k \mapsto \begin{pmatrix} 0&i\\i&0 \end{pmatrix}
 \]
 by linearity.
 This embedding is a homomorphism of $\mathbb{R}$-algebras.
