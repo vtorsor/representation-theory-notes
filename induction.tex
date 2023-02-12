@@ -76,8 +76,8 @@ such that $f(gx)=gf(x)$ for all $x \in X$ and $g \in G$.
 An \emph{isomorphism of $G$-sets} is a $G$-equivariant bijection. 
 \end{definition}
 
-Let $H$ be a subgroup $H$ of $G$.  Recall that a \emph{left coset} is a
-subset of $G$ of the form
+Let $H$ be a subgroup of $G$.  Recall that a \emph{left coset of $H$ in
+$G$} is a subset of $G$ of the form
 \[
 gH = \{ gh \mid h \in H \}
 \]
@@ -211,7 +211,7 @@ If $G$ is finite, then
 \]
 \end{exercise}
 
-\section{Introduction}
+\section{Definition of Induced Representation}
 
 Let $H$ be a subgroup of a finite group $G$.
 
@@ -237,7 +237,7 @@ $H$-equivariant map $\iota : W \to \operatorname{Ind}_H^G W$ such that
 for any other representation $V$ of $G$ and $H$-equivariant map
 $\varphi : W \to V$, there exists a unique $G$-equivariant map
 $\psi: \operatorname{Ind}_H^G W \to V$ such that
-$\psi = \phi \circ \iota$.
+$\psi \circ \iota = \varphi$.
 \end{definition}
 
 An alternative notation for $\operatorname{Ind}_H^G W$ is $W
@@ -265,17 +265,58 @@ Let $V$ be the direct sum $\bigoplus_{x \in X} W$.
 Labeling the $x$th summand of $V$ by $xW$,
 we obtain isomorphisms $\phi_x : W \to xW$.
 
+We now observe that
+\[
+\operatorname{End}_k(V) = \bigoplus_{x \in X} \bigoplus_{y \in X}
+\operatorname{Hom}_k(xW,yW)
+\]
+has a ``block matrix'' structure.
+Given an element $\psi \in \operatorname{End}_k(V)$,
+denote by $\psi^{y,x}$ the restriction to each
+$\operatorname{Hom}_k(xW,yW)$.
+
 Fix $g \in G$; we will define a map
-$\rho_g \in \operatorname{End}_k(V)$ by defining its action on each $xW$
-and extending by linearity.
+$\rho_g \in \operatorname{End}_k(V)$ by defining each component
+$\rho_g^{y,x}$.
 For every $x \in X$, there is a unique $y \in X$ and $h \in H$
-such that $gx=yh$.  For $w \in xW$, we define
-$\rho_g|_{xW}=\phi_y \circ \sigma_h \circ \phi_x^{-1}$
-as an element of $\operatorname{Hom}_k(xW,yW)$.
+such that $gx=yh$.  We define
+\[
+\rho_g^{y,x}=\phi_y \circ \sigma_h \circ \phi_x^{-1}
+\]
+and set all other components to $0$.
 
 It is now tedious, but straightforward, to check that $(V,\rho)$ is linear
 representation of $G$ satisfying the desired universal property.
 \end{proof}
+
+\begin{remark}
+Choose a system of distinct representatives $X$ for $G/H$ and
+write $\operatorname{Ind}^G_H W = \bigoplus_{x \in X} W$
+as in the proof of Proposition~\ref{prop:ind_construction}.
+There is an $H$-equivariant linear map
+\[
+\pi : \operatorname{Ind}^G_H W \to W
+\]
+obtained by taking the sum
+\[
+\pi\left( (w_x)_{x \in X} \right) :=
+\sum_{x \in X} w_x
+\]
+over all $x$ in a system of distinct representatives $X$.
+The map $\pi$ turns out not to depend on the choice of $X$.
+and can be thought of as a generalization of the trace.
+
+Defining this map gives a different universal property:
+given any representation $V$ of $G$ along with an $H$-equivariant map
+$\varphi : V \to W$, there exists a unique $G$-equivariant
+map $\psi : V \to \operatorname{Ind}^G_H \to V$ such that
+$\pi \circ \psi = \varphi$.
+In a more general context, objects satisfying the two universal
+properties may not coincide and we refer to those satisfying this second
+construction as \emph{coinduced representations.}
+\end{remark}
+
+\section{Permutation and Monomial Representations}
 
 In practice, many representations are induced from a subgroups.  We've
 already seen many examples.  In particular:
@@ -320,7 +361,157 @@ then $V$ is a direct sum of representations induced from one-dimensional
 representations of subgroups.
 \end{exercise}
 
+\section{Characters of Induced Representations}
+
+\begin{definition}
+Given a class function $f : G \to \mathbb{C}$, define
+$\operatorname{Res}_H^G f : H \to \mathbb{C}$ as the
+class function obtained by restricting the domain to $H$.
+Given a class function $f : H \to \mathbb{C}$, we construct a new class
+function $\operatorname{Ind}_H^G f : G \to \mathbb{C}$ by the formula
+\[
+(\operatorname{Ind}_H^G f)(g) =
+\frac{1}{|H|}\sum_{\substack{a \in G\\a^{-1}ga \in H}} f(a^{-1}ga)
+\]
+for $g \in G$.
+\end{definition}
+
+It is clear that the character of $\operatorname{Res}_H^G V$
+is $\operatorname{Res}_H^G \chi_V$.
+
+\begin{proposition}
+The character of $\operatorname{Ind}_H^G V$
+is $\operatorname{Ind}_H^G \chi_V$.
+\end{proposition}
+
+\begin{proof}
+We use the block matrix notation from
+Proposition~\ref{prop:ind_construction}
+and set $X$ to be a system of distinct representatives for $G/H$.
+We want to compute the trace of $\rho_g$ for some $g \in G$.
+This is equivalent to summing the traces of the elements
+$\rho_g^{x,x}$ for all $x \in X$.
+We observe that $\rho_g^{x,x} = 0$ unless $gx=xh$ for some
+$h \in H$.
+Thus we are only summing over $x \in X$ such that
+$x^{-1}gx \in H$.  In this case, we have
+$\rho_g^{x,x}=\phi_x \circ \sigma_h \circ \phi_x^{-1}$,
+which has the same trace as $\sigma_h$ where $h=x^{-1}gx$.
+Thus, we have the formula
+\[
+(\operatorname{Ind}_H^G f)(g) =
+\sum_{\substack{x \in X\\x^{-1}gx \in H}} f(x^{-1}gx) .
+\]
+Since $f$ is a class function for $H$,
+we see that $f(x^{-1}gx)=f(y^{-1}gy)$ whenever $xH=yH$.
+Thus, summing over $G$ instead of $X$, we obtain the desired formula
+after dividing by the size of the cosets $H$.
+\end{proof}
+
+\begin{exercise}
+Prove that the function
+$\operatorname{Res}_H^G : C(G) \to C(H)$
+is a ring homomorphism.
+\end{exercise}
+
+\begin{exercise}
+Prove that the function
+$\operatorname{Ind}_H^G : C(H) \to C(G)$
+is an additive group homomorphism,
+but only a ring homomorphism when $G=H$.
+(Hint: what is $(\operatorname{Ind}_H^G 1)(1)$?)
+\end{exercise}
+
+\begin{proposition}
+If $\varphi$ is a class function of $H$ and $\psi$ is a class function
+of $G$, then
+$\operatorname{Ind}^G_H ( (\operatorname{Res^G_H} \psi) \cdot\varphi)
+= \psi \cdot (\operatorname{Ind}^G_H \varphi)$.
+\end{proposition}
+
+\begin{proof}
+Since $\psi(a^{-1}ga)=\psi(g)$, we have
+\[
+\frac{1}{|H|}\sum_{\substack{a \in G\\a^{-1}ga \in H}} \psi(a^{-1}ga)\varphi(a^{-1}ga)
+ =
+ \psi(g) \left(\frac{1}{|H|}\sum_{\substack{a \in G\\a^{-1}ga \in H}} \varphi(a^{-1}ga)
+\right)
+\]
+for all $g \in G$.
+\end{proof}
+
+\begin{corollary}
+The image of $\operatorname{Ind}^G_H$ is an ideal of $C(G)$.
+\end{corollary}
+
+Note that all of the above facts for $C(G)$ hold for $R(G)$ as well.
+
+\section{Frobenius Reciprocity}
+
+\begin{theorem}
+Suppose $V$ is a representation of $G$
+and $W$ is a representation of a subgroup $H$ of $G$.
+There is a canonical isomorphism
+\[
+\operatorname{Hom}^G_k(\operatorname{Ind}_H^G W, V) =
+\operatorname{Hom}^H_k(W,\operatorname{Res}_H^G  V).
+\]
+\end{theorem}
+
+\begin{proof}
+Recall that we have an $H$-equivariant map
+$\iota : W \to \operatorname{Ind}_H^G(W)$ by the definition of the
+induced representation.
+Thus, given an element
+$\psi \in \operatorname{Hom}^G_k(\operatorname{Ind}_H^G W, V)$,
+we obtain an element
+$\varphi \in \operatorname{Hom}^H_k(W,\operatorname{Res}_H^G  V)$
+by composition as $\varphi = \psi \circ \iota$.
+We uniquely recover $\psi$ from $\varphi$ from the universal mapping
+property, showing the two sets are in bijection.
+We've seen that composition of linear maps induces a linear
+transformation on Hom-sets so we have the desired isomorphism
+of vector spaces.
+\end{proof}
+
+An immediate corollary is the famous:
+
+\begin{theorem}[Frobenius Reciprocity]
+If $\varphi$ is a class function of $H$ and $\psi$ is a class function
+of $G$, then
+\[
+(\operatorname{Ind}_H^G \varphi, \psi)_G
+=
+(\varphi, \operatorname{Res}_H^G \psi)_H
+\]
+where we use subscripts to emphasize that one inner product is in $C(G)$
+while the other is in $C(H)$.
+\end{theorem}
+
+\begin{proof}
+In the case where $\varphi$ and $\psi$ are characters,
+this from the sequence
+\begin{align*}
+&(\operatorname{Ind}_H^G \varphi, \psi)_G\\
+=& \dim_k\ \operatorname{Hom}^G_k(\operatorname{Ind}_H^G W, V)\\
+=& \dim_k\ \operatorname{Hom}^H_k(W,\operatorname{Res}_H^G  V)\\
+=&(\varphi, \operatorname{Res}_H^G \psi)_H .
+\end{align*}
+This extends to all class functions by linearity since the characters
+are a spanning set.
+\end{proof}
+
+\section{Mackey decomposition}
+
+TODO: decomposition
+
+TODO: Mackey Irreducibility
+
 \section{Examples}
+
+TODO: dihedral groups
+
+TODO: $S_4$ with explicit bases
 
 \subsection{Example of Non-Induced Representation}
 
