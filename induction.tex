@@ -46,11 +46,6 @@
 
 \maketitle
 
-{\bf
-Throughout this document, we make the standing assumptions that $G$
-is a finite group and $k$ is a field of characteristic coprime to the
-order of $G$.}
-
 ``The basics'' of induced representations can be found in essentially
 every introductory character theory text.  For example:
 \cite[\S{16}]{AlperinBell},
@@ -103,8 +98,9 @@ Checking the remaining two axioms for a group action are left as an exercise.
 \end{proof}
 
 \begin{remark}
-The definition of the left action on $G/H$ is more subtle than the proof
-suggests.  We do \emph{not} have an analogous right action on $G/H$
+The definition of the left action on $G/H$ is more subtle than a
+superficial reading of the proof would suggest.
+We do \emph{not} have an analogous right action on $G/H$
 since it is not well-defined.  Asking that the right action be
 well-defined is equivalent to asking that $H$ be a normal subgroup.
 \end{remark}
@@ -153,7 +149,7 @@ We use the notation $H \backslash G$ for the set of right cosets of $H$
 in $G$.
 
 The following exercises are strongly recommended if you haven't
-though about the distinction of left and right actions before:
+thought about the distinction of left and right actions before:
 
 \begin{exercise}
 If $X$ is a \emph{left} $G$-set and $G$ is abelian, then there is a
@@ -186,7 +182,7 @@ $H \backslash G / K$.
 
 There are several different equivalent perspectives on double cosets.
 Double cosets are the equivalence classes for the equivalence relation
-$g \sim hgk$ for $h \in H$ and $k \in K$.
+where $g \sim hgk$ for all $h \in H$ and $k \in K$.
 Double cosets are the orbits of the left $H$-action on $G/K$.
 Double cosets are the orbits of the right $K$-action on $H\backslash G$.
 Finally, double cosets are the orbits of the \emph{left} action
@@ -215,12 +211,13 @@ If $G$ is finite, then
 
 Let $H$ be a subgroup of a finite group $G$.
 
-Given a representation $(V,\rho)$ of $G$, we define the \emph{restriction to
+Given a finite dimensional
+representation $(V,\rho)$ of $G$, we define the \emph{restriction to
 $H$} as the representation $(V,\rho|_H)$ where the underlying vector
 space is the same, but the group homomorphism $\rho|_H : H \to
-\operatorname{GL}(V)$ is obtained from $H$.
-We write $\operatorname{Res}_H^G(V)$ or $V {\downarrow}^G_H$
-even though the vector space is the same.
+\operatorname{GL}(V)$ has domain $H$.
+We often write $\operatorname{Res}_H^G(V)$ or $V {\downarrow}^G_H$
+to emphasize the $H$-action, even though the vector space is the same.
 
 Induced representations are a method of going in the other direction.
 We begin with a representation of $H$ and produce a representation of
@@ -229,10 +226,10 @@ It is convenient to define induced representations via their universal
 property:
 
 \begin{definition}
-Let $W$ be a representation of $H$ and suppose $H$ is a subgroup of a
-finite group $G$.
+Suppose $H$ is a subgroup of a finite group $G$ and
+$W$ is a finite dimensional representation of $H$. 
 The \emph{induced representation} is a representation
-$\operatorname{Ind}_H^G W$ of $G$ along with an
+$\operatorname{Ind}_H^G W$ of $G$ together with an
 $H$-equivariant map $\iota : W \to \operatorname{Ind}_H^G W$ such that
 for any other representation $V$ of $G$ and $H$-equivariant map
 $\varphi : W \to V$, there exists a unique $G$-equivariant map
@@ -245,10 +242,11 @@ An alternative notation for $\operatorname{Ind}_H^G W$ is $W
 
 As usual, the universal property is economical to state and is useful
 theoretically, but it is less easy to see that it exists.
-On the other hand, any explicit construction will have various
+On the other hand, an explicit construction may have various
 unimportant ``implementation details'' that vary from author to author
 and are not of fundamental importance.
-Nevertheless, a direct construction must be carried out:
+Nevertheless, a direct construction must be carried out and we
+will need them later.
 
 \begin{proposition} \label{prop:ind_construction}
 Induced representations exist and are unique up to unique isomorphism.
@@ -278,12 +276,16 @@ $\operatorname{Hom}_k(xW,yW)$.
 Fix $g \in G$; we will define a map
 $\rho_g \in \operatorname{End}_k(V)$ by defining each component
 $\rho_g^{y,x}$.
-For every $x \in X$, there is a unique $y \in X$ and $h \in H$
-such that $gx=yh$.  We define
+For all $g \in G$ and $x,y \in X$, we define
 \[
-\rho_g^{y,x}=\phi_y \circ \sigma_h \circ \phi_x^{-1}
+\rho_g^{y,x} =
+\begin{cases}
+\phi_y \circ \sigma_{y^{-1}gx} \circ \phi_x^{-1} & \textrm{if $gxH=yH$,}\\
+0 & \textrm{otherwise},
+\end{cases}
 \]
-and set all other components to $0$.
+where we observe that $y^{-1}gx \in H$ so the evaluation of $\sigma$
+makes sense.
 
 It is now tedious, but straightforward, to check that $(V,\rho)$ is linear
 representation of $G$ satisfying the desired universal property.
@@ -309,14 +311,14 @@ and can be thought of as a generalization of the trace.
 Defining this map gives a different universal property:
 given any representation $V$ of $G$ along with an $H$-equivariant map
 $\varphi : V \to W$, there exists a unique $G$-equivariant
-map $\psi : V \to \operatorname{Ind}^G_H \to V$ such that
+map $\psi : V \to \operatorname{Ind}^G_H W$ such that
 $\pi \circ \psi = \varphi$.
 In a more general context, objects satisfying the two universal
 properties may not coincide and we refer to those satisfying this second
 construction as \emph{coinduced representations.}
 \end{remark}
 
-\section{Permutation and Monomial Representations}
+\section{Monomial Representations}
 
 In practice, many representations are induced from a subgroups.  We've
 already seen many examples.  In particular:
@@ -341,16 +343,25 @@ the basis elements $\{ e_{sH} \}$ in $V$.
 One checks that the group action of $G$ is identical in both cases.
 \end{proof}
 
+\begin{example}
+The regular representation of $G$ is precisely the
+representation $\operatorname{Ind}^G_1 k$
+obtained by induction from the trivial representation of the trivial
+group.
+\end{example}
+
 \begin{definition}
-A representation $(V,\rho)$ of a group $G$ is a\emph{monomial
+A representation $(V,\rho)$ of a group $G$ is a \emph{monomial
 representation} or a \emph{twisted permutation representation} if 
 there exists a basis $\{e_1,\ldots,e_n\}$ of $V$
-such that, for all $1 \le i \le n$ and $g \in G$, there exists
-a $1 \le j \le n$ and $\lambda \in \mathbb{C}^\times$ such that
-$\rho_g(e_i)=\lambda e_j$.
+such that, for all $1 \le i \le n$ and $g \in G$
+we have
+\[ \rho_g(e_i)=\lambda e_j\]
+for some $1 \le j \le n$ and $\lambda \in k^\times$.
 \end{definition}
 
-Informally, monomial representations are those whose matrices have
+Monomial representations are those with a basis such that the
+corresponding matrices have
 exactly one non-zero element in each row and column.
 Permutation representations are those where that non-zero element is
 always equal to one.
@@ -363,10 +374,18 @@ representations of subgroups.
 
 \section{Characters of Induced Representations}
 
+In this section, we assume that the base field $k$ is $\mathbb{C}$.
+
 \begin{definition}
 Given a class function $f : G \to \mathbb{C}$, define
 $\operatorname{Res}_H^G f : H \to \mathbb{C}$ as the
 class function obtained by restricting the domain to $H$.
+\end{definition}
+
+It is clear that the character of $\operatorname{Res}_H^G V$
+is $\operatorname{Res}_H^G \chi_V$.
+
+\begin{definition}
 Given a class function $f : H \to \mathbb{C}$, we construct a new class
 function $\operatorname{Ind}_H^G f : G \to \mathbb{C}$ by the formula
 \[
@@ -375,9 +394,6 @@ function $\operatorname{Ind}_H^G f : G \to \mathbb{C}$ by the formula
 \]
 for $g \in G$.
 \end{definition}
-
-It is clear that the character of $\operatorname{Res}_H^G V$
-is $\operatorname{Res}_H^G \chi_V$.
 
 \begin{proposition}
 The character of $\operatorname{Ind}_H^G V$
@@ -404,8 +420,8 @@ Thus, we have the formula
 \]
 Since $f$ is a class function for $H$,
 we see that $f(x^{-1}gx)=f(y^{-1}gy)$ whenever $xH=yH$.
-Thus, summing over $G$ instead of $X$, we obtain the desired formula
-after dividing by the size of the cosets $H$.
+Thus, summing over $G$ instead of $X$ amounts to
+multiplication by the size of the cosets $|H|$.
 \end{proof}
 
 \begin{exercise}
@@ -418,7 +434,7 @@ is a ring homomorphism.
 Prove that the function
 $\operatorname{Ind}_H^G : C(H) \to C(G)$
 is an additive group homomorphism,
-but only a ring homomorphism when $G=H$.
+but a ring homomorphism only if $G=H$.
 (Hint: what is $(\operatorname{Ind}_H^G 1)(1)$?)
 \end{exercise}
 
@@ -430,7 +446,7 @@ $\operatorname{Ind}^G_H ( (\operatorname{Res^G_H} \psi) \cdot\varphi)
 \end{proposition}
 
 \begin{proof}
-Since $\psi(a^{-1}ga)=\psi(g)$, we have
+Since $\psi(a^{-1}ga)=\psi(g)$ for all $a \in G$, we have
 \[
 \frac{1}{|H|}\sum_{\substack{a \in G\\a^{-1}ga \in H}} \psi(a^{-1}ga)\varphi(a^{-1}ga)
  =
@@ -444,7 +460,9 @@ for all $g \in G$.
 The image of $\operatorname{Ind}^G_H$ is an ideal of $C(G)$.
 \end{corollary}
 
-Note that all of the above facts for $C(G)$ hold for $R(G)$ as well.
+The above facts are stated for the ring of class functions
+$C(G)$, but one can check that they also hold for the representation
+ring $R(G)$ as well.
 
 \section{Frobenius Reciprocity}
 
@@ -466,11 +484,11 @@ Thus, given an element
 $\psi \in \operatorname{Hom}^G_k(\operatorname{Ind}_H^G W, V)$,
 we obtain an element
 $\varphi \in \operatorname{Hom}^H_k(W,\operatorname{Res}_H^G  V)$
-by composition as $\varphi = \psi \circ \iota$.
+by the composition $\varphi = \psi \circ \iota$.
 We uniquely recover $\psi$ from $\varphi$ from the universal mapping
 property, showing the two sets are in bijection.
 We've seen that composition of linear maps induces a linear
-transformation on Hom-sets so we have the desired isomorphism
+transformation on Hom-spaces so we have the desired isomorphism
 of vector spaces.
 \end{proof}
 
@@ -490,11 +508,11 @@ while the other is in $C(H)$.
 
 \begin{proof}
 In the case where $\varphi$ and $\psi$ are characters,
-this from the sequence
+we have
 \begin{align*}
 &(\operatorname{Ind}_H^G \varphi, \psi)_G\\
-=& \dim_k\ \operatorname{Hom}^G_k(\operatorname{Ind}_H^G W, V)\\
-=& \dim_k\ \operatorname{Hom}^H_k(W,\operatorname{Res}_H^G  V)\\
+=& \dim_\mathbb{C}\ \operatorname{Hom}^G_\mathbb{C}(\operatorname{Ind}_H^G W, V)\\
+=& \dim_\mathbb{C}\ \operatorname{Hom}^H_\mathbb{C}(W,\operatorname{Res}_H^G  V)\\
 =&(\varphi, \operatorname{Res}_H^G \psi)_H .
 \end{align*}
 This extends to all class functions by linearity since the characters
@@ -503,9 +521,120 @@ are a spanning set.
 
 \section{Mackey decomposition}
 
-TODO: decomposition
+Here we learn how restriction and induction interact.
 
-TODO: Mackey Irreducibility
+\begin{theorem}[Mackey Decomposition]
+Let $K,H$ be subgroups of $G$ and suppose $(W,\rho)$ is a representation of
+$H$.
+Then
+\[
+\operatorname{Res}^G_K \operatorname{Ind}^G_H W
+\cong
+\bigoplus_{[x] \in K\backslash G / H}
+\operatorname{Ind}_{H_x}^K W_x
+\]
+where $H_x = xHx^{-1} \cap K$, and $(W_x,\sigma_x)$ is a representation
+of $H_x$ with underlying vector space $W$
+defined by $\sigma_x(g)=\rho(x^{-1}gx)$ for all $g \in H_x$.
+\end{theorem}
+
+\begin{proof}
+Let $X$ be a system of distinct representatives for $G/H$.
+Observe that $H_x$ is the stabilizer of the $K$-action on each $x \in X$.
+Let $X_1,\ldots,X_r$ be the subsets of $X$ corresponding to the
+$K$-orbits on $G/H$.
+Observe that the sets $\{X_i\}$ correspond bijectively to the
+double cosets in $K \backslash G / H$.
+
+We recall the explicit description of $\tau = \operatorname{Ind}^G_H \rho$
+from Proposition~\ref{prop:ind_construction}
+as a direct sum $\bigoplus_{x \in X} xW$,
+with isomorphisms $\phi_x: W \to xW$ and $\tau_g$ decomposing as
+\[
+\rho_g^{y,x} =
+\begin{cases}
+\phi_y \circ \rho_{y^{-1}gx} \circ \phi_x^{-1} & \textrm{if $gxH=yH$,}\\
+0 & \textrm{otherwise},
+\end{cases}
+\]
+in each $\operatorname{Hom}_k(xW,yW)$
+for $x,y \in X$ and $g \in G$.
+
+Let $W_i$ be the sum of the subspaces $xW$ for $x \in X_i$.
+We have
+\[
+\operatorname{Ind}^G_H W = \bigoplus_{i=1}^r W_i
+\]
+where each $W_i$ is easily seen to be $K$-stable.
+It remains to prove that
+$W_i \cong \operatorname{Ind}_{H_x}^K W_x$ for some choice of $x \in X_i$.
+
+Again by Proposition~\ref{prop:ind_construction},
+we have $\tau_i = \operatorname{Ind}_{H_x}^K \sigma_x$
+with $\psi_y : W_x \to yW_x$ and
+\[
+\rho_g^{z,y} =
+\begin{cases}
+\psi_z \circ \rho_{z^{-1}gy} \circ \psi_y^{-1} & \textrm{if $gyH_x=zH_x$,}\\
+0 & \textrm{otherwise},
+\end{cases}
+\]
+in each $\operatorname{Hom}_k(yW,zW)$
+for $y,z \in X_i$ and $g \in K$.
+
+For each $y \in X_i$, define $\pi_y : yW \to yW_x$
+via $\pi_y = \psi_y \circ \phi_y^{-1}$.
+The direct sum $\bigoplus_{y \in X_i} \pi_y$
+is an isomorphism from $W_i$ to $\operatorname{Ind}_{H_x}^K \sigma_x$.
+One checks that this is $K$-equivariant as desired.
+\end{proof}
+
+We now turn to an application where $H=K$.
+As in the statement of the Mackey Decomposition Theorem,
+for any element $x \in G$, we define $H_x = xHx^{-1} \cap H$.
+Observe that while $\operatorname{Res}^H_{H_x} W$
+and $W_x$ are both representations of $H_x$,
+they are not isomorphic in general!
+If $\chi$ is the character for $W$ in $C(H)$, let $\chi_x$ denote the
+character of $W_x$ in $C(H_x)$.
+
+\begin{theorem}[Mackey Irreducibility]
+The representation $\operatorname{Ind}^G_H W$ is irreducible
+if and only if $W$ is irreducible and,
+for every $x \in G \setminus H$,
+we have $( \chi_x, \operatorname{Res}^H_{H_x} )=0$.
+\end{theorem}
+
+\begin{proof}
+We use Frobenius Reciprocity and the Mackey Decomposition liberally:
+\begin{align*}
+&( \operatorname{Ind}^G_H \chi, \operatorname{Ind}^G_H \chi )\\
+=&( \chi, \operatorname{Res}^G_H \operatorname{Ind}^G_H \chi )\\
+=&( \chi, \sum_{[x] \in H\backslash G / H}
+\operatorname{Ind}_{H_x}^H \chi_x )\\
+=&\sum_{[x] \in H\backslash G / H} ( \chi, 
+\operatorname{Ind}_{H_x}^H \chi_x )\\
+=&\sum_{[x] \in H\backslash G / H} ( \operatorname{Res}_{H_x}^H\chi, 
+ \chi_x ).
+\end{align*}
+If $x \in H$, then they are equal and
+$\chi=\operatorname{Res}_{H_x}^H\chi = \chi_x$.
+Thus
+\[
+( \operatorname{Ind}^G_H \chi, \operatorname{Ind}^G_H \chi )
+=(\chi,\chi)+
+\sum_{\substack{[x] \in H\backslash G / H\\x \not\in  H}}
+( \operatorname{Res}_{H_x}^H\chi,  \chi_x )
+\]
+Since $\operatorname{Res}_{H_x}^H\chi$ and $\chi_x$ are actual
+characters of $H_x$, their inner product is always a non-negative integer.
+Moreover, $(\chi,\chi)$ is a strictly positive integer.
+Thus
+$( \operatorname{Ind}^G_H \chi, \operatorname{Ind}^G_H \chi )=1$
+if and only if $(\chi,\chi)=1$ and every other
+summand vanishes.
+The theorem follows.
+\end{proof}
 
 \section{Examples}
 
