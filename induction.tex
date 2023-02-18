@@ -524,7 +524,7 @@ are a spanning set.
 Here we learn how restriction and induction interact.
 
 \begin{theorem}[Mackey Decomposition]
-Let $K,H$ be subgroups of $G$ and suppose $(W,\rho)$ is a representation of
+Let $K,H$ be subgroups of $G$ and suppose $(W,\sigma)$ is a representation of
 $H$.
 Then
 \[
@@ -535,7 +535,7 @@ Then
 \]
 where $H_x = xHx^{-1} \cap K$, and $(W_x,\sigma_x)$ is a representation
 of $H_x$ with underlying vector space $W$
-defined by $\sigma_x(g)=\rho(x^{-1}gx)$ for all $g \in H_x$.
+defined by $\sigma_x(g)=\sigma(x^{-1}gx)$ for all $g \in H_x$.
 \end{theorem}
 
 \begin{proof}
@@ -598,11 +598,11 @@ they are not isomorphic in general!
 If $\chi$ is the character for $W$ in $C(H)$, let $\chi_x$ denote the
 character of $W_x$ in $C(H_x)$.
 
-\begin{theorem}[Mackey Irreducibility]
+\begin{theorem}[Mackey Irreducibility Criterion]
 The representation $\operatorname{Ind}^G_H W$ is irreducible
 if and only if $W$ is irreducible and,
 for every $x \in G \setminus H$,
-we have $( \chi_x, \operatorname{Res}^H_{H_x} )=0$.
+we have $( \chi_x, \operatorname{Res}^H_{H_x} \chi )=0$.
 \end{theorem}
 
 \begin{proof}
@@ -635,6 +635,23 @@ if and only if $(\chi,\chi)=1$ and every other
 summand vanishes.
 The theorem follows.
 \end{proof}
+
+\begin{corollary}
+Suppose $H$ is normal in $G$.
+The representation $\operatorname{Ind}^G_H \rho$ is irreducible
+if and only if $\rho$ is irreducible and $\rho_x \ne \rho$
+for all $x \not\in H$.
+\end{corollary}
+
+\begin{proof}
+When $H$ is normal, $H_x=H$ since $xHx^{-1}=H$ for all $x \in G$.
+In particular, $\operatorname{Res}^G_H(\rho)=\rho$.
+Assuming $\chi$ is irreducible, the condition
+$\left(\chi_x,\operatorname{Res}^G_H(\chi)\right)=0$
+is equivalent to $\chi_x \ne \chi$ and the result follows from
+the Mackey Irreducibility Criterion.
+\end{proof}
+
 
 \section{Examples}
 
@@ -812,6 +829,11 @@ Prove that $U(H)$ is isomorphic to $Q_8 \rtimes (\mathbb{Z}/3\mathbb{Z})$.
 Prove that $U(H)$ is isomorphic to the special linear group
 $\operatorname{SL}_2(\mathbb{F}_3)$ over the field of $3$ elements.
 \end{exercise}
+
+\section{Applications}
+
+\section{Artin and Brauer's Theorem}
+
 
 
 \bibliographystyle{alpha}
