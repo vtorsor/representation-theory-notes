@@ -915,7 +915,7 @@ Since $A$ is a central extension of two cyclic groups, it must be
 abelian.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem} \label{thm:ss_monomial}
 Every representation of a supersolvable group is monomial.
 \end{theorem}
 
@@ -1089,7 +1089,7 @@ for all $w \in \bigoplus_{i=1}^n V$ and $v \in V$.
 
 Now, the function
 \[
-\bigoplus_{H \in \mathcal{F}} \operatorname{Res}^G_H \Delta:
+\bigoplus_{H \in \mathcal{F}} \operatorname{Res}^G_H \circ \Delta:
 C(G) \to \bigoplus_{H \in \mathcal{F}} C(H)
 \]
 is injective since class functions are determined by their values on
@@ -1113,6 +1113,36 @@ surjective linear map.
 The restriction to $\bigoplus_{H \in \mathcal{F}} R(H)$
 therefore has finite cokernel, since the image is a subgroup of $R(G)$
 of maximal rank.
+\end{proof}
+
+\begin{definition}
+A group $H$ is \emph{$p$-elementary} for a prime $p$ if
+$H \cong P \times C$ where $P$ is a $p$-group and $C$ is a cyclic group
+of order coprime to $p$.
+We say a group $H$ is \emph{elementary} if it is $p$-elementary for some
+prime $p$.
+\end{definition}
+
+\begin{theorem}[Brauer's Theorem]
+If $\mathcal{F}$ is the set of elementary subgroups of $G$,
+then $\Sigma_{\mathcal{F}} \operatorname{Ind}$ is surjective.
+\end{theorem}
+
+\begin{proof}
+See \cite[\S{10}]{Serre}.
+\end{proof}
+
+\begin{corollary}
+Every character is an integer linear combination of monomial characters.
+\end{corollary}
+
+\begin{proof}
+Brauer's Theorem tells us that every character is an integer linear
+combination of characters induced from elementary subgroups.
+An elementary group is nilpotent, thus supersolvable.
+By Theorem~\ref{thm:ss_monomial}, all of their representations are
+monomial.
+A representation induced from a monomial representation is monomial.
 \end{proof}
 
 \bibliographystyle{alpha}
