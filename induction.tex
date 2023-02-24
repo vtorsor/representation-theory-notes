@@ -1053,7 +1053,67 @@ We conclude that $\rho \cong \theta_{i,\tau}$ as desired.
 
 \section{Artin and Brauer's Theorem}
 
+Let $\mathcal{F}$ be a family of subgroups of a finite group $G$.
+Define the map
+\[
+\Sigma_{\mathcal{F}} \operatorname{Ind} :
+\bigoplus_{H \in \mathcal{F}} R(H) \to R(G)
+\]
+via
+\[
+(\chi_H)_{H \in \mathcal{F}} \mapsto \sum_{H \in \mathcal{F}}
+\operatorname{Ind}_H^G \chi_H .
+\]
 
+\begin{theorem}[Artin's Theorem]
+If $\mathcal{F}$ is the set of cyclic subgroups of $G$,
+then $\Sigma_{\mathcal{F}} \operatorname{Ind}$ has finite cokernel.
+\end{theorem}
+
+\begin{proof}
+First, let $V$ be a complex inner product space and consider the maps
+\[
+\Sigma : \bigoplus_{i=1}^n V \to V \textrm{ and }
+\Delta : V \to \bigoplus_{i=1}^n V
+\]
+defined via
+\[
+\Sigma\left(v_1,\ldots,v_n\right) = \sum_{i=1}^n v_i \textrm{ and }
+\Delta(v) = (v,\ldots,v).
+\]
+They are adjoint linear operators in the sense that
+\[
+\left( \Sigma(w), v \right) = \left( w, \Delta(v) \right)
+\]
+for all $w \in \bigoplus_{i=1}^n V$ and $v \in V$.
+
+Now, the function
+\[
+\bigoplus_{H \in \mathcal{F}} \operatorname{Res}^G_H \Delta:
+C(G) \to \bigoplus_{H \in \mathcal{F}} C(H)
+\]
+is injective since class functions are determined by their values on
+cyclic subgroups.
+If a linear transformation is injective, then its adjoint operator
+\[
+\Sigma_{\mathcal{F}} \operatorname{Ind} :
+\bigoplus_{H \in \mathcal{F}} C(H) \to C(G)
+\]
+is surjective.
+
+Now the linear map
+\[
+\Sigma_{\mathcal{F}} \operatorname{Ind} :
+\mathbb{Q} \otimes_{\mathbb{Z}}
+\left(\bigoplus_{H \in \mathcal{F}} R(H)\right)
+\to \mathbb{Q} \otimes_{\mathbb{Z}} R(G)
+\]
+must be surjective since tensoring with $\mathbb{C}$ produces a
+surjective linear map.
+The restriction to $\bigoplus_{H \in \mathcal{F}} R(H)$
+therefore has finite cokernel, since the image is a subgroup of $R(G)$
+of maximal rank.
+\end{proof}
 
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
