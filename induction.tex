@@ -832,6 +832,225 @@ $\operatorname{SL}_2(\mathbb{F}_3)$ over the field of $3$ elements.
 
 \section{Applications}
 
+Suppose $G$ is a finite group and $\phi: G \to G$
+is a group automorphism.  For any class function $\chi$,
+define the class function $\phi \cdot \chi := \chi \circ \phi^{-1}$.
+
+\begin{exercise}
+Prove the following.
+The assignment $\chi \mapsto \phi \cdot \chi$ induces an action
+of $\operatorname{Aut}(G)$ on $C(G)$.
+The action preserves both the ring and inner product space structure on
+$G$, takes characters to characters,
+and irreducible characters to irreducible characters.
+The subgroup $\operatorname{Inn}(G)$ of inner automorphisms is in the
+kernel of the action.
+\end{exercise}
+
+\begin{lemma} \label{lem:normal_restriction}
+Suppose $N$ is a normal subgroup of $G$ and $V$
+is an irreducible representation of $G$.  One of the following holds:
+\begin{enumerate}
+\item $\operatorname{Res}^G_N V$ is isotypic, or
+\item $V \cong \operatorname{Ind}^G_H W$ where $W$ is an irreducible
+representation of a proper subgroup $H$ of $G$ such that $N
+\subseteq H$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Consider the isotypic decomposition
+\[
+Res^G_N V \cong U_1 \oplus U_2 \oplus \cdots \oplus U_r
+\]
+where $U_1, \ldots, U_r$ are the distinct isotypic subrepresentations of $N$.
+If $r=1$, then we are in the first case; thus we may assume $r \ge 2$.
+For any $g \in G$ and index $i$, we see that $g(U_i)$ is an $N$-stable
+subspace of $V$; indeed, for every $n\in N$ we have some $n' \in N$
+such that $ngU_i=gn'U_i=gU_i$.
+Let $H$ be the set of $g \in G$ such that $g(U_1)=U_1$.
+Thus $U$ is an $H$-subrepresentation of $V$.
+By the universal mapping property, there is a $G$-equivariant
+morphism $\operatorname{Ind}^G_H U_1 \to V$.
+Since $G$ acts transitively on the $U_i$'s, we obtain an isomorphism.
+\end{proof}
+
+\begin{definition}
+A finite group $G$ is \emph{supersolvable} if there exists a chain of
+subgroups
+\[
+1=G_0 \subseteq G_1 \subseteq \cdots \subseteq G_r = G
+\]
+where each $G_i$ is normal in $G$ and $G_{i+1}/G_i$ is cyclic
+for each $i=0,\ldots, r$. 
+\end{definition}
+
+\begin{exercise}
+Prove the following implications for a finite group $G$:
+\[
+\textrm{$p$-group} \implies
+\textrm{nilpotent} \implies \textrm{supersolvable} \implies
+\textrm{solvable},
+\]
+and find explicit examples showing the converses may not hold.
+\end{exercise}
+
+\begin{exercise}
+All subgroups and quotient groups of a supersolvable group are
+supersolvable.
+\end{exercise}
+
+\begin{lemma} \label{lem:ss_abel}
+If $G$ is a nonabelian supersolvable group, then there exists a normal
+abelian subgroup $A$ of $G$ such that $A$ is not contained in the center
+of $G$.
+\end{lemma}
+
+\begin{proof}
+Let $Z$ be the center of $G$.  Then $G/Z$ is supersolvable and there
+exists a normal cyclic subgroup $C \subseteq G/Z$.  Let $A$ be the
+preimage of $C$ via the quotient map $G \to G/Z$.
+Since $C$ is normal in $G/C$, we see $A$ is normal in $G$.
+Since $A$ is a central extension of two cyclic groups, it must be
+abelian.
+\end{proof}
+
+\begin{theorem}
+Every representation of a supersolvable group is monomial.
+\end{theorem}
+
+\begin{proof}
+We proceed by induction on the order of the group $G$.
+We may assume without loss of generality that our representation
+$(V,\rho)$ is irreducible.
+Since quotients of supersolvable groups are supersolvable,
+by induction we may assume that $V$ is a faithful representation.
+If $G$ is abelian, then we are done.
+Thus, we may assume $G$ is nonabelian and, by Lemma~\ref{lem:ss_abel},
+there is a normal abelian subgroup $A$ of $G$ not contained in the center.
+
+We claim $\operatorname{Res}^G_A V$ is \emph{not} isotypic.
+An isotypic representation of an abelian group consists of scalar
+matrices.  Since these commute with every other matrix in the group,
+and the representation is faithful, this would mean $A$ was in the center
+of $G$, a contradiction.
+Thus, we may appeal to Lemma~\ref{lem:normal_restriction}
+to conclude $V$ is induced from a proper subgroup $H$.
+Since $H$ is supersolvable, by the induction hypothesis we conclude that
+$V$ is induced from a monomial representation.
+Thus $V$ is monomial as desired.
+\end{proof}
+
+\section{Semidirect Products}
+
+Throughout this section $G = A \rtimes H$
+where $A$ is a finite abelian group and $H$ is a finite group.
+
+Recall that $A^\vee :=
+\operatorname{Hom}_{\mathrm{grp}}(A,\mathbb{C}^\times)$
+is an abelian group that is isomorphic to $A$ itself (although not
+canonically).
+There is a left action of $G$ on $A^\vee$ via
+\[
+(g\chi)(a)=\chi(g^{-1}ag)
+\]
+where $g \in G$, $\chi \in A^\vee$ and $a \in A$.
+Since $A$ is abelian, the $G$-action factors through the projection
+onto the subgroup $H$.
+
+Let $\chi_1,\ldots, \chi_r$ be a system of distinct representatives
+for the $H$-orbits of $A^\vee$.  Define
+$H_i=\operatorname{Stab}_H(\chi_i)$.
+In particular,
+\[
+A^\vee \cong H/H_1 \sqcup \cdots \sqcup H/H_r
+\]
+as $H$-sets.
+
+Given an irreducible representation $\rho$ of $H_i$,
+we will define a representation $\theta_{i,\rho}$ as follows.
+Let $G_i= A \rtimes H_i$.
+Extend $\rho$ to a representation $\widetilde{\rho}$ of $G_i$
+by composition with the map $G_i \to H_i$.
+Extend $\chi_i$ to a representation $\widetilde{\chi_i}$ of $G_i$
+by defining $\widetilde{\chi_i}(ah)=\chi_i(a)$
+for all $a \in A$ and $h \in H_i$; this makes sense because
+$H_i$ acts trivially on $\chi_i$.
+Now finally, we define
+\[
+\theta_{i,\rho} := \operatorname{Ind}_{G_i}^G
+\widetilde{\chi_i} \otimes \widetilde{\rho},
+\]
+which is a representation of $G$.
+
+\begin{theorem}
+Every irreducible representation of $G$ is isomorphic to some
+$\theta_{i,\rho}$,
+every $\theta_{i,\rho}$ is irreducible, and
+$\theta_{i,\rho} \cong \theta_{i', \rho'}$ if and only if 
+$i=i'$ and $\rho \cong \rho'$.
+\end{theorem}
+
+\begin{proof}
+First we show that $\theta_{i,\rho}$ is irreducible.
+Let $\eta = \widetilde{\chi_i} \otimes \widetilde{\rho}$
+where $\theta_{i,\rho} = \operatorname{Ind}_{G_i}^G \eta$.
+Let $x \in G \setminus G_i$ and $K_x = G_i \cap xG_ix^{-1}$.
+Observe that $\operatorname{Res}^{K_x}_A \eta = n\chi_i$
+where $n$ is the degree of $\eta$.
+As in the statement of the Mackey Decomposition,
+we define a representation of $K_x$ via
+$\eta_x (g) = \eta(x^{-1}gx)$ for all $g \in K_x$.
+Now $\operatorname{Res}^{K_x}_A \eta = n\chi'$
+where $\chi'(a) = \chi_i(x^{-1}ax)$ for all $a \in A$.
+Since $\chi_i(a) \ne \chi_i(x^{-1}ax)$ for some $a \in A$
+we conclude that $\chi_i \ne \chi'$.
+Since $\chi_i$ and $\chi'$ are irreducible, we conclude that
+$(\chi_i, \chi')=0$.  Thus $(\eta,\eta_x)=0$ and we
+conclude that $\theta_{i,\rho}$ is irreducible by Mackey's
+Irreducibility Criterion.
+
+Now we show that the isomorphism class of $\theta_{i,\rho}$
+is determined by $i$ and $\rho$.
+The restriction $\operatorname{Res}^G_A \theta_{i,\rho}$
+is a direct sum of characters $\nu_1,\ldots,\nu_s$ in $A^\vee$.
+From the Mackey Decomposition Theorem, we know that each
+$\nu_j$ is of the form $g \cdot \chi_i$ for some $g \in G$.
+Since $A$ is abelian, each $\nu_j$ is of the form $h \cdot \chi_i$
+for $h \in H$.  In particular, all $\nu_j$ are from the same $H$-orbit
+of $A^\vee$, so the index $i$ is determined.
+Let $W$ be the isotypic component of $\operatorname{Res}^G_A V$
+associated to the representation $\chi_i$.
+The group $G_i$ leaves $W$ invariant and we see that 
+$W$ is isomorphic to the representation
+$\widetilde{\chi_i} \otimes \widetilde{\rho}$,
+which determines $\rho$.
+
+Finally, we show that every irreducible representation of $G$ has the
+desired form.  Let $(V, \sigma)$ be an irreducible representation of $G$.
+Let
+\[
+\operatorname{Res}^G_A V = \bigoplus_{\chi \in A^\vee} W_\chi
+\]
+be the isotypic decomposition.  Pick a character $\chi_i \in A^\vee$
+with $W_{\chi_i} \ne 0$ and let $H_i = \operatorname{Stab}_H(\chi_i)$.
+Observe that $W_{\chi_i}$ is a subrepresentation of $V$
+for the group $H_i$; let $\tau$ be this $H_i$-representation.
+We see that the $G_i$-action on $W_{\chi_i}$ is the representation
+$\widetilde{\chi_i} \otimes \widetilde{\tau}$.
+Using Frobenius Reciprocity, we have the sequence of inequalities
+\[
+0 < \left( \widetilde{\chi_i} \otimes \widetilde{\tau},
+\operatorname{Res}^G_{G_i} \sigma \right)_{G_i}
+= \left( \operatorname{Ind}^G_{G_i} \widetilde{\chi_i} \otimes \widetilde{\tau},
+\sigma \right)_{G} \le 1
+\]
+where the first inequality follows from the fact that
+$W_{\chi_i}$ is a summand of $V$ and the second inequality
+follows from the fact that $\rho$ is irreducible.
+We conclude that $\rho \cong \theta_{i,\tau}$ as desired.
+\end{proof}
+
 \section{Artin and Brauer's Theorem}
 
 
