@@ -1,0 +1,125 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{ytableau}
+
+% theorem styles (I like everything to have the same counter)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{exercise}[theorem]{Exercise}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% some numbering settings
+\numberwithin{equation}{section}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{15.2pt}
+\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+\setlength{\footskip}{30pt}
+\pagestyle{fancy}
+
+\makeatletter
+\let\ps@plain\ps@fancy 
+\makeatother
+
+\lhead{MATH 742}
+\chead{Induced Representations}
+\rhead{Spring 2023}
+\lfoot{Last Revised: \today}
+\cfoot{}
+\rfoot{\thepage\ of \pageref{LastPage} }
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\title{Symmetric Groups and General Linear Groups}
+\author{Alexander Duncan}
+
+\maketitle
+
+Much of this material is drawn from
+\cite[\S{4,6,A}]{FultonHarris},
+\cite[\S{5.12--5.19}]{Etingof},
+\cite[\S{I}]{Macdonald}, and
+\cite[\S{7}]{Stanley2}.
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+
+\section{Partitions}
+
+Recall that a \emph{partition} $\lambda$ is a sequence of decreasing
+non-negative integers
+$\lambda_1 \ge \lambda_2 \ge \cdots$ that is eventually $0$.
+Some standard terminology:
+\begin{itemize}
+\item The non-zero $\lambda_i$ are the \emph{parts} of $\lambda$.
+\item The number $\ell(\lambda)$ of parts is the \emph{length} of $\lambda$.
+\item The sum $|\lambda|=\sum_{i \ge 0} \lambda_i$ is the \emph{weight} of $\lambda$.
+\item A ``partition of $n$'' is a partition of weight $n$.
+\item $\lambda \vdash n$ means $\lambda$ is a partition of $n$.
+\item The number $m_i(\lambda)$ of parts equal to $i$ is
+the \emph{multiplicity} of $i$ in $\lambda$.
+\item Partitions can be written $\lambda_1 + \lambda_2 + \cdots + \lambda_r$.
+\item We may use the shorthand $\lambda = (1^{m_1} 2^{m_2} \cdots r^{m_r})$.
+\end{itemize}
+
+Partitions are often drawn as \emph{Young tableaux}.  This is just a
+series of empty boxes where each row contains $\lambda_i$ boxes.
+There are some differing conventions between different areas of math, so
+read any source carefully.
+
+Given a partition $\lambda$, the \emph{conjugate partition}
+is the partition $\lambda'$ obtained by reflecting the Young diagram in
+the downwards-right diagonal line.  More explicitly,
+$\lambda'_i$ is the number of parts such that $\lambda_j \ge i$. 
+
+\begin{example}
+The partitions of $4$ are as follows:
+\begin{center}
+\begin{tabular}{ccccc}
+4 & 3+1 & 2+2 & 2+1+1 & 1+1+1+1 \\
+\ydiagram{4} & \ydiagram{3,1} & \ydiagram{2,2} & \ydiagram{2,1,1} &
+\ydiagram{1,1,1,1}
+\end{tabular}
+\end{center}
+\end{example}
+
+\begin{example}
+Let $\lambda = (4,4,2,2,2,1)$.
+We may also write $\lambda$ as $4+4+2+2+2+1$ or $1^12^34^2$.
+We have weights $\lambda_1=4$, $\lambda_2=4$,
+$\lambda_3=2$,
+$\lambda_4=2$,
+$\lambda_5=2$, and
+$\lambda_6=1$.
+We have length $\ell(\lambda)=6$, weight $|\lambda|=15$,
+and multiplicities $m_1(\lambda)=1$, $m_2(\lambda)=3$,
+$m_3(\lambda)=0$, and $m_4(\lambda)=2$.
+The Young tableau is
+\begin{center}
+\ydiagram{4,4,2,2,2,1}.
+\end{center}
+The conjugate partition $\lambda'$ is $(6,5,2,2)$.
+\end{example}
+
+We use the notation $\operatorname{Par}(n)$ to denote the set of
+partitions of $n$.  And the notation $\operatorname{Par}$ for the set of
+all partitions of all weights.
+
+\bibliographystyle{alpha}
+\bibliography{rep_theory}
+
+\end{document}
+
+
