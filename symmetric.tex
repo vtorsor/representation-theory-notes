@@ -32,7 +32,7 @@
 \makeatother
 
 \lhead{MATH 742}
-\chead{Induced Representations}
+\chead{$S_n$ and $\operatorname{GL}_n$}
 \rhead{Spring 2023}
 \lfoot{Last Revised: \today}
 \cfoot{}
@@ -98,7 +98,7 @@ The partitions of $4$ are as follows:
 \begin{example}
 Let $\lambda = (4,4,2,2,2,1)$.
 We may also write $\lambda$ as $4+4+2+2+2+1$ or $1^12^34^2$.
-We have weights $\lambda_1=4$, $\lambda_2=4$,
+We have parts $\lambda_1=4$, $\lambda_2=4$,
 $\lambda_3=2$,
 $\lambda_4=2$,
 $\lambda_5=2$, and
@@ -116,6 +116,214 @@ The conjugate partition $\lambda'$ is $(6,5,2,2)$.
 We use the notation $\operatorname{Par}(n)$ to denote the set of
 partitions of $n$.  And the notation $\operatorname{Par}$ for the set of
 all partitions of all weights.
+
+Recall that every permutation $\sigma \in S_n$ can be written as a
+product of disjoint cycles, which is unique up to reordering of
+the cycles.  Counting the cycles of length $1$, we see that the orders
+of the constituent cycles give a partition $\lambda \vdash n$.
+For example $(1\ 4\ 3)(2\ 8)(6\ 7) \in S_9$ has cycle type
+$3+2+2+1+1$.
+The following is standard in most group theory texts:
+
+\begin{proposition}
+Two permutations in $S_n$ are conjugate if and only if they have the
+same cycle type.
+In particular, the conjugacy classes of $S_n$ are in canonical bijective
+correspondence with $\operatorname{Par}(n)$.
+\end{proposition}
+
+\section{Symmetric Functions}
+
+There is a natural left action of the symmetric group $S_n$ on the ring of
+polynomials $R=\mathbb{Z}[x_1,\ldots,x_n]$ by permuting the variables.
+More precisely, there is a unique ring automorphism of $R$ defined
+by $x_i \mapsto x_{\sigma{i}}$ for each variable $x_i$ and each
+permutation $\sigma \in S_n$.
+Alternatively, if $\sigma \in S_n$, the we have
+\[
+(\sigma \cdot f)(a_1,\ldots,a_n) =
+f\left(a_{\sigma(1)}, \ldots, a_{\sigma}(n)\right)
+\]
+for $f \in R$ and $a_1,\ldots,a_n \in \mathbb{Z}$.
+
+\begin{definition}
+A polynomial $f \in \mathbb{Z}[x_1,\ldots, x_n]$ is \emph{symmetric}
+if $\sigma \cdot f = f$ for all $\sigma \in \Sigma$.
+We denote by $\mathsf{SF}_n$ set of symmetric polynomials
+$\mathbb{Z}[x_1,\ldots,x_n]^{S_n}$ in $n$ variables.
+\end{definition}
+
+The set $\mathsf{SF}_n$ forms a graded ring
+\[
+\mathsf{SF}_n = \bigoplus_{d \ge 0} \mathsf{SF}_n^d
+\]
+where each $\mathsf{SF}_n^d = \mathbb{Z}[x_1,\ldots,x_n]_{(d)}^{S_n}$
+is the subgroup of homogeneous symmetric polynomials of degree $d$.
+
+Given a tuple $\alpha = (\alpha_1,\ldots,\alpha_n) \in \mathbb{N}^n$
+we use the shorthand
+\[
+x^\alpha = x_1^{\alpha_1} \cdots x_n^{\alpha_n}
+\]
+to denote monomials in $\mathbb{Z}[x_1,\ldots,x_n]$.
+
+Given a partition $\lambda \vdash d$ with length $\ell(\lambda) \le n$,
+the \emph{monomial symmetric polynomial associated to $\lambda$}
+is given by
+\[
+m_\lambda := \sum_{\alpha} x^\alpha
+\]
+where $(\alpha_1,\ldots,\alpha_n)$ ranges over all
+\emph{distinct} permutations of $(\lambda_1,\ldots,\lambda_n)$.
+
+\begin{example}
+If $n=3$, then we have
+\begin{align*}
+m_\emptyset &= 1\\
+m_1 &= x_1 + x_2 + x_3\\
+m_2 &= x_1^2 + x_2^2 + x_3^2\\
+m_{11} &= x_1x_2 + x_1x_3 + x_2x_3\\
+m_{111} &= x_1x_2x_3 \\
+m_{14} &= x_1x_2^4 + x_1^4x_2 + x_1x_3^4 + x_1^4x_3 + x_2x_3^4 +
+x_2^4x_3.
+\end{align*}
+\end{example}
+
+Importantly, we have the following:
+
+\begin{proposition}
+Monomial symmetric polynomials form a basis for $\mathsf{SF}_n$.
+Specifically,
+\[
+\mathsf{SF}_n^d = \operatorname{span}_{\mathbb{Z}}
+\{ m_\lambda \mid \lambda \vdash d, \ell(\lambda) \le n \}.
+\]
+\end{proposition}
+
+\begin{proof}
+The partitions of length at most $n$ are a system of distinct
+representatives for the $S_n$-orbits of $\mathbb{N}^n$.
+The monomials in $m_\lambda$ are precisely those of these orbit of
+$\lambda$.
+The coefficient of every monomial
+in $m_\lambda$ is either $0$ or $1$ and every possible monomial
+occurs in exactly one $m_\lambda$.
+If $f$ is a symmetric polynomial, then the coefficient
+of a monomial $x^\alpha$ must be the same as $x^{\sigma(\alpha)}$
+for every $\sigma \in S_n$.  
+\end{proof}
+
+There are several notable additional families of symmetric polynomials
+which we define now.
+
+\begin{definition}
+For positive integers $d$, we define
+the \emph{elementary symmetric polynomial $e_d$ of degree $d$} as
+\[
+e_d = m_{1^d} = \sum_{1 \le i_1 < i_2 < \cdots < i_d \le n} x_{i_1}x_{i_2}\cdots
+x_{i_d},
+\]
+the \emph{complete homogeneous symmetric polynomial $h_d$ of degree $d$} as
+\[
+h_d = \sum_{\lambda \vdash d} m_\lambda = \sum_{1 \le i_1 \le i_2 \le \cdots \le i_d \le n} x_{i_1}x_{i_2}\cdots
+x_{i_d},
+\]
+and the \emph{power sum symmetric polynomial $p_d$ of degree $d$} as
+\[
+p_d = m_d = \sum_{1 \le i \le n} x_i^d.
+\]
+By convention, $e_0=h_0=p_0=1$.
+\end{definition}
+
+\begin{remark}
+Note that the convention for $d=0$ is arguably not a convention
+for $e_0$ and $h_0$ if one writes the definitions in a different way.
+However, there are good reasons to instead define $p_0=n$.
+However, this convention is incompatible with the ring of symmetric functions
+discussed in the next section. 
+\end{remark}
+
+\begin{example}
+If $n=3$, then we have
+\begin{align*}
+e_1 = h_1 = p_1 &= x_1 + x_2 + x_3\\
+e_2 &= x_1x_2 + x_1x_3 + x_2x_3\\
+e_3 &= x_1x_2x_3 \\
+e_4 &= 0 \\
+h_2 &= x_1^2 + x_2^2 + x_3^2 + x_1x_2 + x_1x_3 + x_2x_3\\
+h_3 &= x_1^3 + \cdots + x_1^2x_2 + \cdots + x_1x_2x_3\\
+p_2 &= x_1^2 + x_2^2 + x_3^2\\
+p_3 &= x_1^3 + x_2^3 + x_3^3
+\end{align*}
+\end{example}
+
+We now see some of the connections of symmetric functions and
+representation theory:
+
+\begin{proposition}
+Suppose $V$ is an $n$-dimensional vector space and
+$\varphi \in \operatorname{End}(V)$ has eigenvalues
+$\lambda_1,\ldots,\lambda_n$.
+Then the natural action of $\varphi$ on the exterior power $\Lambda^d V$
+has trace
+\[
+\operatorname{tr}\left( \Lambda^d \varphi \right)
+= e_d(\lambda_1,\ldots,\lambda_n)
+\]
+and the natural action of $\varphi$ on the symmetric power
+$\mathcal{S}^d V$ has trace
+\[
+\operatorname{tr}\left( \mathcal{S}^d \varphi \right)
+= h_d(\lambda_1,\ldots,\lambda_n).
+\]
+\end{proposition}
+
+\begin{proof}
+It suffices to work over an algebraically closed field $k$.
+We prove the statement for $\Lambda^d V$ since the argument for
+$\mathcal{S}^d$ is very similar. 
+
+First, we assume that $\varphi$ is diagonalizable with eigenvectors
+$v_1,\ldots, v_n$ corresponding to eigenvalues
+$\lambda_1,\ldots,\lambda_n$.
+Now, an eigenbasis for $\Lambda^d V$ is given by
+\[
+\{ v_{i_1}\wedge v_{i_2}\wedge \cdots \wedge v_{i_d} \mid
+1 \le i_1 < i_2 < \cdots < i_d \le n \} \ .
+\]
+The corresponding eigenvalues of $\Lambda^d \varphi$ are therefore
+\[
+\{ \lambda_{i_1} \lambda_{i_2} \cdots \lambda_{i_d} \mid
+1 \le i_1 < i_2 < \cdots < i_d \le n \} \ .
+\]
+The trace of $\Lambda^d \phi$ is just the sum of the eigenvalues, which
+is $e_d(\lambda_1,\ldots,\lambda_n)$ as desired.
+
+Now we consider the case where $\varphi$ is not diagonalizable.
+In this case $\varphi$ has a Jordan canonical form.  Thus,
+we have a basis $v_1,\ldots, v_n$ for $V$ such that $\varphi$ is
+represented by $D+N$ where $D$ is a diagonal matrix and
+$N$ is a lower triangular matrix.
+Observe that $N(v_i)$ is a linear combination of $v_{i+1},\ldots, v_n$.
+
+Define a total ordering on $\mathbb{N}^n$ where
+$(a_1,\ldots,a_n) < (b_1,\ldots,b_n)$ if $a_i < b_i$ for the minimal $i$
+on which $a_i \ne b_i$.
+We now observe that
+\[
+(D+N)(v_{i_1}\wedge \cdots \wedge v_{i_d})
+= D(v_{i_1}\wedge \cdots \wedge v_{i_d})
++ \textrm{higher terms} 
+\]
+where the ``higher terms'' are scalar multiples of
+$v_{j_1}\wedge \cdots \wedge v_{j_d}$
+where $(j_1,\ldots,j_d) > (i_1,\ldots,i_d)$.
+Thus, appropriately ordered, our basis for $\Lambda^d V$
+also represents $\Lambda^d V$ as a lower-triangular matrix.
+The trace only depends on the diagonal entries so the result follows
+from the diagonalizable case.
+\end{proof}
+
 
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
