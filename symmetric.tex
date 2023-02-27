@@ -137,7 +137,7 @@ correspondence with $\operatorname{Par}(n)$.
 There is a natural left action of the symmetric group $S_n$ on the ring of
 polynomials $R=\mathbb{Z}[x_1,\ldots,x_n]$ by permuting the variables.
 More precisely, there is a unique ring automorphism of $R$ defined
-by $x_i \mapsto x_{\sigma{i}}$ for each variable $x_i$ and each
+by $x_i \mapsto x_{\sigma(i)}$ for each variable $x_i$ and each
 permutation $\sigma \in S_n$.
 Alternatively, if $\sigma \in S_n$, the we have
 \[
@@ -149,7 +149,7 @@ for $f \in R$ and $a_1,\ldots,a_n \in \mathbb{Z}$.
 \begin{definition}
 A polynomial $f \in \mathbb{Z}[x_1,\ldots, x_n]$ is \emph{symmetric}
 if $\sigma \cdot f = f$ for all $\sigma \in \Sigma$.
-We denote by $\mathsf{SF}_n$ set of symmetric polynomials
+We denote by $\mathsf{SF}_n$ the set of symmetric polynomials
 $\mathbb{Z}[x_1,\ldots,x_n]^{S_n}$ in $n$ variables.
 \end{definition}
 
@@ -237,10 +237,9 @@ By convention, $e_0=h_0=p_0=1$.
 
 \begin{remark}
 Note that the convention for $d=0$ is arguably not a convention
-for $e_0$ and $h_0$ if one writes the definitions in a different way.
-However, there are good reasons to instead define $p_0=n$.
-However, this convention is incompatible with the ring of symmetric functions
-discussed in the next section. 
+for $e_0$ and $h_0$ if one writes the definitions in the ``right'' way.
+There are good reasons to instead define $p_0=n$, but this does not
+extend to the ring of symmetric functions discussed in the next section. 
 \end{remark}
 
 \begin{example}
@@ -256,6 +255,32 @@ p_2 &= x_1^2 + x_2^2 + x_3^2\\
 p_3 &= x_1^3 + x_2^3 + x_3^3
 \end{align*}
 \end{example}
+
+It is worth mentioning right away (but whose proof we will defer)
+some fundamental results.  First, we have \emph{Newton's identities}:
+\[
+de_d = \sum_{i=1}^d (-1)^{i-1} p_i e_{d-i} ,
+\]
+and the fundamental relation:
+\[
+0 = \sum_{i=0}^d (-1)^i e_i h_{d-i},
+\]
+which hold for all positive integers $d$.
+These allow one to recursively compute $p_i$'s and $h_i$'s in terms
+of $e_i$'s (and vice versa).
+
+We also have the \emph{Fundamental Theorem of Symmetric
+Polynomials} which states that $e_1,\ldots,e_n$ are algebraically independent
+generators of the ring $\mathsf{SF}_n$.
+In fact, combining this with the above relations, we have
+\begin{align*}
+\mathbb{Z}[x_1,\ldots,x_n]^{S_n} &= \mathbb{Z}[e_1,\ldots,e_n]\\
+\mathbb{Z}[x_1,\ldots,x_n]^{S_n} &= \mathbb{Z}[h_1,\ldots,h_n]\\
+\mathbb{Q}[x_1,\ldots,x_n]^{S_n} &= \mathbb{Q}[p_1,\ldots,p_n]
+\end{align*}
+where rational coefficients are necessary for the last equality.
+The proofs of these equalities are not very hard, but we defer them for
+the moment as they are consequences of more general facts.
 
 We now see some of the connections of symmetric functions and
 representation theory:
@@ -324,6 +349,108 @@ The trace only depends on the diagonal entries so the result follows
 from the diagonalizable case.
 \end{proof}
 
+Another way of understanding the previous proposition is that
+$\Lambda^d V$ and $\mathcal{S}^d V$ are representations of
+$\operatorname{GL}(V)$ with corresponding ``characters'' $e_d$ and
+$h_d$, respectively.
+We will see that there is a class of symmetric polynomials
+called \emph{Schur polynomials} which are precisely the ``characters''
+of the irreducible \emph{polynomial} representations of
+$\operatorname{GL}(V)$.
+
+
+\section{The Ring of Symmetric Functions}
+
+Many of the relations between various special symmetric polynomials are
+basically independent of the number $n$ of variables $x_1,\ldots,x_n$
+in the ambient polynomial ring.  The \emph{ring of symmetric functions}
+is a standard object in algebraic combinatorics that facilitates
+this.  Several equivalent constructions exist, but we will follow
+the construction from \cite{Stanley2}, which is fairly ``down to earth.''
+
+Let $\mathbb{Z}[[\{x_n\}_{n \in \mathbb{N}}]]$ be the ring of formal
+power series in countably many variables.  Recall that this means that
+we allow only finitely many $x_i$ in each monomial, but each element may be
+a linear combination of infinitely many monomials and there may be no upper
+bound on the subscripts $i$ occurring among the $x_i$'s in each
+monomial.
+For a non-negative integer $d$, the subgroup
+$\mathbb{Z}[[\{x_n\}_{n \in \mathbb{N}}]]_{(d)}$ consists of those
+elements whose monomials all have degree exactly $d$ (in other words,
+exactly $d$ variables $x_i$ in each monomial, counting multiplicities).
+
+Let $S_{\mathbb{N}_{>0}}$ be the symmetric group on $\mathbb{N}_{>0}$; in other
+words, the group of all bijections $\mathbb{N}_{>0} \to \mathbb{N}_{>0}$.
+There is a natural action of $S_{\mathbb{N}_{>0}}$ on
+$\mathbb{Z}[[\{x_n\}_{n \in \mathbb{N}_{>0}}]]$ by permuting variables that
+preserves the degree.
+A \emph{homogeneous symmetric function of degree $d$} is an element
+$f \in \mathbb{Z}[[\{x_n\}_{n \in \mathbb{N}_{>0}}]]_{(d)}^{S_{\mathbb{N}}}$.
+Let $\mathsf{SF}^d$ be the subgroup of
+homogeneous symmetric functions of degree $d$.
+
+We define the \emph{ring of symmetric functions} as the direct sum
+\[
+\mathsf{SF} = \bigoplus_{d \ge 0} \mathsf{SF}^d,
+\]
+which is a graded subring of $\mathbb{Z}[[\{x_n\}_{n \in \mathbb{N}_{>0}}]]$.
+
+\begin{remark}
+Note that ``symmetric function'' is standard terminology,
+but it's not a great name since it's not
+really clear what it is a function \emph{of}.
+Moreover, the term symmetric function is often used in the finite
+variable case to discuss ``ordinary'' functions like $e^{x+y}$,
+which are invariant under symmetries like $x \leftrightarrow y$.
+\end{remark}
+
+There are canonical surjective graded ring homomorphisms
+$\rho_n : \mathsf{SF} \to \mathsf{SF}_n$, which are defined via
+\[
+\rho_n(f)(x_1,\ldots,x_n) = f(x_1,\ldots,x_n,0,0,\cdots) .
+\]
+Note that convergence is not an issue since all but finitely many monomials
+will evaluate zero.
+
+\begin{remark}
+One can equivalently define the ring of symmetric functions as an inverse
+limit
+\[
+\mathsf{SF} = \lim_{\longleftarrow} \mathsf{SF}^n
+\]
+in the category of graded rings (see \cite{Macdonald}).
+(Warning: it is \emph{not} the inverse limit in ordinary rings.)
+The $\rho_n$ above are precisely the canonical projections obtained in
+this construction.
+\end{remark}
+
+We define the \emph{monomial symmetric function associated to $\lambda$}
+given by
+\[
+m_\lambda := \sum_{\alpha} x^\alpha
+\]
+where $(\alpha_1,\ldots) \in \mathbb{N}^{\mathbb{N}_{>0}}$ ranges over all
+\emph{distinct} permutations of $(\lambda_1,\ldots)$.
+Observe that the set $\{ m_\lambda \mid \lambda \in
+\operatorname{Par}\}$ is a basis for $\mathsf{SF}$.
+
+We can now define the \emph{elementary symmetric functions}
+\[
+e_d = m_{1^d},
+\]
+the \emph{complete homogeneous symmetric functions}
+\[
+h_d = \sum_{\lambda \vdash d} m_\lambda ,
+\]
+and the \emph{power sum symmetric functions}
+\[
+p_d = m_{d}.
+\]
+
+The overloading of $m_\lambda$, $e_d$, $h_d$, and $p_d$ to mean
+different objects in each $\mathsf{SF}^n$ is seen to be mostly harmless
+in view of the fact that they are precisely the images of the
+corresponding objects in $\mathsf{SF}$ under the maps to $\rho_n$.
 
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
