@@ -254,10 +254,10 @@ By convention, $e_0=h_0=p_0=1$.
 \end{definition}
 
 \begin{remark}
-Note that the convention for $d=0$ is arguably not a convention
-for $e_0$ and $h_0$ if one writes the definitions in the ``right'' way.
-There are good reasons to instead define $p_0=n$, but this does not
-extend to the ring of symmetric functions discussed in the next section. 
+The conventions for $e_0$ and $h_0$ are uncontroversial,
+but many references leave $p_0$ undefined.
+Indeed, there are good reasons to instead define $p_0=n$, but this does not
+extend to the ring of symmetric functions discussed below. 
 \end{remark}
 
 \begin{example}
@@ -279,7 +279,7 @@ some fundamental results.  First, we have \emph{Newton's identities}:
 \[
 de_d = \sum_{i=1}^d (-1)^{i-1} p_i e_{d-i} ,
 \]
-and the fundamental relation:
+and the fundamental relation
 \[
 0 = \sum_{i=0}^d (-1)^i e_i h_{d-i},
 \]
@@ -369,10 +369,10 @@ from the diagonalizable case.
 
 Another way of understanding the previous proposition is that
 $\Lambda^d V$ and $\mathcal{S}^d V$ are representations of
-$\operatorname{GL}(V)$ with corresponding ``characters'' $e_d$ and
+$\operatorname{GL}(V)$ with corresponding characters $e_d$ and
 $h_d$, respectively.
 We will see that there is a class of symmetric polynomials
-called \emph{Schur polynomials} which are precisely the ``characters''
+called \emph{Schur polynomials} which are precisely the characters
 of the irreducible \emph{polynomial} representations of
 $\operatorname{GL}(V)$.
 
@@ -386,14 +386,14 @@ is a standard object in algebraic combinatorics that facilitates
 this.  Several equivalent constructions exist, but we will follow
 the construction from \cite{Stanley2}, which is fairly ``down to earth.''
 
-Let $\mathbb{Z}[[\{x_n\}_{n \in \mathbb{N}}]]$ be the ring of formal
+Let $\mathbb{Z}[[\{x_n\}_{n \in \mathbb{N}_{>0}}]]$ be the ring of formal
 power series in countably many variables.  Recall that this means that
 we allow only finitely many $x_i$ in each monomial, but each element may be
 a linear combination of infinitely many monomials and there may be no upper
 bound on the subscripts $i$ occurring among the $x_i$'s in each
 monomial.
 For a non-negative integer $d$, the subgroup
-$\mathbb{Z}[[\{x_n\}_{n \in \mathbb{N}}]]_{(d)}$ consists of those
+$\mathbb{Z}[[\{x_n\}_{n \in \mathbb{N}_{>0}}]]_{(d)}$ consists of those
 elements whose monomials all have degree exactly $d$ (in other words,
 exactly $d$ variables $x_i$ in each monomial, counting multiplicities).
 
@@ -428,17 +428,17 @@ $\rho_n : \mathsf{SF} \to \mathsf{SF}_n$, which are defined via
 \rho_n(f)(x_1,\ldots,x_n) = f(x_1,\ldots,x_n,0,0,\cdots) .
 \]
 Note that convergence is not an issue since all but finitely many monomials
-will evaluate zero.
+will evaluate as zero.
 
 \begin{remark}
 One can equivalently define the ring of symmetric functions as an inverse
 limit
 \[
-\mathsf{SF} = \lim_{\longleftarrow} \mathsf{SF}^n
+\mathsf{SF} = \lim_{\substack{\longleftarrow\\n}} \mathsf{SF}^n
 \]
 in the category of graded rings (see \cite{Macdonald}).
 (Warning: it is \emph{not} the inverse limit in ordinary rings.)
-The $\rho_n$ above are precisely the canonical projections obtained in
+The $\rho_n$ above are precisely the canonical projections obtained from
 this construction.
 \end{remark}
 
