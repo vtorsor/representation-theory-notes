@@ -72,6 +72,8 @@ Some standard terminology:
 the \emph{multiplicity} of $i$ in $\lambda$.
 \item Partitions can be written $\lambda_1 + \lambda_2 + \cdots + \lambda_r$.
 \item We may use the shorthand $\lambda = (1^{m_1} 2^{m_2} \cdots r^{m_r})$.
+\item $\lambda+\mu$ is the partition $(\lambda_1+\mu_1, \ldots)$.
+\item $\lambda \subseteq \mu$ means $\lambda_i \le \mu_i$ for all $i \ge 1$.
 \end{itemize}
 
 Partitions are often drawn as \emph{Young tableaux}.  This is just a
@@ -300,6 +302,97 @@ where rational coefficients are necessary for the last equality.
 The proofs of these equalities are not very hard, but we defer them for
 the moment as they are consequences of more general facts.
 
+\subsection{Alternating and Schur Polynomials}
+
+Let $\epsilon : S_n \to \{\pm 1\}$ be the sign homomorphism
+and let $A_n = \ker(\epsilon)$ be the alternating group on $n$ letters.
+
+\begin{definition}
+A polynomial $f \in \mathbb{Z}[x_1,\ldots,x_n]$ is \emph{alternating} if
+$\sigma \cdot f = \epsilon(\sigma)f$ for all $\sigma \in S_n$.
+Given an element $\alpha \in \mathbb{N}^n$, define
+\[
+a_\alpha = \sum_{\sigma \in S_n} \epsilon(\sigma) x^{\sigma(\alpha)},
+\]
+which is an alternating polynomial.
+\end{definition}
+
+Note that $a_\alpha=0$ if and only if the entries of $\alpha$ are
+not distinct.  We also see that every alternating polynomial is a linear
+combination of $a_\lambda$'s for partitions $\lambda$ where the parts
+$\lambda_i$ are all distinct.
+Observe that all parts of $\lambda$ are distinct if and only if
+$\delta \subseteq \lambda$ where
+$\delta=(n-1,n-2,\ldots,1,0)$.
+We have the following:
+
+\begin{lemma}
+The set
+\[
+\left\{ a_\lambda \middle| \ell(\lambda) \le n, \delta \subseteq \lambda
+\right\}
+\]
+is a basis for the group of alternating polynomials.
+\end{lemma}
+
+\begin{example}
+The \emph{Vandermonde polynomial} $\Delta \in \mathbb{Z}[x_1,\ldots,x_n]$
+is defined via
+\[
+\Delta = \prod_{1 \le i < j \le n} (x_i-x_j).
+\]
+Note that $(i\ j) \cdot \Delta = -\Delta$ for all $i \ne j$.
+We conclude that $\sigma(\Delta) = \epsilon(\Delta)$
+for all $\sigma \in S_n$.
+Thus $\Delta$ is alternating.
+Observe that $\Delta=a_\delta$.
+\end{example}
+
+\begin{lemma}
+Every alternating polynomial $f$ has the form $g \Delta$
+where $g$ is a symmetric polynomial. 
+\end{lemma}
+
+\begin{proof}
+It suffices to show that $(x_i-x_j)$ divides $f$ for all $i \ne j$.
+Indeed, suppose $c_\alpha x^\alpha$ is a monomial in $f$
+and write $x^\alpha = x_i^u x_j^v x^\beta$ where $x_i$ and $x_j$
+do not divide $x^\beta$.
+Since $f$ is alternating, $-c_\alpha x_i^v x_j^u x^\beta$
+also must appear in $f$.
+Thus $c_\alpha (x_i^u x_j^v - x_i^v x_j^u) x^\beta$ occurs in $f$.
+Each of these divisible by $(x_i-x_j)$ as desired.
+\end{proof}
+
+The following definition now makes sense:
+
+\begin{definition}
+For a partition $\lambda$ of length $\le n$, the \emph{Schur polynomial}
+is the symmetric polynomial
+$s_\lambda = a_{\lambda+\delta}/a_\delta$.
+\end{definition}
+
+Moreover, we have the following:
+
+\begin{proposition}
+The set of Schur polynomials
+\[
+\{ s_\lambda \mid \lambda \vdash d, \ell(\lambda) \le n \}
+\]
+are a basis for $\mathsf{SF}^d_n$.
+\end{proposition}
+
+A nice consequence is:
+
+\begin{theorem}[Fundamental Theorem of Alternating Polynomials]
+The ring $\mathbb{Z}[x_1,\ldots,x_n]^{A_n}$ is a free
+$\mathsf{SF}_n$-module with basis $\{1, \Delta\}$.
+In other words, every $A_n$-invariant polynomial $f$ can be written uniquely
+as $f=p+\Delta q$ where $p,q$ are symmetric.
+\end{theorem}
+
+\subsection{Symmetric and Exterior Powers}
+
 We now see some of the connections of symmetric functions and
 representation theory:
 
@@ -470,6 +563,9 @@ different objects in each $\mathsf{SF}^n$ is seen to be mostly harmless
 in view of the fact that they are precisely the images of the
 corresponding objects in $\mathsf{SF}$ under the maps to $\rho_n$.
 
+We may also define the \emph{Schur symmetric functions}
+$s_\lambda$ by observing that the Schur polynomials are compatible
+with the construction of $\mathsf{SF}$ as an inverse limit.
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
 
