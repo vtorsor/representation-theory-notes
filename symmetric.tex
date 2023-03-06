@@ -132,7 +132,20 @@ In particular, the conjugacy classes of $S_n$ are in canonical bijective
 correspondence with $\operatorname{Par}(n)$.
 \end{proposition}
 
-\section{Symmetric Functions}
+For every partition $\lambda$, we define the following integer
+\[
+z_\lambda = \prod_{i \ge 1} i^{m_i} m_i!
+\]
+where $m_i=m_i(\lambda)$ denotes the multiplicities.
+
+\begin{exercise}
+Prove that, if $\sigma \in S_n$ has cycle type $\lambda$,
+then the centralizer $Z_{S_n}(\sigma)$ has order $z_\lambda$.
+Equivalently, the number of elements of $S_n$ with cycle type $\lambda$
+is $n!/z_\lambda$.
+\end{exercise}
+
+\section{Symmetric Polynomials}
 
 There is a natural left action of the symmetric group $S_n$ on the ring of
 polynomials $R=\mathbb{Z}[x_1,\ldots,x_n]$ by permuting the variables.
@@ -175,6 +188,11 @@ m_\lambda := \sum_{\alpha} x^\alpha
 \]
 where $(\alpha_1,\ldots,\alpha_n)$ ranges over all
 \emph{distinct} permutations of $(\lambda_1,\ldots,\lambda_n)$.
+
+\begin{exercise}
+Prove that $\displaystyle z_\lambda m_\lambda = \sum_{\sigma \in S_n}
+x^{\sigma(\lambda)}$ for all $\lambda$ of length $\ell(\lambda) \le n$.
+\end{exercise}
 
 \begin{example}
 If $n=3$, then we have
