@@ -329,8 +329,7 @@ We have the following:
 \begin{lemma}
 The set
 \[
-\left\{ a_\lambda \middle| \ell(\lambda) \le n, \delta \subseteq \lambda
-\right\}
+\{ a_\lambda \mid \ell(\lambda) \le n, \delta \subseteq \lambda \}
 \]
 is a basis for the group of alternating polynomials.
 \end{lemma}
@@ -566,6 +565,125 @@ corresponding objects in $\mathsf{SF}$ under the maps to $\rho_n$.
 We may also define the \emph{Schur symmetric functions}
 $s_\lambda$ by observing that the Schur polynomials are compatible
 with the construction of $\mathsf{SF}$ as an inverse limit.
+
+\begin{proposition}
+$\displaystyle\sum_{i=0}^d (-1)^i e_i h_{d-i}=0$ for every $d \ge 1$.
+\end{proposition}
+
+\begin{proof}
+Consider the generating functions
+\[ E(t) = \sum_{r \ge 0} e_r t^r
+\textrm{ and }
+H(t) = \sum_{r \ge 0} h_r t^r \]
+as elements in $\mathsf{SF}[[t]]$.
+We see that
+\begin{align*}
+& E(t)\\
+ =& 1 + (x_1+x_2+\cdots)t
++ (x_1x_2+x_1x_3+\cdots)t^2 \\
+=&\prod_{i \ge 1} (1+x_i t)
+\end{align*}
+in the larger ring $\mathbb{Z}[[x_1,\ldots]][[t]]$.
+Similarly, recalling the geometric series formula, we have
+\[
+H(t) = \prod_{i \ge 1} (1-x_i t)^{-1} .
+\]
+The equality $H(t)E(-t)=1$ is immediate.
+The desired identities are simply the coefficients of $t^d$
+in this equality.
+\end{proof}
+
+\begin{proposition}[Newton Identities] For all $d \ge 1$,
+\begin{align*}
+dh_d&=\sum_{i=1}^d p_i h_{d-i} \textrm{ and} \\ 
+de_d&=\sum_{i=1}^d (-1)^{i-1} p_i e_{d-i}.
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+We compute
+\begin{align*}
+&\sum_{r \ge 1} p_r t^{r-1}\\
+ =& \sum_{i \ge 1} \sum_{d \ge 0} x_i^d t^{d-1} \\
+=& \sum_{i \ge 1} \frac{x_i}{1-x_it}\\
+=& \sum_{i \ge 1} \frac{d}{dt}\log\left(
+\left(1-x_i\right)^{-1}\right)\\
+=& \frac{H'(t)}{H(t)} = \frac{E'(-t)}{E(-t)}
+\end{align*}
+and then we read the identities off from 
+the coefficients of $t^d$ in $P(t)H(t)=H'(t)$
+and $P(t)E(-t)=E'(-t)$.
+\end{proof}
+
+For $\lambda=(\lambda_1,\lambda_2,\ldots,\lambda_r)$ we define
+$e_\lambda = e_{\lambda_1}\cdot e_{\lambda_2} \cdots e_{\lambda_r}$,
+$h_\lambda = h_{\lambda_1}\cdot h_{\lambda_2} \cdots h_{\lambda_r}$, and
+$p_\lambda = p_{\lambda_1}\cdot p_{\lambda_2} \cdots p_{\lambda_r}$.
+
+We have a natural partial ordering on partitions where $\lambda \ge \mu$
+if and only if
+$\lambda_1 + \cdots + \lambda_i \ge \mu_1 + \cdots \mu_i$
+for all $i \ge 1$.
+(Note this is only a partial ordering as, for example, $(31^3)$ and $(2^3)$
+are incomparable.
+
+\begin{proposition} \label{prop:01matrix}
+We have
+\[
+e_\lambda = \sum_{\mu \vdash |\lambda|} M_{\lambda \mu} m_\mu
+\]
+where $M_{\lambda \mu}$ is the number of $\{0,1\}$-matrices whose
+rows sum to $\lambda_1,\lambda_2,\ldots$ and whose columns
+sum to $\mu_1,\mu_2,\ldots$.
+Moreover, $M_{\lambda\mu} \ne 0$ if and only if $\mu \le \lambda'$
+and $M_{\lambda\lambda'}=1$.
+\end{proposition}
+
+\begin{proof}
+We merely sketch the argument.
+We consider the terms of $e_\lambda$ and $m_\mu$ in reference to the
+following matrix:
+\[
+X = \begin{pmatrix}
+x_1 & x_2 & x_3 & \cdots \\
+x_1 & x_2 & x_3 & \cdots \\
+x_1 & x_2 & x_3 & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{pmatrix}.
+\]
+Observe that each $\{0,1\}$-matrix $Y$ produces a monomial $x^\alpha$
+by taking the product of the entries of $X$ corresponding to the
+non-zero entries of $Y$.
+Monomials in $e_\lambda$ are uniquely constructed by
+taking the product of exactly $\lambda_1$ distinct entries from row $1$,
+exactly $\lambda_2$ from row $2$, etc.
+Monomials $x^\mu$ are constructed by
+taking the product of exactly $\mu_1$ distinct entries from column $1$,
+exactly $\mu_2$ from column $2$, etc.
+
+The conditions on $M_{\lambda\mu}$ now follow by looking for
+$\{0,1\}$-matrices satisfying certain constraints.
+\end{proof}
+
+After refining our partial order to a total order
+on the partitions, we can think of $M=\left(M_{\lambda\mu}\right)$ as
+an infinite integer matrix.
+Note that $M_{\lambda\mu'}$ is triangular with $1$s along the diagonal.
+Thus $M$ is invertible and we have the following important corollary:
+
+\begin{corollary}[Fundamental Theorem of Symmetric Functions]
+There is an equality of rings
+\[\mathsf{SF} = \mathbb{Z}[e_1,e_2,\ldots] \]
+where $e_1,e_2,\ldots$ are algebraically independent.
+\end{corollary}
+
+\begin{exercise}
+Find an analog for Proposition~\ref{prop:01matrix} for $h_\lambda$
+using $\mathbb{N}$-matrices instead of $\{0,1\}$-matrices.
+Conclude that 
+$\mathsf{SF} = \mathbb{Z}[h_1,h_2,\ldots]$
+where $h_1,h_2,\ldots$ are algebraically independent.
+\end{exercise}
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
 
