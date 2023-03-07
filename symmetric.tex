@@ -381,7 +381,17 @@ The set of Schur polynomials
 are a basis for $\mathsf{SF}^d_n$.
 \end{proposition}
 
-A nice consequence is:
+The \emph{Kostka numbers} $K_{\lambda \mu}$ are the entries of the
+change of basis matrix between the monomial basis and the Schur basis.
+Specifically, they are non-negative integers such that
+\[
+s_\lambda = \sum_{\mu\, \vdash |\lambda|} K_{\lambda \mu} m_\mu
+\]
+for all partitions $\lambda,\mu$.
+
+\begin{exercise}
+Prove that $s_{(d)} = h_d$ and $s_{(1^d)} = e_d$.
+\end{exercise}
 
 \begin{theorem}[Fundamental Theorem of Alternating Polynomials]
 The ring $\mathbb{Z}[x_1,\ldots,x_n]^{A_n}$ is a free
@@ -389,6 +399,20 @@ $\mathsf{SF}_n$-module with basis $\{1, \Delta\}$.
 In other words, every $A_n$-invariant polynomial $f$ can be written uniquely
 as $f=p+\Delta q$ where $p,q$ are symmetric.
 \end{theorem}
+
+\begin{remark}
+If $V$ is an $n$-dimensional complex linear representation of $G$,
+then we have a natural action of $G$ on the polynomial ring
+$S=\mathbb{C}[x_1,\ldots,x_n]$ by viewing it as the symmetric algebra
+$\mathcal{S}(V^\vee)$.
+A famous theorem of Hochster-Roberts proves that the invariant ring
+$S^G=\mathbb{C}[x_1,\ldots,x_n]^G$ is a Cohen-Macaulay ring:
+there exists a polynomial subring $R=\mathbb{C}[f_1,\ldots,f_n]$
+such that $S^G$ is a free $R$-module.
+The ``Fundamental Theorem of Alternating Polynomials'' can be seen as a
+very special case of this fact (where the subring and basis have
+particular interpretations).
+\end{remark}
 
 \subsection{Symmetric and Exterior Powers}
 
@@ -566,7 +590,7 @@ We may also define the \emph{Schur symmetric functions}
 $s_\lambda$ by observing that the Schur polynomials are compatible
 with the construction of $\mathsf{SF}$ as an inverse limit.
 
-\begin{proposition}
+\begin{proposition} \label{prop:fund_rel}
 $\displaystyle\sum_{i=0}^d (-1)^i e_i h_{d-i}=0$ for every $d \ge 1$.
 \end{proposition}
 
@@ -603,12 +627,12 @@ de_d&=\sum_{i=1}^d (-1)^{i-1} p_i e_{d-i}.
 \begin{proof}
 We compute
 \begin{align*}
-&\sum_{r \ge 1} p_r t^{r-1}\\
- =& \sum_{i \ge 1} \sum_{d \ge 0} x_i^d t^{d-1} \\
-=& \sum_{i \ge 1} \frac{x_i}{1-x_it}\\
-=& \sum_{i \ge 1} \frac{d}{dt}\log\left(
-\left(1-x_i\right)^{-1}\right)\\
-=& \frac{H'(t)}{H(t)} = \frac{E'(-t)}{E(-t)}
+\sum_{r \ge 1} p_r t^{r-1}
+&= \sum_{i \ge 1} \sum_{d \ge 0} x_i^d t^{d-1}
+= \sum_{i \ge 1} \frac{x_i}{1-x_it}\\
+&= \sum_{i \ge 1} \frac{d}{dt}\log\left(
+\left(1-x_i\right)^{-1}\right)
+= \frac{H'(t)}{H(t)} = \frac{E'(-t)}{E(-t)}
 \end{align*}
 and then we read the identities off from 
 the coefficients of $t^d$ in $P(t)H(t)=H'(t)$
@@ -684,6 +708,192 @@ Conclude that
 $\mathsf{SF} = \mathbb{Z}[h_1,h_2,\ldots]$
 where $h_1,h_2,\ldots$ are algebraically independent.
 \end{exercise}
+
+\begin{exercise}
+Use the Newton identites to show that 
+$\mathsf{SF} \otimes_{\mathbb{Z}} \mathbb{Q} \cong \mathbb{Q}[p_1,p_2,\ldots]$
+where $p_1,p_2,\ldots$ are algebraically independent.
+\end{exercise}
+
+\begin{example}
+\[
+\begin{pmatrix} e_{11}\\ e_2\\ e_{111}\\ e_{21}\\ e_3\\
+e_{1111}\\ e_{211} \\ e_{22}\\ e_{31}\\ e_4
+\end{pmatrix}
+=
+\begin{pmatrix}
+2 & 1 &
+ & & &
+& & & & \\
+1 & &
+ & & &
+& & & & \\
+ & &
+6 & 3 & 1 &
+& & & & \\
+ & &
+3 & 1 & &
+& & & & \\
+ & &
+1 & & &
+& & & & \\
+ & &
+ & & &
+24 & 12 & 6 & 4 & 1 \\
+ & &
+ & & &
+12 & 5 & 2 & 1 & \\
+ & &
+ & & &
+6 & 2 & 1 & & \\
+ & &
+ & & &
+4 & 1 & & & \\
+ & &
+ & & &
+1 & & & &
+\end{pmatrix} 
+\begin{pmatrix} m_{11}\\ m_2\\ m_{111}\\ m_{21}\\ m_3\\
+m_{1111}\\ m_{211} \\ m_{22}\\ m_{31}\\ m_4
+\end{pmatrix}
+\]
+\end{example}
+
+\begin{example}
+\[
+\begin{pmatrix} h_{11}\\ h_2\\ h_{111}\\ h_{21}\\ h_3\\
+h_{1111}\\ h_{211} \\ h_{22}\\ h_{31}\\ h_4
+\end{pmatrix}
+=
+\begin{pmatrix}
+2 & 1 &
+ & & &
+& & & & \\
+1 & 1 &
+ & & &
+& & & & \\
+ & &
+6 & 3 & 1 &
+& & & & \\
+ & &
+3 & 2 & 1 &
+& & & & \\
+ & &
+1 & 1 & 1 &
+& & & & \\
+ & &
+ & & &
+24 & 12 & 6 & 4 & 1 \\
+ & &
+ & & &
+12 & 7 & 4 & 3 & 1 \\
+ & &
+ & & &
+6 & 4 & 3 & 2 & 1 \\
+ & &
+ & & &
+4 & 3 & 2 & 2 & 1 \\
+ & &
+ & & &
+1 & 1 & 1 & 1 & 1
+\end{pmatrix} 
+\begin{pmatrix} m_{11}\\ m_2\\ m_{111}\\ m_{21}\\ m_3\\
+m_{1111}\\ m_{211} \\ m_{22}\\ m_{31}\\ m_4
+\end{pmatrix}
+\]
+\end{example}
+
+\begin{example}
+\[
+\begin{pmatrix} e_{11}\\ e_2\\ e_{111}\\ e_{21}\\ e_3\\
+e_{1111}\\ e_{211} \\ e_{22}\\ e_{31}\\ e_4
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & &
+ & & &
+& & & & \\
+\frac{1}{2} & -\frac{1}{2} &
+ & & &
+& & & & \\
+ & &
+1 & & &
+& & & & \\
+ & &
+\frac{1}{2} & -\frac{1}{2} &  &
+& & & & \\
+ & &
+\frac{1}{6} & -\frac{1}{2} & \frac{1}{3} &
+& & & & \\
+ & &
+ & & &
+1 & & & & \\
+ & &
+ & & &
+\frac{1}{2} & -\frac{1}{2} & & & \\
+ & &
+ & & &
+\frac{1}{4} & -\frac{1}{2} & \frac{1}{4} & & \\
+ & &
+ & & &
+\frac{1}{6} & -\frac{1}{2} & & \frac{1}{3} & \\
+ & &
+ & & &
+\frac{1}{24} & -\frac{1}{4} & \frac{1}{8} & \frac{1}{3} & -\frac{1}{4}
+\end{pmatrix} 
+\begin{pmatrix}
+p_{11}\\ p_2\\ p_{111}\\ p_{21}\\ p_3\\
+p_{1111}\\ p_{211} \\ p_{22}\\ p_{31}\\ p_4
+\end{pmatrix}
+\]
+\end{example}
+
+We end this section with a handful of interesting observations and
+definitions (without proof) that hopefully will encourage the reader to
+delve more deeply into \cite{Macdonald} and \cite{Stanley2}.
+
+We have the formulas
+\[
+h_d = \sum_{\lambda \vdash d} \frac{p_\lambda}{z_\lambda}\]
+and
+\[
+e_d = \sum_{\lambda \vdash d} \epsilon_\lambda
+\frac{p_\lambda}{z_\lambda}
+\]
+where $\epsilon_\lambda = (-1)^{|\lambda|-\ell(\lambda)}$
+
+There is a standard symmetric positive definite bilinear form $(-,-)$
+on $\mathsf{SF}$ defined via
+\[
+( s_\lambda, s_\mu ) = \delta_{\lambda \mu}
+\]
+for all partitions $\lambda, \mu$.
+This form also satisfies
+\[
+( h_\lambda, m_\mu ) = \delta_{\lambda \mu}
+\]
+and
+\[
+( p_\lambda, p_\mu ) = z_\lambda \delta_{\lambda \mu}
+\]
+for all partitions $\lambda, \mu$.
+
+A consequence of the Fundamental Theorem is that there is a ring
+isomorphism
+\[
+\omega : \mathsf{SF} \to \mathsf{SF}
+\]
+given by $\omega(e_\lambda)=h_\lambda$ for every partition $\lambda$.
+In view of Proposition~\ref{prop:fund_rel}, we see that
+$\omega(h_\lambda)=e_\lambda$ as well.
+With a bit more work, one can show that
+$\omega(p_\lambda)=\epsilon_\lambda p_\lambda$
+and
+$\omega(s_\lambda)=s_{\lambda'}$.
+This last observation show us that $\omega$ is an isometry:
+that $( \omega(f), \omega(g) ) = (f, g)$ for
+all $f,g \in \mathsf{SF}$.
+
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
 
