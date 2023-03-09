@@ -1120,6 +1120,213 @@ Since $P_T \cap Q_T = \{1\}$, the $v_{\sigma\tau}$ are all distinct.
 Thus $c_T(x) \ne 0$ as desired.
 \end{proof}
 
+\section{Representations of $\operatorname{GL}(V)$}
+
+\begin{definition}
+Given a complex $n$-dimensional vector space $V$,
+a \emph{polynomial representation} (resp. \emph{rational represenation} of
+$\operatorname{GL}(V)$ is a representation
+\[
+\rho : \operatorname{GL}(V) \to \operatorname{GL}_N(\mathbb{C})
+\]
+where the entries of $\rho(g)$ are polynomial (resp. rational)
+functions of the entries of $g$.
+\end{definition}
+
+\begin{remark}
+For those who know some algebraic geometry,
+the rational representations are rational maps on the ambient matrix
+ring $\mathbb{C}^{n^2}$, but they are regular on the open set
+$\operatorname{GL}_n(\mathbb{C})$.
+The polynomial representations are regular on the whole of
+$\mathbb{C}^{n^2}$.
+Watch out: some authors use ``polynomial representation'' synonymously with
+rational representations.
+\end{remark}
+
+\begin{example}
+If $V = \mathbb{C}^2$, then $\mathcal{S}^2(V) \cong \mathbb{C}^3$
+has a natural action of $\operatorname{GL}(V)$.
+Indeed, choosing bases $\{x,y\}$ for $V$ and $\{x^2,xy,y^2\}$
+for $\mathcal{S}^2(V)$ we obtain a representation
+$\rho : \operatorname{GL}_2(k) \to \operatorname{GL}_3(k)$
+with
+\[
+\rho
+\begin{pmatrix} a & b \\ c & d \end{pmatrix}
+=
+\begin{pmatrix}
+a^2 & 2ab & b^2\\
+ac & ad+bc & bd\\
+c^2 & 2cd & d^2
+\end{pmatrix} 
+\]
+as explicit description.
+\end{example}
+
+\begin{example}
+If $V$ has dimension $n$, recall that $\Lambda^n(V)$ has dimension $1$.
+The natural representation
+$\rho: \operatorname{GL}(V) \to \operatorname{GL}(\Lambda^n(V)) \cong k$
+is the determinant.
+\end{example}
+
+More generally, $\mathcal{S}^k(V)$ and $\Lambda^k(V)$
+have canonical actions of $\operatorname{GL}(V)$ for all $k \ge 0$.
+
+\begin{example}
+Consider the representation
+$\rho : \operatorname{GL}_1(\mathbb{C}) \to
+\operatorname{GL}_1(\mathbb{C})$
+given by
+\[
+\rho(z) = \frac{z}{|z|} .
+\]
+This is neither a polynomial nor rational representation.
+\end{example}
+
+\begin{example}
+The \emph{dual representation} $V^\vee$ of $V$ is the natural
+action of $\operatorname{GL}(V)$ on $V^\vee$.
+Choosing a basis and taking its dual basis,
+the dual representation corresponds to taking the transpose inverse
+$(A^T)^{-1}$
+of a matrix $A$.
+This is not a polynomial representation since the entries of $(A^T)^{-1}$ have
+denominators.
+However, recall that the inverse matrix $A^{-1}$ has the form
+$\det(A)\operatorname{adj}(A)$ where
+$\operatorname{adj}(A)$ is the \emph{adjugate matrix}.
+The entries of the adjugate matrix are polynomial functions of the
+entries of the original matrix.
+Since $(A^T)^{-1}=\operatorname{adj}(A)^T \det(A)^{-1}$,
+we conclude that $V^\vee$ is a rational representation.
+\end{example}
+
+The difference between polynomial and rational representations is,
+fortunately, not very substantial.  Indeed, the denominators that occur
+in the rational functions can only be powers of the determinant or else
+the representation is not defined for every point of
+$\operatorname{GL}(V)$.
+
+\begin{proposition}
+If $\rho$ is a rational representation of $\operatorname{GL}(V)$,
+then there is a unique minimal non-negative integer $m$
+and a unique polynomial representation $\sigma$
+such that
+such that
+\[
+\rho(g) = \frac{\sigma(g)}{\det(g)^m}
+\]
+for all $g \in \operatorname{GL}(V)$. 
+\end{proposition}
+
+Given a complex $n$-dimensional vector space $V$,
+recall that there is a natural action of $S_d$ on the tensor power
+$V^{\otimes d}$ satisfying
+\[
+\sigma(v_1 \otimes \cdots \otimes v_d) =
+\sigma(v_{\sigma^{-1}(1)} \otimes \cdots \otimes v_{\sigma^{-1}(d)})
+\]
+for $\sigma \in S_d$.
+There is also a natural ``diagonal'' action of $\operatorname{GL}_n(V)$
+on $V^{\otimes d}$ satisfying
+\[
+g(v_1 \otimes \cdots \otimes v_d) = g(v_1) \otimes \cdots \otimes g(v_d)
+\]
+for all $g \in \operatorname{GL}(V)$.
+These actions clearly commute, so we obtain an action of
+$S_d \times \operatorname{GL}(V)$ on $V^{\otimes d}$.
+
+\begin{definition}
+Given a partition $\lambda \vdash d$, we
+have the \emph{Schur functor} $\mathbb{S}_\lambda$,
+which takes a vector space $W$ to the following
+$\operatorname{GL}(W)$-representation:
+\[
+\mathbb{S}_\lambda(W) :=
+\operatorname{Hom}^{S_d}_{\mathbb{C}}(V_\lambda,W^{\otimes d}) \ .
+\]
+\end{definition}
+
+\begin{remark}
+For those who know some category theory,
+each Schur functor $\mathbb{S}_\lambda$ is a covariant functor
+from the category of finite-dimensional vector spaces to itself.
+This means that if $f : W \to U$ is a linear map,
+then we also have a linear map
+\[
+\mathbb{S}_\lambda(f) : \mathbb{S}_\lambda(W) \to \mathbb{S}_\lambda(U).
+\]
+The fact that these are $\operatorname{GL}(W)$ representations is a
+special case of their functoriality.
+\end{remark}
+
+\begin{theorem}[Schur-Weyl]
+Let $W$ be an $n$-dimensional complex vector space
+and let $d \ge 0$.
+As an $S_d \times \operatorname{GL}(W)$-representation, there is a
+canonical decomposition
+\[
+W^{\otimes d} =
+\bigoplus_{\substack{\lambda \vdash d\\ \ell(\lambda) \le n}}
+V_\lambda \otimes \mathbb{S}_\lambda(W)
+\]
+where $V_\lambda$ is the Specht module of $\lambda$ and each
+\[
+\mathbb{S}_\lambda(W) :=
+\operatorname{Hom}^{S_d}_{\mathbb{C}}(V_\lambda,W^{\otimes d})
+\]
+is an irreducible $\operatorname{GL}(W)$-representation.
+\end{theorem}
+
+\begin{theorem}
+The isomorphism classes of all \emph{polynomial}
+irreducible representations
+of $\operatorname{GL}(W)$ are precisely the $\mathbb{S}_\lambda(W)$
+where $\ell(\lambda) \le d$.
+Moreover, if $g \in \operatorname{GL}(W)$ has eigenvalues
+$\alpha_1,\ldots, \alpha_n$, then
+\[
+\operatorname{tr}(\mathbb{S}_\lambda(g)) = s_\lambda(\alpha_1,\alpha_2,\cdots,
+\alpha_n,0,0,\cdots)
+\]
+is the character.
+\end{theorem}
+
+By evaluating $\mathbb{S}_\lambda$ at the identity, we can determine the
+dimensions of the irreducible representations obtained from Schur
+functors.
+
+\begin{corollary}[Weyl Dimension Formula]
+If $W$ is an $n$-dimensional vector space and $\lambda$ is a partition.
+If $\ell(\lambda) \le n$, then
+\[
+\dim\ \mathbb{S}_\lambda(W) = s_\lambda(1,1,\ldots,1,0,\ldots)
+= \prod_{1 \le i < j \le n} \frac{\lambda_i-\lambda_j +  j - i}{j-i}.
+\]
+If $\ell(\lambda) > n$, then $\dim\ \mathbb{S}_\lambda(W) = 0$.
+\end{corollary}
+
+\begin{example}
+Since $V_{(d)}$ is the trivial $S_d$-representation,
+we see that
+\[
+\mathbb{S}_{(d)}(W) = \operatorname{Hom}^{S_d}_{\mathbb{C}}(\mathbb{C},W^{\otimes d})
+\cong \operatorname{Sym}^d(W) \cong \mathcal{S}^d(W) .
+\]
+\end{example}
+
+\begin{example}
+Since $V_{(1^d)}$ is the sign $S_d$-representation $\epsilon$,
+we see that
+\[
+\mathbb{S}_{(1^d)}(W)L = \operatorname{Hom}^{S_d}_{\mathbb{C}}(\epsilon,W^{\otimes d})
+\cong \operatorname{Alt}^d(W) \cong \Lambda^d(W) .
+\]
+Note that $\mathbb{S}_{(1^d)}(W)=0$ when $\dim(W) > d$.
+\end{example}
+
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
 
