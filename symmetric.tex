@@ -894,6 +894,232 @@ This last observation show us that $\omega$ is an isometry:
 that $( \omega(f), \omega(g) ) = (f, g)$ for
 all $f,g \in \mathsf{SF}$.
 
+\section{Representations of Symmetric Groups}
+
+Let $S_n$ be the symmetric group on $n$ letters.
+Recall that the conjugacy classes of $S_n$ are in bijection with
+partitions of $n$ by taking their cycle types.
+Given a partition $\lambda \vdash n$ and a class function
+$f \in C(S_n)$, we define $f(\lambda):=f(\sigma)$ where
+$\sigma \in S_n$ is any permutation with cycle type $\lambda$.
+Let $\chi_\lambda \in C(S_n)$ denote the characteristic function
+\[
+\chi_\lambda(\sigma)
+\begin{cases}
+1 & \textrm{if $\sigma$ has cycle type $\lambda$,}\\
+0 & \textrm{otherwise.}\\
+\end{cases}
+\]
+
+\begin{theorem}
+There is a isometric group isomorphism
+\[
+\operatorname{ch} : R(S_n) \to \mathsf{SF}^n
+\]
+defined by
+\[
+\operatorname{ch}(f) :=
+\sum_{\lambda \vdash n} \frac{f(\lambda)}{z_\lambda} p_{\lambda}.
+\]
+Given a class function $f$, its values can be computed via
+\[
+f(\lambda) = ( \operatorname{ch}(f), p_\lambda ).
+\]
+The characteristic functions $\chi_\lambda \in C(S_n)$
+correspond to $\frac{p_{\lambda}}{z_\lambda}$ in
+$\mathsf{SF}^n_{\mathbb{Q}}$.
+The irreducible characters in $R(S_n)$ correspond to the Schur
+functions $\{ s_\lambda \mid \lambda \vdash n \}$,
+the trivial character corresponds to $h_n=s_n$, and
+the sign character corresponds to $e_n=s_{(1)^n}$.
+The involution $\omega : \mathsf{SF}^n \to \mathsf{SF}^n$
+corresponds to tensoring with the sign character.
+\end{theorem}
+
+\begin{proof}
+First we define the \emph{characteristic map}
+$\operatorname{ch} : C(S_n) \to
+\mathsf{SF}^n \otimes_{\mathbb{Z}} \mathbb{C}$
+since it's not clear that the image of $R(S_n)$ is even
+contained in $\mathsf{SF}^n$.
+Recalling that $(p_\lambda,p_\mu)=z_\lambda \delta_{\mu \lambda}$,
+the formula
+\[
+f(\lambda) = ( \operatorname{ch}(f), p_\lambda )
+\]
+is immediate.  This shows that $\operatorname{ch}$ is bijective
+(on complex vector spaces).
+
+The correspondence between
+$\chi_\lambda$ and $\frac{p_{\lambda}}{z_\lambda}$
+follow now from the observation that
+\[
+\chi_\lambda(\mu) = \delta_{\lambda \mu} =
+\left(\frac{p_{\lambda}}{z_\lambda}, p_\mu\right)
+\]
+for all $\lambda$ and $\mu$.
+
+Now, recall that the number of elements in $S_n$ with cycle type
+$\lambda$ is given by $\frac{n!}{z_\lambda}$.  Thus
+\[
+(\chi_\lambda, \chi_\mu) =
+\begin{cases}
+\frac{1}{z_\lambda} & \textrm{if $\lambda=\mu$,}\\
+0 & \textrm{otherwise.}\\
+\end{cases}
+\]
+But this is exactly the same as $(p_\lambda,p_\mu)$,
+so $\operatorname{ch}$ is an isometry.
+
+We omit the proof of the remaining statements. 
+\end{proof}
+
+An immediate corollary of the above theorem is that
+character table of $S_n$ is precisely the same
+as the change of basis matrix between the $\{ p_\lambda \}$
+and $\{ s_\lambda \}$ in $\mathsf{SF}_n$.
+
+\begin{definition}
+The irreducible representation $V_\lambda$ of $S_n$ corresponding to
+$s_\lambda$ is the \emph{Specht module} associated to $\lambda$.
+\end{definition}
+
+Defining the graded group
+\[
+R(S_\ast) := \bigoplus_{n \ge 0} R(S_n)
+\]
+we obtain a characteristic map
+\[
+\operatorname{ch} : R(S_\ast) \to \mathsf{SF}
+\]
+by adding together graded components.
+However, the ``obvious'' multiplication on $R(S_\ast)$
+\emph{does not} correspond to the multiplication on $\mathsf{SF}$.
+We define a multiplication on $R(S_\ast)$ that makes
+$\operatorname{ch}$ into a graded ring isomorphism.
+
+There is a natural embedding $S_n \times S_m \hookrightarrow S_{n+m}$;
+there are many ways of doing this, but they are all conjugate.
+Given a representation $\rho$ of $S_n$, we obtain a representation
+$\widetilde{\rho}$ of $S_n \times S_m$ from $\rho$ by precomposition
+with the first projection.  Similarly, given a representation $\sigma$
+of $S_m$, we obtain a representation $\widetilde{\sigma}$ of
+$S_n \times S_m$.
+
+Let $R(S_n)$ be the representation ring of the symmetric group $S_n$. 
+We define a bilinear multiplication
+\[ \boxtimes : R(S_n) \times R(S_m) \to R(S_{n+m}) \]
+via
+\[
+\rho \boxtimes \sigma := \operatorname{Ind}_{S_n \times S_m}^{S_{n+m}}
+(\widetilde{\rho} \otimes \widetilde{\sigma}).
+\]
+This turns $R(S_\ast)$ into a commutative, graded ring
+and $\operatorname{ch}$ is a graded ring isomorphism.
+
+\subsection{Explicit Description of Specht modules}
+
+Here we actually construct each Specht module $V_\lambda$
+as a subrepresentation of the regular representation of $S_n$.
+Note that the isotypic component associated to $V_\lambda$ usually has
+multiplicity greater than $1$, so the construction unsurprisingly relies
+on an arbitrary choice.
+
+\begin{definition}
+A \emph{Young tableau} $T$ is a Young diagram for a partition $\lambda$
+of $n$ where each number in $\{1,\ldots,n\}$ is assigned to exactly one
+box.
+Given a Young tableau $T$, we define $P_T$ as the
+subgroup of $S_n$ that permutes only the numbers within each row of $T$
+and $Q_T$ as the subgroup that permutes only the numbers within each
+column of $T$.  
+\end{definition}
+
+\begin{example}
+The following is a Young tableau for the partition $322$:
+\begin{center}
+\begin{ytableau}
+3 & 1 & 5 \\
+6 & 2 \\
+4 & 7
+\end{ytableau}
+\end{center}
+We have
+\[
+P_T = S_{\{1,3,5\}} \times S_{\{2,6\}} \times S_{\{4,7\}}
+\textrm{ and }
+Q_T = S_{\{3,4,6\}} \times S_{\{1,2,7\}}
+\]
+where $S_X$ is the group of permutations of the set $X$. 
+\end{example}
+
+If $\lambda = (\lambda_1,\ldots,\lambda_r)$ is a partition,
+define $S_\lambda := S_{\lambda_1} \times \cdots \times S_{\lambda_r}$.
+Observe that $P_T \cong S_\lambda$
+and $Q_T \cong S_{\lambda'}$.
+The subgroups $P_T$ and $Q_T$ depend on the choice of tableau $T$, but
+the conjugacy class only depends on the corresponding partition
+$\lambda$.
+
+Given a Young tableau $T$ and a representation $V$ of $S_n$,
+define the \emph{Young projectors}:
+\[
+a_T := \frac{1}{|P_T|}\sum_{\sigma \in P_T} \sigma
+\textrm{ and }
+b_T := \frac{1}{|Q_T|}\sum_{\sigma \in Q_T} \epsilon(\sigma)\sigma
+\]
+which are easily seen to be projections in $\operatorname{End}(V)$.
+The \emph{Young symmetrizer} is the endomorphism $c_T = a_T \circ b_T$.
+One checks that $c_T = b_T \circ a_T$.
+
+\begin{theorem}
+Suppose $\lambda$ is a partition of $n$.
+If $V_{reg}$ is the regular representation and $T$ is a Young tableau
+for $\lambda$, then the image of $c_T(V_{reg})$ is isomorphic to the
+Specht module $V_\lambda$.
+\end{theorem}
+
+\begin{proof}
+We only sketch this.
+First, let $U_T = a_T(V_{reg})$ and $W_T = b_T(V_{reg})$.
+We observe that
+\[
+U_T \cong \operatorname{Ind}_{P_T}^{S_n} 1_{P_T}
+\]
+and
+\[
+W_T \cong \operatorname{Ind}_{Q_T}^{S_n} \epsilon_{Q_T}
+\]
+where $1_{P_T}$ is the trivial representation and $\epsilon_{Q_T}$ is the sign
+representation.
+In other words, the characteristic of $U_T$ is
+\[
+\operatorname{ch}(1 \boxtimes \cdots \boxtimes 1)
+= h_{\lambda_1} \cdots h_{\lambda_r} = h_\lambda,
+\]
+while the characteristic of $W_T$ is
+\[
+\operatorname{ch}(\epsilon \boxtimes \cdots \boxtimes \epsilon)
+= e_{\lambda'_1} \cdots e_{\lambda'_r} = e_{\lambda'}.
+\]
+Writing out $h_\lambda$ and $e_{\lambda'}$ in the Schur basis,
+we see that $s_\lambda$ is the only basis vector with a non-zero entry
+in both.
+Moreover, $(s_\lambda,h_\lambda)=(s_\lambda,e_{\lambda'})=1$.
+Thus, the image $a_T \circ b_T$ is isomorphic to the Specht module
+$V_\lambda$ provided the image is non-zero.
+
+Let $\{ v_\sigma \}_{\sigma \in S_n}$ be the standard basis for the regular
+representation $V_{reg}$.
+We have the concrete description
+\[
+c_T(v_{1})  = \frac{1}{|P_T| |Q_T|}\sum_{\sigma \in P_T}\sum_{\tau \in Q_T}
+\epsilon(\tau) v_{\sigma\tau} .
+\]
+Since $P_T \cap Q_T = \{1\}$, the $v_{\sigma\tau}$ are all distinct.
+Thus $c_T(x) \ne 0$ as desired.
+\end{proof}
+
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
 
