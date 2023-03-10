@@ -389,9 +389,32 @@ s_\lambda = \sum_{\mu\, \vdash |\lambda|} K_{\lambda \mu} m_\mu
 \]
 for all partitions $\lambda,\mu$.
 
+\begin{example}
+For $n \ge 4$, we have the following change of basis matrix:
+\[
+\begin{pmatrix}
+s_{1111}\\ s_{211} \\ s_{22}\\ s_{31}\\ s_4
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 0 & 0 & 0 & 0\\
+3 & 1 & 0 & 0 & 0\\
+2 & 1 & 1 & 0 & 0\\
+3 & 2 & 1 & 1 & 0\\
+1 & 1 & 1 & 1 & 1
+\end{pmatrix} 
+\begin{pmatrix}
+m_{1111}\\ m_{211} \\ m_{22}\\ m_{31}\\ m_4
+\end{pmatrix}
+\]
+Thus, for example $K_{(31)(1111)}=3$.
+\end{example}
+
 \begin{exercise}
 Prove that $s_{(d)} = h_d$ and $s_{(1^d)} = e_d$.
 \end{exercise}
+
+We will not need the following later, but it is of general interest:
 
 \begin{theorem}[Fundamental Theorem of Alternating Polynomials]
 The ring $\mathbb{Z}[x_1,\ldots,x_n]^{A_n}$ is a free
@@ -848,6 +871,94 @@ p_{1111}\\ p_{211} \\ p_{22}\\ p_{31}\\ p_4
 \]
 \end{example}
 
+Now we point out a combinatorial interpretation for the Schur functions
+and the Kostka numbers.
+A \emph{semistandard Young tableau $T$ of shape $\lambda$}
+is Young diagram of the partition $\lambda$ whose boxes are filled with
+positive integers that are non-strictly increasing in each row
+and strictly increasing in each column.
+The \emph{type} or \emph{content} $\alpha$ of a semistandard Young tableau
+$T$ is the sequence
+$(\alpha_1,\alpha_2,\ldots)$ of non-negative integers
+where $\alpha_i$ is the number of boxes containing $i$.
+Given a semistandard Young tableau $T$ of type $\alpha$,
+we have a monomial
+\[
+x^T = x_1^{\alpha_1}x_2^{\alpha_2} \cdots .
+\]
+
+\begin{theorem}
+If $\lambda$ is a partition, then
+\[
+s_\lambda = \sum_{T} x^T
+\]
+where the sum is over all semistandard Young tableaux of shape
+$\lambda$.
+In particular, $K_{\lambda \mu}$ is the number of semistandard Young
+tableaux of shape $\lambda$ and type $\mu$.
+\end{theorem}
+
+\begin{example}
+The following is a Young tableau of shape $422$
+and type $(2,3,0,1,2)$:
+\begin{center}
+\begin{ytableau}
+1 & 1 & 2 & 5 \\
+2 & 2 \\
+4 & 5
+\end{ytableau}
+\end{center}
+The corresponding monomial is $x^T=x_1^2x_2^3x_4x_5^2$.
+\end{example}
+
+\begin{exercise}
+For partitions $\lambda, \mu$, we have
+$K_{\lambda \mu}=0$ unless $\mu \le \lambda$ in the dominance order.
+Moreover $K_{\lambda \lambda}=1$.
+\end{exercise}
+
+In fact, almost all of change of bases between the various
+bases of $\mathsf{SF}$ can be understood in terms of Kostka numbers
+(see \cite[\S{I.6}]{Macdonald} for a comprehensive treatment).
+Some notable examples:
+\begin{align*}
+s_\lambda &= \sum_{\mu} K_{\lambda \mu} m_\mu\\
+h_\lambda &= \sum_{\mu} K_{\mu\lambda} s_\mu\\
+e_\lambda &= \sum_{\mu} K_{\mu'\lambda} s_\mu.
+\end{align*}
+
+For a partition $\lambda \vdash n$, the specific Kostka number
+$f^\lambda = K_{\lambda(1)^n}$ is of special interest.
+Namely, $f^\lambda$ counts the number of \emph{standard Young tableau}
+whose boxes contain each of the integers $\{1,\ldots,n\}$ exactly once
+(while still increasing down rows and columns).
+For the $(i,j)$th box of a Young diagram, let the \emph{hook length}
+$h(i,j)$ count the number of boxes directly below and those directly
+to the right of the box $(i,j)$ as well as the box itself.
+
+\begin{theorem}[Hook Length Formula]
+$f^\lambda = \frac{n!}{\prod h(i,j)}$
+where the product is over all boxes of the young diagram of $\lambda$.
+\end{theorem}
+
+\begin{example}
+Consider the partition $\lambda = (4,3,2)$.
+We fill in each box of the Young diagram with its hook length:
+\begin{center}
+\begin{ytableau}
+6 & 5 & 3 & 1 \\
+4 & 3 & 1 \\
+2 & 1
+\end{ytableau}
+\end{center}
+Thus,
+\[
+f^\lambda = \frac{9!}{6\cdot 5 \cdot 4 \cdot 3 \cdot 3 \cdot 2}
+= 168
+\]
+in this case.
+\end{example}
+
 We end this section with a handful of interesting observations and
 definitions (without proof) that hopefully will encourage the reader to
 delve more deeply into \cite{Macdonald} and \cite{Stanley2}.
@@ -983,6 +1094,20 @@ and $\{ s_\lambda \}$ in $\mathsf{SF}_n$.
 The irreducible representation $V_\lambda$ of $S_n$ corresponding to
 $s_\lambda$ is the \emph{Specht module} associated to $\lambda$.
 \end{definition}
+
+\begin{proposition}
+$\displaystyle \dim_{\mathbb{C}} V_\lambda = f^\lambda
+=\frac{n!}{\prod h(i,j)}$
+\end{proposition}
+
+\begin{proof}
+If $f \in R(S_n)$ is the character of $V_\lambda$,
+then evaluating at the identity gives
+\[
+f(e)=f(1^d)= ( \operatorname{ch}(f), p_{(1^d)} )
+= (s_\lambda, h_{(1^d)}) = K_{\lambda(1)^f}=f^\lambda.
+\]
+\end{proof}
 
 Defining the graded group
 \[
