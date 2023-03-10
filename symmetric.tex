@@ -47,6 +47,24 @@
 
 \maketitle
 
+Here we discuss the theory of symmetric functions, with the particular
+goal of describing representations of the symmetric groups and general
+linear groups.
+The irreducible representations of the symmetric group
+$S_n$ are the \emph{Specht modules} $V_\lambda$, which are parametrized
+by the partitions $\lambda$ of weight $n$.
+The irreducible polynomial representations of the general linear group
+$\operatorname{GL}(\mathbb{V})$ are precisely the (images of the)
+\emph{Schur functors} $\mathbb{S}_\lambda(V)$ where $\lambda$ is
+partition of length $\ell(\lambda) \le \dim(V)$.
+Both are best understood as being in bijection with \emph{Schur
+functions} $\{ s_\lambda \}$, which form an orthonormal basis for the
+ring of symmetric functions. 
+
+These notes are not self-contained.  Many proofs will be sketched or
+left as a reference.  This is not because the proofs are hard (the
+beauty of this subject is that they are often very slick!), but that the
+theory is too rich to properly explore in only a few weeks.
 Much of this material is drawn from
 \cite[\S{4,6,A}]{FultonHarris},
 \cite[\S{5.12--5.19}]{Etingof},
@@ -58,7 +76,7 @@ Much of this material is drawn from
 
 \section{Partitions}
 
-Recall that a \emph{partition} $\lambda$ is a sequence of decreasing
+Recall that a \emph{partition} $\lambda$ is a sequence of non-strictly decreasing
 non-negative integers
 $\lambda_1 \ge \lambda_2 \ge \cdots$ that is eventually $0$.
 Some standard terminology:
@@ -74,17 +92,20 @@ the \emph{multiplicity} of $i$ in $\lambda$.
 \item We may use the shorthand $\lambda = (1^{m_1} 2^{m_2} \cdots r^{m_r})$.
 \item $\lambda+\mu$ is the partition $(\lambda_1+\mu_1, \ldots)$.
 \item $\lambda \subseteq \mu$ means $\lambda_i \le \mu_i$ for all $i \ge 1$.
+\item The dominance ordering $\lambda \le \mu$ means
+$\sum_{j=1}^i\lambda_j \le \sum_{j=1}^i\mu_j$ for all $i \ge 1$.
 \end{itemize}
 
-Partitions are often drawn as \emph{Young tableaux}.  This is just a
+Partitions are often drawn as \emph{Young diagrams}.  This is just a
 series of empty boxes where each row contains $\lambda_i$ boxes.
+We use \emph{English notation} where $\lambda_1$ is the top row.
 There are some differing conventions between different areas of math, so
 read any source carefully.
 
 Given a partition $\lambda$, the \emph{conjugate partition}
-is the partition $\lambda'$ obtained by reflecting the Young diagram in
+is the partition $\lambda^\dag$ obtained by reflecting the Young diagram in
 the downwards-right diagonal line.  More explicitly,
-$\lambda'_i$ is the number of parts such that $\lambda_j \ge i$. 
+$\lambda^\dag_i$ is the number of parts such that $\lambda_j \ge i$. 
 
 \begin{example}
 The partitions of $4$ are as follows:
@@ -112,12 +133,8 @@ The Young tableau is
 \begin{center}
 \ydiagram{4,4,2,2,2,1}.
 \end{center}
-The conjugate partition $\lambda'$ is $(6,5,2,2)$.
+The conjugate partition $\lambda^\dag$ is $(6,5,2,2)$.
 \end{example}
-
-We use the notation $\operatorname{Par}(n)$ to denote the set of
-partitions of $n$.  And the notation $\operatorname{Par}$ for the set of
-all partitions of all weights.
 
 Recall that every permutation $\sigma \in S_n$ can be written as a
 product of disjoint cycles, which is unique up to reordering of
@@ -131,14 +148,23 @@ The following is standard in most group theory texts:
 Two permutations in $S_n$ are conjugate if and only if they have the
 same cycle type.
 In particular, the conjugacy classes of $S_n$ are in canonical bijective
-correspondence with $\operatorname{Par}(n)$.
+correspondence with partitions of $n$.
 \end{proposition}
 
-For every partition $\lambda$, we define the following integer
+For every partition $\lambda$, we define the integers
+\[
+\epsilon_\lambda = (-1)^{|\lambda|-\ell(\lambda)} .
+\]
+and
 \[
 z_\lambda = \prod_{i \ge 1} i^{m_i} m_i!
 \]
-where $m_i=m_i(\lambda)$ denotes the multiplicities.
+where $m_i=m_i(\lambda)$ denotes the multiplicities,
+
+\begin{exercise}
+Prove that, if $\sigma \in S_n$ has cycle type $\lambda$,
+then $\operatorname{sgn}(\sigma)=\epsilon_\lambda$.
+\end{exercise}
 
 \begin{exercise}
 Prove that, if $\sigma \in S_n$ has cycle type $\lambda$,
@@ -223,7 +249,7 @@ Specifically,
 \begin{proof}
 The partitions of length at most $n$ are a system of distinct
 representatives for the $S_n$-orbits of $\mathbb{N}^n$.
-The monomials in $m_\lambda$ are precisely those of these orbit of
+The monomials in $m_\lambda$ are precisely those of the orbit of
 $\lambda$.
 The coefficient of every monomial
 in $m_\lambda$ is either $0$ or $1$ and every possible monomial
@@ -310,7 +336,8 @@ and let $A_n = \ker(\epsilon)$ be the alternating group on $n$ letters.
 \begin{definition}
 A polynomial $f \in \mathbb{Z}[x_1,\ldots,x_n]$ is \emph{alternating} if
 $\sigma \cdot f = \epsilon(\sigma)f$ for all $\sigma \in S_n$.
-Given an element $\alpha \in \mathbb{N}^n$, define
+Given an element $\alpha \in \mathbb{N}^n$, define the \emph{alternant
+of $\alpha$} as
 \[
 a_\alpha = \sum_{\sigma \in S_n} \epsilon(\sigma) x^{\sigma(\alpha)},
 \]
@@ -341,7 +368,7 @@ is defined via
 \Delta = \prod_{1 \le i < j \le n} (x_i-x_j).
 \]
 Note that $(i\ j) \cdot \Delta = -\Delta$ for all $i \ne j$.
-We conclude that $\sigma(\Delta) = \epsilon(\Delta)$
+We conclude that $\sigma(\Delta) = \operatorname{sgn}(\sigma)$
 for all $\sigma \in S_n$.
 Thus $\Delta$ is alternating.
 Observe that $\Delta=a_\delta$.
@@ -371,7 +398,15 @@ is the symmetric polynomial
 $s_\lambda = a_{\lambda+\delta}/a_\delta$.
 \end{definition}
 
-Moreover, we have the following:
+The alternants $\{ a_{\lambda+\delta} \}$ are a basis for
+the alternating polynomials analogously to the monomial symmetric
+polynomials $\{ m_\lambda \}$ being a basis for the symmetric
+polynomials.
+Since we have $a_{\lambda+\delta}=s_\lambda a_\delta$, the Schur polynomials
+as ``monomial alternating polynomials'' except we've divided out the
+alternating part so that they are symmetric.
+
+In particular, we have the following:
 
 \begin{proposition}
 The set of Schur polynomials
@@ -385,9 +420,10 @@ The \emph{Kostka numbers} $K_{\lambda \mu}$ are the entries of the
 change of basis matrix between the monomial basis and the Schur basis.
 Specifically, they are non-negative integers such that
 \[
-s_\lambda = \sum_{\mu\, \vdash |\lambda|} K_{\lambda \mu} m_\mu
+s_\lambda = \sum_{\substack{\mu\, \vdash |\lambda|\\\ell(\mu) \le n}} K_{\lambda \mu} m_\mu
 \]
-for all partitions $\lambda,\mu$.
+for all partitions $\lambda,\mu$.  The Kostka numbers do not depend on the number of
+variables $n$ in the ambient polynomial ring (we do not prove this here).
 
 \begin{example}
 For $n \ge 4$, we have the following change of basis matrix:
@@ -445,18 +481,18 @@ representation theory:
 \begin{proposition}
 Suppose $V$ is an $n$-dimensional vector space and
 $\varphi \in \operatorname{End}(V)$ has eigenvalues
-$\lambda_1,\ldots,\lambda_n$.
+$\alpha_1,\ldots,\alpha_n$.
 Then the natural action of $\varphi$ on the exterior power $\Lambda^d V$
 has trace
 \[
 \operatorname{tr}\left( \Lambda^d \varphi \right)
-= e_d(\lambda_1,\ldots,\lambda_n)
+= e_d(\alpha_1,\ldots,\alpha_n)
 \]
 and the natural action of $\varphi$ on the symmetric power
 $\mathcal{S}^d V$ has trace
 \[
 \operatorname{tr}\left( \mathcal{S}^d \varphi \right)
-= h_d(\lambda_1,\ldots,\lambda_n).
+= h_d(\alpha_1,\ldots,\alpha_n).
 \]
 \end{proposition}
 
@@ -467,7 +503,7 @@ $\mathcal{S}^d$ is very similar.
 
 First, we assume that $\varphi$ is diagonalizable with eigenvectors
 $v_1,\ldots, v_n$ corresponding to eigenvalues
-$\lambda_1,\ldots,\lambda_n$.
+$\alpha_1,\ldots,\alpha_n$.
 Now, an eigenbasis for $\Lambda^d V$ is given by
 \[
 \{ v_{i_1}\wedge v_{i_2}\wedge \cdots \wedge v_{i_d} \mid
@@ -475,11 +511,11 @@ Now, an eigenbasis for $\Lambda^d V$ is given by
 \]
 The corresponding eigenvalues of $\Lambda^d \varphi$ are therefore
 \[
-\{ \lambda_{i_1} \lambda_{i_2} \cdots \lambda_{i_d} \mid
+\{ \alpha_{i_1} \alpha_{i_2} \cdots \alpha_{i_d} \mid
 1 \le i_1 < i_2 < \cdots < i_d \le n \} \ .
 \]
 The trace of $\Lambda^d \phi$ is just the sum of the eigenvalues, which
-is $e_d(\lambda_1,\ldots,\lambda_n)$ as desired.
+is $e_d(\alpha_1,\ldots,\alpha_n)$ as desired.
 
 Now we consider the case where $\varphi$ is not diagonalizable.
 In this case $\varphi$ has a Jordan canonical form.  Thus,
@@ -499,7 +535,7 @@ We now observe that
 \]
 where the ``higher terms'' are scalar multiples of
 $v_{j_1}\wedge \cdots \wedge v_{j_d}$
-where $(j_1,\ldots,j_d) > (i_1,\ldots,i_d)$.
+where we have $(j_1,\ldots,j_d) > (i_1,\ldots,i_d)$.
 Thus, appropriately ordered, our basis for $\Lambda^d V$
 also represents $\Lambda^d V$ as a lower-triangular matrix.
 The trace only depends on the diagonal entries so the result follows
@@ -523,7 +559,7 @@ basically independent of the number $n$ of variables $x_1,\ldots,x_n$
 in the ambient polynomial ring.  The \emph{ring of symmetric functions}
 is a standard object in algebraic combinatorics that facilitates
 this.  Several equivalent constructions exist, but we will follow
-the construction from \cite{Stanley2}, which is fairly ``down to earth.''
+the construction from \cite{Stanley2}, which is fairly down to earth.
 
 Let $\mathbb{Z}[[\{x_n\}_{n \in \mathbb{N}_{>0}}]]$ be the ring of formal
 power series in countably many variables.  Recall that this means that
@@ -546,7 +582,7 @@ $f \in \mathbb{Z}[[\{x_n\}_{n \in \mathbb{N}_{>0}}]]_{(d)}^{S_{\mathbb{N}}}$.
 Let $\mathsf{SF}^d$ be the subgroup of
 homogeneous symmetric functions of degree $d$.
 
-We define the \emph{ring of symmetric functions} as the direct sum
+We define the \emph{ring of symmetric functions} as the (internal) direct sum
 \[
 \mathsf{SF} = \bigoplus_{d \ge 0} \mathsf{SF}^d,
 \]
@@ -588,8 +624,7 @@ m_\lambda := \sum_{\alpha} x^\alpha
 \]
 where $(\alpha_1,\ldots) \in \mathbb{N}^{\mathbb{N}_{>0}}$ ranges over all
 \emph{distinct} permutations of $(\lambda_1,\ldots)$.
-Observe that the set $\{ m_\lambda \mid \lambda \in
-\operatorname{Par}\}$ is a basis for $\mathsf{SF}$.
+Observe that the set $\{ m_\lambda\}$ is a basis for $\mathsf{SF}$.
 
 We can now define the \emph{elementary symmetric functions}
 \[
@@ -610,8 +645,14 @@ in view of the fact that they are precisely the images of the
 corresponding objects in $\mathsf{SF}$ under the maps to $\rho_n$.
 
 We may also define the \emph{Schur symmetric functions}
-$s_\lambda$ by observing that the Schur polynomials are compatible
-with the construction of $\mathsf{SF}$ as an inverse limit.
+$s_\lambda$ via 
+\[
+s_\lambda = \sum_{\mu} K_{\lambda \mu} m_\mu
+\]
+by taking advantage of the fact that the Kostka numbers
+do not depend on the number of variables in the given polynomial ring.
+
+\subsection{Relations and Identities}
 
 \begin{proposition} \label{prop:fund_rel}
 $\displaystyle\sum_{i=0}^d (-1)^i e_i h_{d-i}=0$ for every $d \ge 1$.
@@ -667,7 +708,7 @@ $e_\lambda = e_{\lambda_1}\cdot e_{\lambda_2} \cdots e_{\lambda_r}$,
 $h_\lambda = h_{\lambda_1}\cdot h_{\lambda_2} \cdots h_{\lambda_r}$, and
 $p_\lambda = p_{\lambda_1}\cdot p_{\lambda_2} \cdots p_{\lambda_r}$.
 
-We have a natural partial ordering on partitions where $\lambda \ge \mu$
+Recall the \emph{dominance partial ordering} on partitions where $\lambda \ge \mu$
 if and only if
 $\lambda_1 + \cdots + \lambda_i \ge \mu_1 + \cdots \mu_i$
 for all $i \ge 1$.
@@ -682,8 +723,8 @@ e_\lambda = \sum_{\mu \vdash |\lambda|} M_{\lambda \mu} m_\mu
 where $M_{\lambda \mu}$ is the number of $\{0,1\}$-matrices whose
 rows sum to $\lambda_1,\lambda_2,\ldots$ and whose columns
 sum to $\mu_1,\mu_2,\ldots$.
-Moreover, $M_{\lambda\mu} \ne 0$ if and only if $\mu \le \lambda'$
-and $M_{\lambda\lambda'}=1$.
+Moreover, $M_{\lambda\mu} \ne 0$ if and only if $\mu \le \lambda^\dag$
+and $M_{\lambda\lambda^\dag}=1$.
 \end{proposition}
 
 \begin{proof}
@@ -715,7 +756,7 @@ $\{0,1\}$-matrices satisfying certain constraints.
 After refining our partial order to a total order
 on the partitions, we can think of $M=\left(M_{\lambda\mu}\right)$ as
 an infinite integer matrix.
-Note that $M_{\lambda\mu'}$ is triangular with $1$s along the diagonal.
+Note that $M_{\lambda\mu^\dag}$ is triangular with $1$s along the diagonal.
 Thus $M$ is invertible and we have the following important corollary:
 
 \begin{corollary}[Fundamental Theorem of Symmetric Functions]
@@ -871,6 +912,8 @@ p_{1111}\\ p_{211} \\ p_{22}\\ p_{31}\\ p_4
 \]
 \end{example}
 
+\subsection{Young Tableaux}
+
 Now we point out a combinatorial interpretation for the Schur functions
 and the Kostka numbers.
 A \emph{semistandard Young tableau $T$ of shape $\lambda$}
@@ -887,17 +930,6 @@ we have a monomial
 x^T = x_1^{\alpha_1}x_2^{\alpha_2} \cdots .
 \]
 
-\begin{theorem}
-If $\lambda$ is a partition, then
-\[
-s_\lambda = \sum_{T} x^T
-\]
-where the sum is over all semistandard Young tableaux of shape
-$\lambda$.
-In particular, $K_{\lambda \mu}$ is the number of semistandard Young
-tableaux of shape $\lambda$ and type $\mu$.
-\end{theorem}
-
 \begin{example}
 The following is a Young tableau of shape $422$
 and type $(2,3,0,1,2)$:
@@ -911,20 +943,38 @@ and type $(2,3,0,1,2)$:
 The corresponding monomial is $x^T=x_1^2x_2^3x_4x_5^2$.
 \end{example}
 
+The following is used as the \emph{definition} of Schur functions in
+\cite{Stanley2}; that it agrees with the classical definition
+above is \cite[Theorem 7.15.2]{Stanley2}.
+
+\begin{theorem}
+If $\lambda$ is a partition, then
+\[
+s_\lambda = \sum_{T} x^T
+\]
+where the sum is over all semistandard Young tableaux of shape
+$\lambda$.
+In particular, $K_{\lambda \mu}$ is the number of semistandard Young
+tableaux of shape $\lambda$ and type $\mu$.
+\end{theorem}
+
+Various properties of Kostka numbers are easier to check
+given this definition:
+
 \begin{exercise}
 For partitions $\lambda, \mu$, we have
 $K_{\lambda \mu}=0$ unless $\mu \le \lambda$ in the dominance order.
 Moreover $K_{\lambda \lambda}=1$.
 \end{exercise}
 
-In fact, almost all of change of bases between the various
-bases of $\mathsf{SF}$ can be understood in terms of Kostka numbers
+In fact, almost all transition matrices of
+$\mathsf{SF}$ can be understood in terms of Kostka numbers
 (see \cite[\S{I.6}]{Macdonald} for a comprehensive treatment).
 Some notable examples:
 \begin{align*}
 s_\lambda &= \sum_{\mu} K_{\lambda \mu} m_\mu\\
 h_\lambda &= \sum_{\mu} K_{\mu\lambda} s_\mu\\
-e_\lambda &= \sum_{\mu} K_{\mu'\lambda} s_\mu.
+e_\lambda &= \sum_{\mu} K_{\mu^\dag\lambda} s_\mu.
 \end{align*}
 
 For a partition $\lambda \vdash n$, the specific Kostka number
@@ -936,7 +986,7 @@ For the $(i,j)$th box of a Young diagram, let the \emph{hook length}
 $h(i,j)$ count the number of boxes directly below and those directly
 to the right of the box $(i,j)$ as well as the box itself.
 
-\begin{theorem}[Hook Length Formula]
+\begin{theorem}[Hook Length Formula] \label{thm:hook_length}
 $f^\lambda = \frac{n!}{\prod h(i,j)}$
 where the product is over all boxes of the young diagram of $\lambda$.
 \end{theorem}
@@ -959,34 +1009,68 @@ f^\lambda = \frac{9!}{6\cdot 5 \cdot 4 \cdot 3 \cdot 3 \cdot 2}
 in this case.
 \end{example}
 
-We end this section with a handful of interesting observations and
-definitions (without proof) that hopefully will encourage the reader to
+The change of basis between power sums and Schur functions
+are especially interesting for the representation theory of symmetric
+groups as we will see shortly.
+
+\begin{example} \label{ex:transSP}
+\[
+\begin{pmatrix}
+p_{11}\\ p_2\\ p_{111}\\ p_{21}\\ p_3\\
+p_{1111}\\ p_{211} \\ p_{22}\\ p_{31}\\ p_4
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 1 &
+ & & &
+& & & & \\
+-1 & 1 &
+ & & &
+& & & & \\
+
+ & &
+1 & 2 & 1 &
+& & & & \\
+ & &
+-1 & 0 & 1 &
+& & & & \\
+ & &
+1 & -1 & 1 &
+& & & & \\
+ & &
+ & & &
+1 & 3 & 2 & 3 & 1 \\
+ & &
+ & & &
+-1 & -1 & 0 & 1 & 1 \\
+ & &
+ & & &
+1 & -1 & 2 & -1 & 1 \\
+ & &
+ & & &
+1 & 0 & -1 & 0 & 1 \\
+ & &
+ & & &
+-1 & 1 & 0 & -1 & 1
+\end{pmatrix} 
+\begin{pmatrix} s_{11}\\ s_2\\ s_{111}\\ s_{21}\\ s_3\\
+s_{1111}\\ s_{211} \\ s_{22}\\ s_{31}\\ s_4
+\end{pmatrix}
+\]
+\end{example}
+
+We point out some other useful constructions (without proof)
+that hopefully will encourage the reader to
 delve more deeply into \cite{Macdonald} and \cite{Stanley2}.
 
-We have the formulas
-\[
-h_d = \sum_{\lambda \vdash d} \frac{p_\lambda}{z_\lambda}\]
-and
-\[
-e_d = \sum_{\lambda \vdash d} \epsilon_\lambda
-\frac{p_\lambda}{z_\lambda}
-\]
-where $\epsilon_\lambda = (-1)^{|\lambda|-\ell(\lambda)}$
-
-There is a standard symmetric positive definite bilinear form $(-,-)$
-on $\mathsf{SF}$ defined via
-\[
-( s_\lambda, s_\mu ) = \delta_{\lambda \mu}
-\]
-for all partitions $\lambda, \mu$.
-This form also satisfies
-\[
-( h_\lambda, m_\mu ) = \delta_{\lambda \mu}
-\]
-and
-\[
-( p_\lambda, p_\mu ) = z_\lambda \delta_{\lambda \mu}
-\]
+The \emph{Hall inner product} is the unique
+symmetric positive definite bilinear form $(-,-)$ on $\mathsf{SF}$
+satisfying
+\begin{align*}
+( s_\lambda, s_\mu ) &= \delta_{\lambda \mu},\\
+( h_\lambda, m_\mu ) &= \delta_{\lambda \mu}, \textrm{ and}\\
+( p_\lambda, p_\mu ) &= z_\lambda \delta_{\lambda \mu}
+\end{align*}
 for all partitions $\lambda, \mu$.
 
 A consequence of the Fundamental Theorem is that there is a ring
@@ -1000,9 +1084,10 @@ $\omega(h_\lambda)=e_\lambda$ as well.
 With a bit more work, one can show that
 $\omega(p_\lambda)=\epsilon_\lambda p_\lambda$
 and
-$\omega(s_\lambda)=s_{\lambda'}$.
-This last observation show us that $\omega$ is an isometry:
-that $( \omega(f), \omega(g) ) = (f, g)$ for
+$\omega(s_\lambda)=s_{\lambda^\dag}$.
+This last observation show us that $\omega$ is an isometry
+of the Hall inner product:
+$( \omega(f), \omega(g) ) = (f, g)$ for
 all $f,g \in \mathsf{SF}$.
 
 \section{Representations of Symmetric Groups}
@@ -1015,7 +1100,7 @@ $f \in C(S_n)$, we define $f(\lambda):=f(\sigma)$ where
 $\sigma \in S_n$ is any permutation with cycle type $\lambda$.
 Let $\chi_\lambda \in C(S_n)$ denote the characteristic function
 \[
-\chi_\lambda(\sigma)
+\chi_\lambda(\sigma) :=
 \begin{cases}
 1 & \textrm{if $\sigma$ has cycle type $\lambda$,}\\
 0 & \textrm{otherwise.}\\
@@ -1025,29 +1110,32 @@ Let $\chi_\lambda \in C(S_n)$ denote the characteristic function
 \begin{theorem}
 There is a isometric group isomorphism
 \[
-\operatorname{ch} : R(S_n) \to \mathsf{SF}^n
+\operatorname{ch} : R(S_n) \to \mathsf{SF}^n,
 \]
-defined by
+called the \emph{characteristic map}, defined by
 \[
 \operatorname{ch}(f) :=
 \sum_{\lambda \vdash n} \frac{f(\lambda)}{z_\lambda} p_{\lambda}.
 \]
-Given a class function $f$, its values can be computed via
+Viewed as a class function, the values of $f \in R(S_n)$
+can be computed via
 \[
 f(\lambda) = ( \operatorname{ch}(f), p_\lambda ).
 \]
 The characteristic functions $\chi_\lambda \in C(S_n)$
 correspond to $\frac{p_{\lambda}}{z_\lambda}$ in
 $\mathsf{SF}^n_{\mathbb{Q}}$.
-The irreducible characters in $R(S_n)$ correspond to the Schur
-functions $\{ s_\lambda \mid \lambda \vdash n \}$,
-the trivial character corresponds to $h_n=s_n$, and
-the sign character corresponds to $e_n=s_{(1)^n}$.
+The irreducible characters in $R(S_n)$ are
+exactly the $\chi^\lambda := \operatorname{chi}(s_\lambda)$
+for $\lambda \vdash n$.
+The trivial character $\chi^{(n)}$ corresponds to $h_n=s_n$, and
+the sign character $\chi^{(1^n)}$ corresponds to $e_n=s_{(1)^n}$.
 The involution $\omega : \mathsf{SF}^n \to \mathsf{SF}^n$
 corresponds to tensoring with the sign character.
 \end{theorem}
 
 \begin{proof}
+We only point a few nice facts that are easy to see.
 First we define the \emph{characteristic map}
 $\operatorname{ch} : C(S_n) \to
 \mathsf{SF}^n \otimes_{\mathbb{Z}} \mathbb{C}$
@@ -1082,17 +1170,30 @@ $\lambda$ is given by $\frac{n!}{z_\lambda}$.  Thus
 But this is exactly the same as $(p_\lambda,p_\mu)$,
 so $\operatorname{ch}$ is an isometry.
 
-We omit the proof of the remaining statements. 
+We omit the proof of the remaining statements
+(see \cite[\S{I.7}]{Macdonald} or \cite[\S{7.18}]{Stanley2}).
 \end{proof}
 
 An immediate corollary of the above theorem is that
 character table of $S_n$ is precisely the same
 as the change of basis matrix between the $\{ p_\lambda \}$
 and $\{ s_\lambda \}$ in $\mathsf{SF}_n$.
+If the entries of the character table of $S_n$ are denoted
+$\chi_\mu^\lambda$, then
+\[
+\chi_\lambda = \sum_{\mu} \chi_\lambda^\mu \chi^\mu
+\]
+is equivalent to
+\[
+p_\lambda = \sum_{\mu} \chi_\lambda^\mu s_\mu .
+\]
+One can now see that the entries of the matrix from Example~\ref{ex:transSP}
+are exactly the entries of the character tables for $S_2$, $S_3$, and
+$S_4$.
 
 \begin{definition}
 The irreducible representation $V_\lambda$ of $S_n$ corresponding to
-$s_\lambda$ is the \emph{Specht module} associated to $\lambda$.
+$\chi^\lambda$ is the \emph{Specht module} associated to $\lambda$.
 \end{definition}
 
 \begin{proposition}
@@ -1107,6 +1208,7 @@ then evaluating at the identity gives
 f(e)=f(1^d)= ( \operatorname{ch}(f), p_{(1^d)} )
 = (s_\lambda, h_{(1^d)}) = K_{\lambda(1)^f}=f^\lambda.
 \]
+Now we appeal to Theorem~\ref{thm:hook_length}.
 \end{proof}
 
 Defining the graded group
@@ -1118,7 +1220,7 @@ we obtain a characteristic map
 \operatorname{ch} : R(S_\ast) \to \mathsf{SF}
 \]
 by adding together graded components.
-However, the ``obvious'' multiplication on $R(S_\ast)$
+However, the existing multiplication on each $R(S_n)$
 \emph{does not} correspond to the multiplication on $\mathsf{SF}$.
 We define a multiplication on $R(S_\ast)$ that makes
 $\operatorname{ch}$ into a graded ring isomorphism.
@@ -1144,6 +1246,10 @@ and $\operatorname{ch}$ is a graded ring isomorphism.
 
 \subsection{Explicit Description of Specht modules}
 
+Specht modules can also be described without
+reference to symmetric functions
+(see \cite[\S{4}]{FultonHarris} and \cite[\S{5.11-17}]{Etingof}).
+
 Here we actually construct each Specht module $V_\lambda$
 as a subrepresentation of the regular representation of $S_n$.
 Note that the isotypic component associated to $V_\lambda$ usually has
@@ -1153,7 +1259,8 @@ on an arbitrary choice.
 \begin{definition}
 A \emph{Young tableau} $T$ is a Young diagram for a partition $\lambda$
 of $n$ where each number in $\{1,\ldots,n\}$ is assigned to exactly one
-box.
+box.  (Note that this neither a special case nor a generalization
+of the standard and semistandard Young tableau discussed above.)
 Given a Young tableau $T$, we define $P_T$ as the
 subgroup of $S_n$ that permutes only the numbers within each row of $T$
 and $Q_T$ as the subgroup that permutes only the numbers within each
@@ -1181,19 +1288,19 @@ where $S_X$ is the group of permutations of the set $X$.
 If $\lambda = (\lambda_1,\ldots,\lambda_r)$ is a partition,
 define $S_\lambda := S_{\lambda_1} \times \cdots \times S_{\lambda_r}$.
 Observe that $P_T \cong S_\lambda$
-and $Q_T \cong S_{\lambda'}$.
+and $Q_T \cong S_{\lambda^\dag}$.
 The subgroups $P_T$ and $Q_T$ depend on the choice of tableau $T$, but
 the conjugacy class only depends on the corresponding partition
 $\lambda$.
 
-Given a Young tableau $T$ and a representation $V$ of $S_n$,
+Given a Young tableau $T$ and a representation $W$ of $S_n$,
 define the \emph{Young projectors}:
 \[
 a_T := \frac{1}{|P_T|}\sum_{\sigma \in P_T} \sigma
 \textrm{ and }
 b_T := \frac{1}{|Q_T|}\sum_{\sigma \in Q_T} \epsilon(\sigma)\sigma
 \]
-which are easily seen to be projections in $\operatorname{End}(V)$.
+which are easily seen to be projections in $\operatorname{End}(W)$.
 The \emph{Young symmetrizer} is the endomorphism $c_T = a_T \circ b_T$.
 One checks that $c_T = b_T \circ a_T$.
 
@@ -1225,13 +1332,13 @@ In other words, the characteristic of $U_T$ is
 while the characteristic of $W_T$ is
 \[
 \operatorname{ch}(\epsilon \boxtimes \cdots \boxtimes \epsilon)
-= e_{\lambda'_1} \cdots e_{\lambda'_r} = e_{\lambda'}.
+= e_{\lambda^\dag_1} \cdots e_{\lambda^\dag_r} = e_{\lambda^\dag}.
 \]
-Writing out $h_\lambda$ and $e_{\lambda'}$ in the Schur basis,
+Writing out $h_\lambda$ and $e_{\lambda^\dag}$ in the Schur basis,
 we see that $s_\lambda$ is the only basis vector with a non-zero entry
 in both.
-Moreover, $(s_\lambda,h_\lambda)=(s_\lambda,e_{\lambda'})=1$.
-Thus, the image $a_T \circ b_T$ is isomorphic to the Specht module
+Moreover, $(s_\lambda,h_\lambda)=(s_\lambda,e_{\lambda^\dag})=1$.
+Thus, the image $c_T = a_T \circ b_T$ is isomorphic to the Specht module
 $V_\lambda$ provided the image is non-zero.
 
 Let $\{ v_\sigma \}_{\sigma \in S_n}$ be the standard basis for the regular
@@ -1242,10 +1349,15 @@ c_T(v_{1})  = \frac{1}{|P_T| |Q_T|}\sum_{\sigma \in P_T}\sum_{\tau \in Q_T}
 \epsilon(\tau) v_{\sigma\tau} .
 \]
 Since $P_T \cap Q_T = \{1\}$, the $v_{\sigma\tau}$ are all distinct.
-Thus $c_T(x) \ne 0$ as desired.
+Thus $c_T \ne 0$ as desired.
 \end{proof}
 
 \section{Representations of $\operatorname{GL}(V)$}
+
+Schur functors are described directly in
+\cite[\S{6}]{FultonHarris} and \cite[\S{5.19,5.20-23}]{Etingof}.
+Slightly more sophisticated expositions can be found in
+\cite[Appendix 7.2]{Stanley2} and \cite[Appendix I.A]{Macdonald}.
 
 \begin{definition}
 Given a complex $n$-dimensional vector space $V$,
@@ -1329,7 +1441,7 @@ we conclude that $V^\vee$ is a rational representation.
 \end{example}
 
 The difference between polynomial and rational representations is,
-fortunately, not very substantial.  Indeed, the denominators that occur
+fortunately, easily characterized.  Indeed, the denominators that occur
 in the rational functions can only be powers of the determinant or else
 the representation is not defined for every point of
 $\operatorname{GL}(V)$.
@@ -1378,13 +1490,15 @@ $\operatorname{GL}(W)$-representation:
 For those who know some category theory,
 each Schur functor $\mathbb{S}_\lambda$ is a covariant functor
 from the category of finite-dimensional vector spaces to itself.
-This means that if $f : W \to U$ is a linear map,
+This implies that if $f : W \to U$ is a linear map,
 then we also have a linear map
 \[
 \mathbb{S}_\lambda(f) : \mathbb{S}_\lambda(W) \to \mathbb{S}_\lambda(U).
 \]
-The fact that these are $\operatorname{GL}(W)$ representations is a
-special case of their functoriality.
+The fact that these are $\operatorname{GL}(W)$ representations can be
+seen as just a consequence of the fact that they are functors.
+(In particular, Schur functors can be defined for more general
+tensor categories.)
 \end{remark}
 
 \begin{theorem}[Schur-Weyl]
@@ -1416,7 +1530,7 @@ $\alpha_1,\ldots, \alpha_n$, then
 \operatorname{tr}(\mathbb{S}_\lambda(g)) = s_\lambda(\alpha_1,\alpha_2,\cdots,
 \alpha_n,0,0,\cdots)
 \]
-is the character.
+we conclude $s_\lambda$ is the character of $\mathbb{S}_\lambda$.
 \end{theorem}
 
 By evaluating $\mathbb{S}_\lambda$ at the identity, we can determine the
