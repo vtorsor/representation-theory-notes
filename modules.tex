@@ -1,0 +1,89 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+
+% theorem styles (I like everything to have the same counter)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{exercise}[theorem]{Exercise}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% some numbering settings
+\numberwithin{equation}{section}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{15.2pt}
+\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+\setlength{\footskip}{30pt}
+\pagestyle{fancy}
+
+\makeatletter
+\let\ps@plain\ps@fancy 
+\makeatother
+
+\lhead{MATH 742}
+\chead{$S_n$ and $\operatorname{GL}_n$}
+\rhead{Spring 2023}
+\lfoot{Last Revised: \today}
+\cfoot{}
+\rfoot{\thepage\ of \pageref{LastPage} }
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\title{Modules and Wedderburn Theory}
+\author{Alexander Duncan}
+
+\maketitle
+
+Modern representation theory is usually phrased in the language of
+non-commutative rings/algebras and their modules.
+Until now I've avoided this language so I could focus on the basics.
+However, the module-theoretic perspective is much more versatile --- even
+for finite groups over $\mathbb{C}$.
+It is much more urgently needed to discuss representation
+theory over other fields. 
+
+The main object is the \emph{group ring} $\mathbb{Z}G$
+or \emph{group algebra} $kG$.  We will see that most of the language of
+representation theory of finite groups can be efficiently expressed
+as special cases of module theory over $kG$.
+Then we will use the language to go even further.
+
+Since module theory is part of the standard algebra qual sequence,
+I will frequently omit proofs and even many definitions under the
+assumption that you should have seen them before.
+However, the emphasis in qual courses is usually on
+\emph{commutative} rings so some reminders are in order.
+I recommend finding a graduate algebra textbook with a good treatment of
+modules, such as \cite[\S{10}]{DF} or \cite[\S{III}]{Lang},
+to refer to if something is unfamiliar.
+
+The ``basics'' of module-theoretic representation theory is in
+almost every text I've referenced, often at a very early stage; 
+see \cite{DF}, \cite{Etingof}, \cite{FultonHarris}, \cite{Lang} etc.
+Serre's book \cite{Serre}, does not use the module-theoretic
+perspective at first, but then abruptly changes gears in chapter 6 and
+assumes you've seen Wedderburn theory (developed below).
+I will also draw heavily from \cite[\S{12,13}]{AlperinBell},
+\cite{AlperinLRT}, and \cite{CurtisReiner}.
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{alpha}
+\bibliography{rep_theory}
+
+\end{document}
+
+
