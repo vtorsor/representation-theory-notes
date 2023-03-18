@@ -81,6 +81,94 @@ I will also draw heavily from \cite[\S{12,13}]{AlperinBell},
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
 
+\section{The Group Ring}
+
+Throughout, we assume that all rings and algebras are unital (have an identity
+element) but are \emph{not necessarily} commutative.
+
+\begin{definition}
+Suppose $G$ is a finite group.
+The \emph{group ring} $\mathbb{Z}G$ is the free abelian group
+on $G$ with multiplication given by
+\[
+\left( \sum_{g \in G} a_g g \right) \cdot
+\left( \sum_{g \in G} b_g g \right)
+:= \sum_{g \in G} \sum_{h \in G} a_gb_h gh
+\]
+for integers $\{a_g\}_{g\in G}$ and $\{b_g\}_{g\in G}$.
+More generally, given a commutative ring $k$,
+the \emph{group algebra} $kG$ is the free $k$-module on $G$
+with multiplication as above.
+\end{definition}
+
+One checks immediately that $\mathbb{Z}G$ is a non-commutative ring with
+identity $1$ corresponding to the basis element of the identity in $G$.
+Similarly, $kG$ is a $k$-algebra with identity $1$.
+Since $1 \in G$ corresponds to $1 \in \mathbb{Z}G$,
+the identification of the basis of $\mathbb{Z}G$ with the elements of
+$G$ is mostly harmless if $G$ is written multiplicatively.
+
+\begin{example}
+Suppose $G=D_6=\langle s,r \mid s^2, r^3, (sr)^2 \rangle$
+is the dihedral group of order $6$.
+We have the following computation in $\mathbb{Z}G$:
+\begin{align*}
+&(3 + 2s + 5r)(r-sr + 5r^2)\\
+=& 3r -3sr +15r^2 + 2sr -2r+10sr^2 +5r^2 -5s+25\\
+=& 25 -5s + r + 20r^2 -sr +10sr^2
+\end{align*}
+\end{example}
+
+\begin{example}
+Let $G = \langle r \mid r^n \rangle$ be a cyclic group of order $n$.
+Thus $G$ has basis $\{1,r,r^2,\ldots, r^{n-1} \}$
+where $r^i\cdot r^j=r^{i+j}$ subject to the relation $r^n=1$.
+In other words, $\mathbb{Z}G$ is isomorphic to the ring
+$\mathbb{Z}[x]/(x^n-1)$.
+\end{example}
+
+Note that using additive notation $\mathbb{Z}/n\mathbb{Z}$
+for the cyclic group of order $n$ would be dangerously
+ambiguous in the example above.
+For this reason, we usually use ``exponential notation''
+for group rings of additive groups.
+If $a+b=c$ in an additive group, then
+we write $x^ax^b=x^{a+b}=x^c$ in the group ring.
+
+\begin{exercise}
+Prove that $\mathbb{Z}G$ is commutative if and only $G$ is abelian.
+\end{exercise}
+
+It is useful to write the coefficients of the product as a formula of
+the multiplicands.  Specifically, if
+\[
+\left( \sum_{g \in G} a_g g \right) \cdot
+\left( \sum_{g \in G} b_g g \right)
+= \sum_{g \in G} c_g g
+\]
+then
+\[
+c_g = \sum_{h \in G} a_hb_{h^{-1}g}
+\]
+for every $g \in G$.
+
+Another description of $\mathbb{Z}G$ is as the set
+$\operatorname{Hom}_{\mathrm{Set}}(G,\mathbb{Z})$
+of functions from $G$ to $\mathbb{Z}$.
+However, the ring structure is \emph{not} the ``obvious one.''
+The additive structure is indeed pointwise addition,
+but we use the \emph{convolution product}
+of two functions $f_1,f_2$ defined via
+\[
+(f_1 \ast f_2)(g) = \sum_{ij=g} f_1(i)f_2(j)
+\]
+for $g \in G$ and the indices in the sum $i,j$
+vary over all pairs of elements of $G$ such that $ij=g$.
+The isomorphism with $\mathbb{Z}G$ is by identifying each basis element
+$g \in \mathbb{Z}G$ with the characteristic function $\chi_g$
+in $\operatorname{Hom}_{\mathrm{Set}}(G,\mathbb{Z})$
+satisfying $\chi_g(h) = \delta_{gh}$ for all $h \in G$.
+
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
 
