@@ -518,7 +518,7 @@ language for understanding decompositions of representations.
 
 \section{Bimodules and Tensor Products}
 
-When $R$ is a commutative ring, we will often just say $R$-module without
+Recall $R$ is a commutative ring, we will often just say $R$-module without
 specifying whether it is left or right.
 
 \begin{definition}
@@ -550,7 +550,8 @@ reverse order; in other words, $a \cdot_{\mathrm{op}} b := ba$.
 Note that commutative rings are canonically isomorphic to their
 opposite rings by the identity map.
 Since the base ring $k$ of a $k$-algebra is always commutative,
-the opposite ring of a $k$-algebra is still a $k$-algebra.
+the opposite ring of a (possibly non-commutative)
+$k$-algebra is still a $k$-algebra.
 
 The transpose map $A \mapsto A^T$ gives a canonical isomorphism
 of the matrix ring $\operatorname{M}_n(k)$ with its opposite
@@ -569,16 +570,17 @@ We have a canonical isomorphism
 \[
 \psi : \operatorname{End}(V)^{\mathrm{op}} \to \operatorname{End}(V^\vee)
 \]
-via $\psi(f)(g)=g \circ f$ for $f \in
+via $\psi(f)(g):=g \circ f$ for $f \in
 \operatorname{End}(V)^{\mathrm{op}}$ and $g \in V^\vee$.
-Moreover, we obtain a (non-canonical) isomorphism between
+We obtain a (non-canonical) isomorphism between
 $\operatorname{End}(V)^{\mathrm{op}}$ and $\operatorname{End}(V)$
 by way of a choice of isomorphism $V \cong V^\vee$.
 \end{example}
 
-We will see later that even \emph{division} rings are not necessarily
-isomorphic to their opposite.  Here is a small example for the
-impatient: 
+Despite these example, rings are not necessarily isomorphic to their opposite.
+We will see later that this does not even hold for \emph{division
+rings}, which are important for representation theory.
+Here is a small, somewhat contrived, example for the impatient: 
 
 \begin{exercise}
 Consider the subring $R \subseteq \operatorname{M}_2(\mathbb{Q})$
@@ -593,7 +595,8 @@ Prove that $R$ is not isomorphic to $R^{\mathrm{op}}$.
 Observe that every left $R$-module is a right $R^{\mathrm{op}}$-module
 via the scalar multiplication $m \cdot_{\mathrm{op}} r := rm$.
 Similarly, every right $R$-module is a left $R^{\mathrm{op}}$-module.
-In particular, the distinction between left and right
+In particular, as we have already observer,
+the distinction between left and right
 $R$-modules is inconsequential precisely when $R$ is commutative.
 
 \begin{definition}
@@ -696,9 +699,17 @@ structures when the ingredients are bimodules.
 If $M$ is an $(S,R)$-bimodule and $N$ is an $(R,U)$-bimodule,
 then $M \otimes_R N$ is an $(S,U)$-bimodule via the multiplication
 $s(m\otimes n)r := (sm) \otimes (nr)$ extended by linearity.
-In particular, if $R$ is commutative, and $M$ and $N$ are both
-\emph{left} $R$-modules, then $M \otimes_R N$ still makes sense.
-Also, if $R$ is a $k$-algebra, then $M \otimes_R N$
+
+Many constructions use the various canonical bimodule structures
+implicitly.
+For example, if $R$ is commutative, and $M$ and $N$ are both
+\emph{left} $R$-modules, then we can use the canonical
+\emph{right} $R$-module structure on $M$
+to make sense of $M \otimes_R N$.
+Then $M \otimes_R N$ has an $R$-module structure using either the left
+$R$-module structure on $M$ or the right $R$-module structure on $N$
+(which agree).
+For annother example, if $R$ is a $k$-algebra, then $M \otimes_R N$
 has a canonical $k$-module structure.
 
 We are now in a position to state an important result:
@@ -715,6 +726,13 @@ Then there is a natural isomorphism
  of $(U,V)$-bimodules.
 \end{theorem}
 
+\begin{exercise}
+The hom-sets in the statement of the Tensor-Hom Adjunction
+use the \emph{left} module structures on $M,N,P$ etc.
+Determine the analogous statement where the hom-sets
+refer to the \emph{right} module structures.
+\end{exercise}
+
 Rarely are all bimodule structures needed at once!
 The most important special case is when $M$ is an $(R,S)$-bimodule,
 $N$ is a left $S$-module and $P$ is left $R$-module;
@@ -729,14 +747,15 @@ If $N$ is a left $S$-module, then the \emph{restriction of scalars
 of $N$} is the left $R$-module structure on $N$ given by
 $r \cdot_R n := f(r)n$ for $r \in R$ and $n \in N$.
 We often denote the restriction of scalars by ${}_RN$
-or${}_fN$ to emphasize the distinction with $N$ as a left $S$-module.
+or${}_fN$ to emphasize the distinction with the original $N$
+viewed as a left $S$-module.
 \end{definition} 
 
 When $f$ is the inclusion of a subring, one can think of the restriction
 of scalars as ``forgetting'' some of the structure of $N$.
 For example, a complex vector space $\mathbb{C}^n$ becomes the real
-vector space $\mathbb{R}^{2n}$ under the inclusion $\mathbb{R} \to
-\mathbb{C}$.
+vector space $\mathbb{R}^{2n}$ under restriction by the inclusion
+$\mathbb{R} \to \mathbb{C}$.
 
 \begin{example}
 If $H$ is a subgroup of a group $G$, the we have an inclusion
@@ -758,6 +777,12 @@ is the left $S$-module $S_R \otimes_R M$.
 The \emph{coextension of scalars of $M$}
 is the left $S$-module $\operatorname{Hom}_R({}_RS,M)$.
 \end{definition}
+
+Note that the notation $S_R$ and ${}_RS$ is usually considered
+unnecessarily pedantic.
+We typically write simply $S \otimes_R M$ for extension of scalars
+and $\operatorname{Hom}_R(S,M)$ for coextension of scalars.
+This is usually unambiguous, although perhaps confusing for beginners.
 
 The Tensor-Hom adjunction shows that extension of scalars
 and restriction of scalars are adjoint.
@@ -792,7 +817,7 @@ The Tensor-Hom adjunction gives us an isomorphism of $k$-vector spaces
 which is exactly the isomorphism
 \[
 \operatorname{Hom}_k^G(\operatorname{Ind}_H^G W,V)
-\cong \operatorname{Hom}_k^H(W,\operatorname{Res}_H^G V))
+\cong \operatorname{Hom}_k^H(W,\operatorname{Res}_H^G V)
 \]
 from Frobenius Reciprocity!
 
