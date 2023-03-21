@@ -182,6 +182,19 @@ d & e & f
 and $I$ is just the transpose.
 \end{example}
 
+\begin{remark}
+For those who know some algebraic geometry,
+the set of subspaces of fixed dimension $r$ in $k^n$ is the
+\emph{Grassmannian} $\operatorname{Gr}(n,r)$.
+In particular, the set of subspaces of dimension $1$ is the projective
+space $\mathbb{P}^{n-1}$.
+The correspondence above allows us to define Grassmannians and
+projective spaces as sets of left ideals of $\operatorname{M}_n(k)$.
+This shift of perspective is useful when we define more general objects
+such as Severi-Brauer varieties when the algebra is not a matrix
+algebra.
+\end{remark}
+
 Choosing a basis $v_1,\ldots v_m$ for a subspace $V$, consider the matrix
 \[
 M_V := \begin{pmatrix}
@@ -242,19 +255,30 @@ that is not a sum of two non-zero orthogonal idempotents.
 The idempotents of $\operatorname{M}_n(k)$ are exactly the (matrices
 representing) the projections $\pi : k^n \to k^n$.
 Given an idempotent $e \in \operatorname{M}_n(k)$ with corresponding
-projection $\pi$, we obtain a direct sum decomposition
+projection $\pi_e$, we obtain a direct sum decomposition
 \[
-k^n = \ker(\pi) \oplus \operatorname{im}(\pi) \ .
+k^n = \ker(\pi_e) \oplus \operatorname{im}(\pi_e)
+\ .
 \]
-Observe that idempotent $1-e$ is orthogonal to $e$ and its corresponding
-projection $\pi'$ swaps the roles of the kernel and the image of $\pi$.
+Observe that idempotent $1-e$ is orthogonal to $e$ and that
+\[
+\ker(\pi_{1-e}) = \operatorname{im}(\pi_{e})
+\textrm{ and }
+\operatorname{im}(\pi_{1-e}) = \ker(\pi_e).
+\]
+Thus, we have a decomposition of vector spaces
+\[
+k^n = e(k^n) + (1-e)(k^n)
+\]
+where we warn that $e(k^n)$ and $(1-e)(k^n)$ are \emph{not}
+$\operatorname{M}_n(k)$-modules.
 
 More generally, a set of orthogonal idempotents $e_1,\ldots,e_r$
 such that $1=e_1+\ldots+e_r$ gives a decomposition
 \[
 k^n = V_1 \oplus V_2 \oplus \cdots \oplus V_r
 \]
-where $V_i = \operatorname{im}(e_i)$ for $1 \le i \le r$.
+where $V_i = \operatorname{im}(\pi_i) = e_i(k^n)$ for $1 \le i \le r$.
 
 We see that the primitive idempotents of $\operatorname{M}_n(k)$
 correspond to the rank $1$ projections.
