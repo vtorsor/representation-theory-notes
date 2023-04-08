@@ -1068,6 +1068,300 @@ kG \otimes_{kH} W \cong \operatorname{Hom}_{kH}(kG,W)
 as left $kG$-modules.
 \end{exercise}
 
+\section{Wedderburn Decomposition}
+
+Throughout this section, $k$ is a field.
+The main goal of this section is to prove the following:
+
+\begin{theorem}[Wedderburn's Theorem] \label{thm:Wedderburn}
+A finite dimensional $k$-algebra $A$ is \emph{semisimple}
+if and only if
+\[
+A \cong \bigoplus_{i=1}^r \operatorname{M}_{n_i}(D_i)
+\]
+where $D_1, \ldots, D_r$ are finite-dimensional $k$-algebras
+and $n_1,\ldots, n_r$ are positive integers.
+\end{theorem}
+
+\begin{definition}
+Let $A$ be a $k$-algebra and $M$ be a left $A$-module.
+A \emph{composition series} or \emph{simple finite filtration}
+is a descending sequence of submodules
+\[
+M=M_0 \supsetneq M_1 \supsetneq \cdots \supsetneq M_r = 0
+\]
+such that each quotient $M_i/M_{i+1}$ is simple.
+The integer $r$ is the \emph{length} of the filtration.
+The module $M$ is of \emph{finite length} if it possesses a simple finite
+filtration or $M=0$.
+\end{definition}
+
+\begin{theorem}[Jordan-H\"older]
+Any two composition series of a left module $M$ are \emph{equivalent}:
+the isomorphism classes of the quotients $M_i/M_{i+1}$
+are unique up to reordering.
+\end{theorem}
+
+In view of the Jordan-H\"older theorem, the following notion is
+well-defined:
+
+\begin{definition}
+The \emph{length} of a module $M$ of finite length is the length of any
+composition series (or $0$ if $M=0$).
+\end{definition}
+
+Recall that a ring is Artinian (resp. Noetherian) if it satisfies the
+descending chain condition (resp. ascending chain condition) on ideals.
+Similarly, a module is Artinian (resp. Noetherian) if it satisfies the
+descending chain condition (resp. ascending chain condition) on
+submodules.  Vector spaces over a field are in particular, both Artinian
+and Noetherian so we immediately have the following.
+
+\begin{proposition}
+Suppose $A$ is a finite-dimensional $k$-algebra,
+and $M$ is a finitely generated left $A$-module.
+Then $A$ and $M$ are both Noetherian and Artinian.
+In particular, we see that $M$ has finite length.
+\end{proposition}
+
+If $M$ is a semisimple left module, then there is a decomposition
+\begin{equation} \label{eq:isoDecomp}
+M = M_1 \oplus \cdots \oplus M_r,
+\end{equation}
+where each $M_i$ is a submodule isomorphic to $S_i^{\oplus a_i}$,
+$S_i$ is simple, $a_i$ is a positive integer
+and $S_i \not\cong S_j$ when $i \ne j$.
+Note that the each submodule $M_i$ is canonical, but the
+isomorphism $M_i \cong S_i^{\oplus a_i}$ is not.
+The submodules $M_1, \ldots, M_r$ are called the \emph{isotypic
+components} of $M$, and \eqref{eq:isoDecomp} is called the \emph{isotypic
+decomposition} of $M$.
+
+\begin{lemma} \label{lem:ssModule}
+Let $A$ be a finite-dimensional $k$-algebra and $M$ be a finitely
+generated left $A$-module.
+The following are equivalent:
+\begin{enumerate}
+\item[(a)] every submodule of $M$ is a direct summand,
+\item[(b)] $M$ is semisimple, and
+\item[(c)] $M$ is sum of simple submodules (not a priori direct).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+If $N_1 \subset N_2 \subset M$ is a chain of submodules and $N_1$ is a
+direct summand of $M$ then $N_1$ is a direct summand of $N_2$.
+Thus (a) $\implies$ (b) follows by induction on the dimension of $M$,
+with simple modules as the base case.  The implication (b) $\implies$
+(c) is immediate.  It remains to show (c) $\implies$ (a).
+
+Let $N$ be a submodule of $M$.
+Let $N'$ be the maximal submodule of $M$ such that $N \cap N' = 0$
+(which exists since $M$ is finite-dimensional).
+If $N + N' = M$ then we are done, so suppose $N + N' \subsetneq M$.
+Then there is a simple submodule $S$ of $M$ not contained in $N+N'$;
+in fact, $S \cap (N+N')=0$ since it is simple.
+
+In particular, $N' \subsetneq N'+S$.
+Consider $m \in (N'+S) \cap N$.  We have $m=n+s$ where and $n \in N'$
+and $s \in S$.  The element $s=m-n$ is in both $S$ and $N+N'$, so is
+trivial.  Thus $m \in N' \cap N$ is itself trivial.
+We conclude that $(N'+S) \cap N$ is trivial.
+The module $N'+S$ is a counterexample to the assumption of maximality of
+$N'$.
+\end{proof}
+
+\begin{lemma} \label{lem:subquot}
+Submodules and quotient modules of semisimple modules are semisimple.
+\end{lemma}
+
+\begin{proof}
+Submodules are semisimple by an argument similar to
+(1) $\implies$ (2) from Lemma~\ref{lem:ssModule}.
+Quotient modules are semisimple by Schur's lemma and
+condition (3) from Lemma~\ref{lem:ssModule}.
+\end{proof}
+
+Recall that an algebra $A$ is semisimple if and only if it is a direct
+product of simple rings.  We will see that this is equivalent to $A$
+being semisimple as a left module over itself.  In the interim, we prove
+a third equivalent restatement:
+
+\begin{lemma}
+Let $A$ be a finite-dimensional $k$-algebra.
+Every finitely generated left $A$-module is semisimple if and only if
+${}_AA$ is semisimple as a left $A$-module over itself.
+\end{lemma}
+
+\begin{proof}
+Suppose ${}_AA$ is semisimple as a left $A$-module.
+Any $A$-module $M$ can be written as a quotient of the free $A$-module
+$A^n$ for some positive integer $n$.
+Thus any submodule $M$ is semisimple by Lemma~\ref{lem:subquot}.
+The converse follows a fortiori.
+\end{proof}
+
+As a consequence of the previous lemma, along with
+Jordan-H\"older, we conclude that a semisimple algebra has only finitely
+many isomorphism classes of simple modules!
+
+\begin{lemma}
+Let $A$ be a finite-dimensional $k$-algebra.
+If $A$ is a simple algebra, then ${}_AA$ is semisimple.
+\end{lemma}
+
+\begin{proof}
+Let $M$ be the sum of all simple submodules in ${}_AA$.
+If $S$ is a simple submodule in ${}_AA$ and $a \in A$, then the left
+ideal $Sa$ is either $0$ or a simple submodule of ${}_AA$.
+Thus $Ma \subseteq M$ for any $a \in A$.
+Thus $M$ is a right ideal of $A$ so, in fact, a two-sided ideal.
+Since $M \ne 0$ and $A$ is simple as a ring, $M=A$.
+So ${}_AA$ is a sum of simple submodules, and thus is semisimple.
+\end{proof}
+
+\begin{corollary} \label{cor:semisimple_def}
+Let $A$ be a finite-dimensional $k$-algebra.
+If $A$ is a semisimple algebra, then ${}_AA$ is semisimple.
+\end{corollary}
+
+\begin{proof}
+Let $A = A_1 \oplus \cdots \oplus A_n$ where each $A_i$ is a simple
+$k$-algebra. Observe that the left $A$-module structure on ${}_AA_i$
+factors through the $A_i$-module structure.
+Each $A_i$ is, in particular, a submodule of ${}_AA$.
+Since they are semisimple, so is their sum.
+\end{proof}
+
+(The converse of the corollary will follow as a consequence of
+Wedderburn's theorem.)
+
+A proof of the following is left as an exercise:
+
+\begin{lemma} \label{lem:fancyMatrix}
+Let $A$ be a ring.
+Let $M= M_1 \oplus \cdots \oplus M_m$ and
+$N=N_1 \oplus \cdots \oplus N_n$ be direct sums of $A$-modules.
+Then
+\[ \operatorname{Hom}_A\left(\bigoplus_iM_i,\ \bigoplus_jN_i\right)
+\cong \bigoplus_{i,j}\operatorname{Hom}_A(M_i, N_j) \ . \]
+\end{lemma}
+
+\begin{lemma}
+Let $A$ be a finite-dimensional $k$-algebra and
+let $M$ be a semisimple left $A$-module.
+Suppose
+\[
+M = M_1 \oplus \cdots \oplus M_r
+\]
+is the isotypic decomposition where $M_i=S_i^{\oplus n_i}$
+for some simple $A$-module $S_i$.
+There is a canonical isomorphism of $k$-algebras
+\[
+\operatorname{End}_A(M) \cong \operatorname{M}_{n_1}(\operatorname{End}_A(S_1))
+\oplus \cdots \oplus
+\operatorname{M}_{n_r}(\operatorname{End}_A(S_r)) .
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:fancyMatrix},
+we have $\operatorname{End}_A(N) = \operatorname{Hom}_A(N,N)$ and
+$\operatorname{End}_A(M^{\oplus n}) \cong M_n(\operatorname{End}_A(N))$
+for any left $A$-module $N$ and any positive integer $n$.
+Thus, it suffices
+to show that $\operatorname{Hom}_A(M_i,M_j)=0$ whenever $i \ne j$.
+Note that $M_i=S_i^{\oplus n_i}$ and $M_j=S_j^{\oplus n_j}$
+for integers $n_i, n_j$ and
+non-isomorphic simple modules $S_i$ and $S_j$.
+Again using the previous lemma, $\operatorname{Hom}_A(M_i,M_j)$ is a direct sum of
+modules of the form $\operatorname{Hom}_A(S_i,S_j)$.  These are $0$ by Schur's lemma.
+\end{proof}
+
+\begin{lemma}
+Let $A$ be a $k$-algebra.
+There is a canonical isomorphism $A^{\mathrm{op}} \cong \operatorname{End}_A({}_AA)$ of
+$k$-algebras.
+\end{lemma}
+
+\begin{proof}
+Given an element $a \in A^{\mathrm{op}}$,
+there is a unique endomorphism $\phi_a \in A^{\mathrm{op}}$
+such that $\phi_a(1)=a$.
+This gives a correspondence that commutes with addition and scalar
+multiplication.
+Thus there is an isomorphism between the underlying vector spaces.
+The computation
+\[ (\phi_a \circ \phi_b)(1)=\phi_a(b)=b\phi_a(1)=ba \]
+shows that the multiplications agree.
+Thus the algebras are isomorphic.
+\end{proof}
+
+One more observation before the main theorem:
+
+\begin{lemma}
+For a $k$-algebra $A$, there is a
+$k$-algebra isomorphism $\operatorname{M}_n(A)^{\mathrm{op}}
+\cong \operatorname{M}_n(A^{\mathrm{op}})$.
+\end{lemma}
+
+\begin{proof}
+Take a matrix to its transpose.  This is clearly a vector space
+isomorphism.  A short calculation shows that the multiplications are
+also compatible. 
+\end{proof}
+
+We now prove Wedderburn's theorem.
+
+\begin{lemma}
+Let $A$ be a finitely generated $k$-algebra.
+If ${}_AA$ is semisimple as a left $A$-module,
+then $A$ is is isomorphic to a direct
+sum of matrix algebras over division algebras.
+\end{lemma}
+
+\begin{proof}[Proof of Theorem~\ref{thm:Wedderburn}]
+Suppose $A$ is semisimple as a $k$-algebra.
+Then ${}_AA$ is semisimple as a left $A$-module
+by Corollary~\ref{cor:semisimple_def}.
+
+Since ${}_AA$ is semisimple, it has an isotypic decomposition
+\[
+{}_AA = S_1^{\oplus n_1} \oplus \cdots \oplus S_r^{\oplus n_r}
+\]
+where $S_i$ are pairwise non-isomorphic simple modules.
+Let $D_i=\operatorname{End}_A(S_i)$,
+which are division algebras by Schur's Lemma.
+
+Thus
+\begin{align*}
+A^{\operatorname{op}} &\cong \operatorname{End}_A(A)\\
+&\cong \operatorname{End}_A(S_1^{\oplus n_1}) \oplus \cdots
+\oplus \operatorname{End}_A(S_r^{\oplus n_r})\\
+&\cong M_{n_1}(D_1) \oplus \cdots \oplus M_{n_r}(D_r) \ ,
+\intertext{and applying the last lemma:}
+A &\cong M_{n_1}(D_1^{\operatorname{op}}) \oplus \cdots \oplus
+M_{n_r}(D_r^{\operatorname{op}}) \ .
+\end{align*}
+
+We leave the converse as an exercise.
+\end{proof}
+
+Note that a corollary of the above (one direction of which was used in
+the proof) is the following characterization of semisimplicity of an
+algebra.
+
+\begin{corollary}
+Let $A$ be a finite-dimensional $k$-algebra.
+The following are equivalent:
+\begin{itemize}
+\item $A$ is semisimple as a ring (a direct sum of simple rings).
+\item $A$ is semisimple as a left $A$-module (a direct sum of simple
+modules).
+\item Every finitely generated left $A$-module is semisimple.
+\end{itemize}
+\end{corollary}
+
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
 
