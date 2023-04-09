@@ -1365,6 +1365,7 @@ modules).
 \section{Central Simple Algebras}
 
 As in the previous section, $k$ is a field.
+We denote the algebraic closure of $k$ by $\overline{k}$.
 Some of the results here are elaborated in texts on central simple
 algebras and the Brauer group (for example, \cite{GS} or \cite{Saltman}). 
 
@@ -1381,11 +1382,19 @@ A \emph{central division $k$-algebra} is a finite-dimensional $k$-algebra
 $A$ with center $Z(A)=k$.
 \end{definition}
 
-In view of Wedderburn's theorem, we may characterize central simple
-algebras completely.  We summarize as follows:
+Recall the following, which we proved when we established Schur's Lemma
+in the complex case:
 
-\begin{proposition}
-Suppose $A$ is a finite-dimensional $k$-algebra.
+\begin{proposition} \label{prop:division_ac}
+If $k$ is algebraically closed, then every central division $k$-algebra
+is isomorphic to $k$.
+\end{proposition}
+
+In view of Wedderburn's theorem, we have a good description of central
+simple algebras and how they relate to the other kinds of
+algebras we've seen.  If $A$ is a finite dimensional $k$-algebra,
+then:
+
 \begin{enumerate}
 \item If $A$ is semisimple, then it is a product of simple $k$-algebras.
 \item If $A$ is simple, then it is a central simple $K$-algebra, where
@@ -1393,10 +1402,9 @@ $K$ is a finite field extension of $k$.
 \item If $A$ is a central simple $k$-algebra, then $A \cong
 \operatorname{M_n}(D)$ where $D$ is a central division $k$-algebra.
 \end{enumerate}
-\end{proposition}
 
-The following shows that everything boils down to understanding division
-algebras.
+Central simple algebras and division algebras are closely related.
+In a sense, then former is totally understood in terms of the latter:
 
 \begin{proposition}
 If $A$ is a central simple $k$-algebra, then there is a unique central
@@ -1421,61 +1429,161 @@ Thus
 \[
 D \cong \operatorname{End}_A(D^{\oplus n})
 \cong L
-\cong \operatorname{End}_A(E^{\oplus n}) \cong E
+\cong \operatorname{End}_A(E^{\oplus m}) \cong E
 \]
 and $m=n$ follows by dimension reasons.
 \end{proof}
 
-\begin{lemma}[Rieffel]
-Let $A$ be a simple $k$-algebra, let $L$ be a non-zero left ideal in
-$A$, and let $D = \operatorname{End}_A(L)$.
-The left multiplication map $\lambda : A \to \operatorname{End}_D(L)$
-is a $k$-algebra isomorphism.
+However, central simple algebras naturally come up in constructions that
+are a bit awkward if restricted to division algebras alone.
+
+\begin{lemma} \label{lem:center_of_tensor}
+If $A$ and $B$ are $k$-algebras, then $Z(A \otimes_k B) = Z(A) \otimes_k
+Z(B)$.
 \end{lemma}
 
 \begin{proof}
-First note that $L$ has a natural left $D$-module structure
-via $\varphi \cdot x := \varphi(x)$ for $\varphi \in D$ and $x \in L$.
-The left multiplication map is given by taking $a \in A$ to
-the map $\lambda_a : L \to L$ defined by $\lambda_a(x)=ax$
-for $x \in L$.
-Note that every $\lambda_a$ is indeed a left $D$-module homomorphism
-of $L$ since $\varphi \cdot ax = \varphi(ax)=a\varphi(x)=a(\varphi \cdot
-x)$ for all $a \in A$, $\varphi \in D$, and $x \in X$.
-It is evident that $\lambda$ is a $k$-algebra homomorphism.
-
-Since $A$ is simple and $\lambda \ne 0$, the two-sided ideal
-$\ker(\lambda)$ must be trivial.  Thus $\lambda$ is injective.
-It remains to show surjectivity.
-
-We show $\lambda(L)$ is a left ideal of $\operatorname{End}_D(L)$.
-First, observe that for $x \in L$,
-consider the right multiplication map $\rho_x : L \to L$
-given by $\rho_x(y)=yx$.  We see that $\rho_x$ is an endomorphism
-of $A$-modules and, thus, an element of $D$.
-Suppose $x, \ell \in L$ and $\varphi \in \operatorname{End}_D(L)$.
-We have
+Clearly, $Z(A) \otimes_k Z(B) \subseteq Z(A \otimes_k B)$.
+Now, suppose $z = \sum_i a_i \otimes b_i$ is an element of
+$Z(A \otimes_k B)$.  We may assume the $a_i$ are linearly independent.
+Take $x \in B$ and observe that
 \[
-(\varphi \circ \lambda(\ell))(x)=\varphi(\ell x)
-=\varphi(\rho_x(\ell))=\rho_x(\varphi(\ell))=\varphi(\ell)x .
+0 = z(1 \otimes x) - (1 \otimes x)z =
+\sum_i a_i \otimes (b_ix-xb_i),
 \]
-Since $x$ was arbitrary, we conclude $\varphi \cdot \lambda(\ell)
-= \lambda(\varphi\cdot \ell)$.  Thus $L$ is a left ideal.
+implying that each $b_ix-xb_i=0$.
+Thus each $b_i \in Z(B)$.
+Thus $z \in A \otimes_k Z(B)$.
+Now, we may assume (after possibly rewriting $z$) that the $b_i$
+are linearly independent in $Z(B)$
+and conclude similarly that each $a_i$ is in $Z(A)$.
+\end{proof}
 
-Now observe that the right ideal $LA$ is a two-sided ideal,
-so $LA=A$ since $A$ is simple.
-Thus, we have
+\begin{lemma} \label{lem:csa_simple_simple}
+If $A$ is a central simple $k$-algebra and
+$B$ is a simple $k$-algebra, then $A \otimes_k B$ is a simple
+$k$-algebra.
+\end{lemma}
+
+\begin{proof}
+Let $I$ be a non-trivial $2$-sided ideal in $A \otimes_k B$.
+Consider an element $x \in I$ and write it as
 \[
-1 = \sum_i \ell_i a_i
+x = \sum_{i=1}^r a_i \otimes b_i,
 \]
-for some $\ell_i \in L$ and $a_i \in A$.
-Given an arbitrary $\varphi \in \operatorname{End}_D(L)$,
-we write
+where $r$ is minimal.
+Since $I$ is $A$ is simple, $Aa_1A=A$.  Thus we have $y,z \in A \otimes 1$
+such that
 \[
-\varphi = \varphi \cdot 1 = \sum_i \varphi \lambda(\ell_i)\lambda(a_i).
+x'=yxz = 1 \otimes b_1 + \sum_{i=2}^r a_i' \otimes b_i
 \]
-But, $\varphi \lambda(\ell_i) \in \lambda(L)$ since $\lambda(L)$
-is a left ideal.  Thus $\varphi$ is in the image of $\lambda$.
+for $a_i'=ya_iz$, where $x' \in I$ also.
+Taking $w \in A$, we see that
+\[
+(w \otimes 1)x' - x'(w \otimes 1) = -\sum_{i=2}^r (wa_i'-a_i'w) \otimes
+b_i
+\]
+is zero by minimality of $r$.  Thus each $a_i'$ is in the center
+$Z(A)=k$.  Thus $x'=1 \otimes b \in I$ for some $b \in B$.
+But $B$ is simple, so $BbB=B$.  Thus $1 \otimes B \subseteq I$.
+We conclude that $A \otimes B = I$ as desired.
+\end{proof}
+
+Note that the hypothesis that $A$ is central over $k$ is vital
+in Lemma~\ref{lem:csa_simple_simple} --- consider $\mathbb{C}
+\otimes_{\mathbb{R}} \mathbb{C}$.
+
+\begin{lemma}
+If $A$ is a finite-dimensional central simple $k$-algebra,
+then there is a $k$-algebra isomorphism
+$A \otimes_k A^{\mathrm{op}} \cong M_n(k)$
+for $n = \dim_k(A)$.
+\end{lemma}
+
+\begin{proof}
+By extension by linearity, there is a $k$-algebra homorphism
+$\Psi : A \otimes_k A^{\mathrm{op}} \to \operatorname{End}_k(A)$
+such that $\Psi(x \otimes y)(z)=xzy$ for $x,z \in A$ and
+$y \in A^{\mathrm{op}}$.  The map is injective since
+$A \otimes A^{\mathrm{op}}$ is simple.
+Surjectivity follows by a dimension count.
+\end{proof}
+
+\begin{definition}
+Two central simple $k$-algebras $A$ and $B$ are
+\emph{Brauer equivalent} if $A \otimes_k M_n(k) \cong B \otimes_k
+M_m(k)$ for some positive integers $m,n$.
+The \emph{Brauer group}, denoted $\operatorname{Br}(k)$,
+is the set of Brauer-equivalence classes
+of central simple $k$-algebras.
+\end{definition}
+
+From the lemmas above, we have the following:
+
+\begin{proposition}
+The Brauer group $\operatorname{Br}(k)$ is a group under
+tensor product of representatives,
+with identity the class of matrix algebras $M_n(k)$
+and inverse given by $[A] \mapsto [A^{\mathrm{op}}]$.
+\end{proposition}
+
+Equivalently, $A$ and $B$ are Brauer equivalent if $A$ and $B$ are both
+matrix rings over the same central division $k$-algebra.
+Thus $\operatorname{Br}(k)$ can also be viewed as the set of isomorphism
+classes of central division $k$-algebras; however, the group structure
+is more obscure with this definition.
+
+Another reason once studies central simple algebras instead of just the
+underlying division algebras is that property of being a central simple
+algebra is invariant under field extension.
+
+\begin{proposition}
+Let $A$ be a finite-dimensional $k$-algebra.
+The following are equivalent:
+\begin{enumerate}
+\item[(a)] $A$ is a central simple $k$-algebra.
+\item[(b)] $A \otimes_k K$ is a central simple $K$-algebra for a field
+extension $K/k$.
+\item[(c)] $A \cong \operatorname{M}_n(D)$ for a central division $k$-algebra
+$D$ and some $n$.
+\item[(d)] $A \otimes_k \overline{k} \cong \operatorname{M}_n(\overline{k})$
+for some $n$.
+\item[(e)] $A \otimes_k K \cong \operatorname{M}_n(K)$
+for a finite field extension $K/k$ and some $n$.
+\item[(f)] $A \otimes_k K \cong \operatorname{M}_n(K)$
+for a finite Galois field extension $K/k$ and some $n$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The equivalence of (e) and (f) boils down to showing that one can choose
+a \emph{separable} field extension.
+Since we're mostly working in
+characteristic $0$, we won't consider (f) here;
+see \cite[Proposition 2.2.5]{GS} for a proof.
+
+We begin by establishing (a) $\implies$ (b).
+By Lemma~\ref{lem:csa_simple_simple} we conclude that $A \otimes_k K$
+is simple since $K$ is simple.  The center of $A \otimes_k K$
+is $k \otimes_k K=K$ by Lemma~\ref{lem:center_of_tensor}.
+Thus $A \otimes_k K$ is a central simple $K$-algebra as desired.
+
+Let us consider (b) $\implies$ (a).
+If $J$ is a two-sided ideal of $A$, then $J \otimes_k K$ will be a
+two-sided ideal of $A \otimes_k K$; thus $A$ is simple.
+If $z$ is in the center $Z(A)$, then $z \otimes 1$ is in the
+center of $Z(A \otimes K)$.  Thus $z \in K \cap k = k$.
+
+The implication (a) $\implies$ (c) we have already seen follows from
+Wedderburn theory.
+The implication (c) $\implies$ (d) follows from
+Proposition~\ref{prop:division_ac}
+using the fact that we have already shown (a) $\implies$ (b).
+The implication (d) $\implies$ (e) follows from the Lefschetz principle:
+the coefficients in an explicit isomorphism
+$A \otimes_k \overline{k} \cong \operatorname{M}_n(\overline{k})$
+must be defined over some finite extension of $k$.
+The implication (e) $\implies$ (b) is immediate.
 \end{proof}
 
 \bibliographystyle{alpha}
