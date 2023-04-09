@@ -1362,6 +1362,122 @@ modules).
 \end{itemize}
 \end{corollary}
 
+\section{Central Simple Algebras}
+
+As in the previous section, $k$ is a field.
+Some of the results here are elaborated in texts on central simple
+algebras and the Brauer group (for example, \cite{GS} or \cite{Saltman}). 
+
+Since a semisimple algebra is a direct sum of simple algebras,
+we are now interested in studying simple algebras.
+The most important invariant of a simple algebra is its center,
+which is always a field since otherwise there is a non-trivial two-sided
+ideal.  This motivates the following definition.
+
+\begin{definition}
+A \emph{central simple $k$-algebra} is a finite-dimensional $k$-algebra
+$A$ with center $Z(A)=k$.
+A \emph{central division $k$-algebra} is a finite-dimensional $k$-algebra
+$A$ with center $Z(A)=k$.
+\end{definition}
+
+In view of Wedderburn's theorem, we may characterize central simple
+algebras completely.  We summarize as follows:
+
+\begin{proposition}
+Suppose $A$ is a finite-dimensional $k$-algebra.
+\begin{enumerate}
+\item If $A$ is semisimple, then it is a product of simple $k$-algebras.
+\item If $A$ is simple, then it is a central simple $K$-algebra, where
+$K$ is a finite field extension of $k$.
+\item If $A$ is a central simple $k$-algebra, then $A \cong
+\operatorname{M_n}(D)$ where $D$ is a central division $k$-algebra.
+\end{enumerate}
+\end{proposition}
+
+The following shows that everything boils down to understanding division
+algebras.
+
+\begin{proposition}
+If $A$ is a central simple $k$-algebra, then there is a unique central
+division $k$-algebra $D$ (up to isomorphism) and positive integer $n$
+such that $A \cong \operatorname{M}_n(D)$.
+\end{proposition}
+
+\begin{proof}
+Suppose $A \cong M_n(D) \cong M_m(E)$ for central division $k$-algebras
+$D$ and $E$.
+Let $L$ be a minimal left ideal of $A$.
+Then $D^{\oplus n} \cong L \cong E^{\oplus m}$ since all the algebras
+are simple and have only isomorphism class of simple module.
+One may view $D^{\oplus n}$ as the set of column vectors with
+entries in $D$.
+Observe that an endomorphism $D^{\oplus n} \to D^{\oplus n}$
+as left $A$-modules is wholly determined by the image of
+the element $(1,0,\ldots,0)$.  One checks that the only
+permitted images are of the form $(a,0,\ldots,0)$ for $a \in A$.
+Thus $\operatorname{End}_A(D^{\oplus n}) \cong D$.
+Thus
+\[
+D \cong \operatorname{End}_A(D^{\oplus n})
+\cong L
+\cong \operatorname{End}_A(E^{\oplus n}) \cong E
+\]
+and $m=n$ follows by dimension reasons.
+\end{proof}
+
+\begin{lemma}[Rieffel]
+Let $A$ be a simple $k$-algebra, let $L$ be a non-zero left ideal in
+$A$, and let $D = \operatorname{End}_A(L)$.
+The left multiplication map $\lambda : A \to \operatorname{End}_D(L)$
+is a $k$-algebra isomorphism.
+\end{lemma}
+
+\begin{proof}
+First note that $L$ has a natural left $D$-module structure
+via $\varphi \cdot x := \varphi(x)$ for $\varphi \in D$ and $x \in L$.
+The left multiplication map is given by taking $a \in A$ to
+the map $\lambda_a : L \to L$ defined by $\lambda_a(x)=ax$
+for $x \in L$.
+Note that every $\lambda_a$ is indeed a left $D$-module homomorphism
+of $L$ since $\varphi \cdot ax = \varphi(ax)=a\varphi(x)=a(\varphi \cdot
+x)$ for all $a \in A$, $\varphi \in D$, and $x \in X$.
+It is evident that $\lambda$ is a $k$-algebra homomorphism.
+
+Since $A$ is simple and $\lambda \ne 0$, the two-sided ideal
+$\ker(\lambda)$ must be trivial.  Thus $\lambda$ is injective.
+It remains to show surjectivity.
+
+We show $\lambda(L)$ is a left ideal of $\operatorname{End}_D(L)$.
+First, observe that for $x \in L$,
+consider the right multiplication map $\rho_x : L \to L$
+given by $\rho_x(y)=yx$.  We see that $\rho_x$ is an endomorphism
+of $A$-modules and, thus, an element of $D$.
+Suppose $x, \ell \in L$ and $\varphi \in \operatorname{End}_D(L)$.
+We have
+\[
+(\varphi \circ \lambda(\ell))(x)=\varphi(\ell x)
+=\varphi(\rho_x(\ell))=\rho_x(\varphi(\ell))=\varphi(\ell)x .
+\]
+Since $x$ was arbitrary, we conclude $\varphi \cdot \lambda(\ell)
+= \lambda(\varphi\cdot \ell)$.  Thus $L$ is a left ideal.
+
+Now observe that the right ideal $LA$ is a two-sided ideal,
+so $LA=A$ since $A$ is simple.
+Thus, we have
+\[
+1 = \sum_i \ell_i a_i
+\]
+for some $\ell_i \in L$ and $a_i \in A$.
+Given an arbitrary $\varphi \in \operatorname{End}_D(L)$,
+we write
+\[
+\varphi = \varphi \cdot 1 = \sum_i \varphi \lambda(\ell_i)\lambda(a_i).
+\]
+But, $\varphi \lambda(\ell_i) \in \lambda(L)$ since $\lambda(L)$
+is a left ideal.  Thus $\varphi$ is in the image of $\lambda$.
+\end{proof}
+
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
 
