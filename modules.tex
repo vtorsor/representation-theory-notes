@@ -1509,6 +1509,9 @@ $A \otimes A^{\mathrm{op}}$ is simple.
 Surjectivity follows by a dimension count.
 \end{proof}
 
+(In fact, the converse of the previous lemma is also true, but we do not
+need this.)
+
 \begin{definition}
 Two central simple $k$-algebras $A$ and $B$ are
 \emph{Brauer equivalent} if $A \otimes_k M_n(k) \cong B \otimes_k
@@ -1585,6 +1588,93 @@ $A \otimes_k \overline{k} \cong \operatorname{M}_n(\overline{k})$
 must be defined over some finite extension of $k$.
 The implication (e) $\implies$ (b) is immediate.
 \end{proof}
+
+In view of the previous proposition, we may discuss some standard
+concepts associated to central simple algebras.
+
+\begin{definition}
+Let $A$ be a central simple $k$-algebra.
+The algebra $A$ is \emph{split} if $A \cong \operatorname{M}_n(k)$
+for some integer $n$.  A \emph{splitting field} of $A$ is a field
+extension $K/k$ such that $A \otimes_k K \cong \operatorname{M}_n(K)$.
+\end{definition}
+
+Note that if $V$ is a $k$-vector space,
+then $\dim_k(V) = \dim_K(V \otimes_k K)$
+for all field extensions $K/k$.
+Thus, the dimension $\dim_k(A)$ of a central simple $k$-algebra $A$
+is always a square since
+$A \otimes_k K \cong \operatorname{M}_n(K)$ for some field extension
+$K/k$.
+
+\begin{definition}
+Let $A$ be a central simple $k$-algebra.
+The \emph{degree} of $A$ is the unique positive integer
+$\deg(A)$ such that
+$\dim_k(A)=\deg(A)^2$.
+The \emph{(Schur) index} of $A$ is given by $\operatorname{ind}(A)=\deg(D)$
+where $D$ is the central division $k$-algebra such that
+$A\cong \operatorname{M}_n(D)$.
+\end{definition}
+
+\begin{proposition}
+If $A$ is a central simple $k$-algebra and
+$M$ is a simple left $A$-module, then
+$\dim_k(M) =\deg(A) \operatorname{ind}(A)$.
+\end{proposition}
+
+\begin{proof}
+Note $A \cong \operatorname{M}_r(D)$ for a central division $k$-algebra
+$D$.
+Since $M$ is simple, we have $M \cong D^{\oplus r}$.
+Thus $\dim_k(M) = r \deg(D)^2=\deg(A) \operatorname{ind}(A)$.
+\end{proof}
+
+Let $A$ be a central simple $k$-algebra with splitting field $K$
+and let $\Psi : A \hookrightarrow M_n(K)$ be the embedding
+obtained by composition with an isomorphism $A \otimes_k K \cong
+M_n(K)$.
+Given an element $a \in A$, we define the
+\emph{reduced characteristic polynomial}
+\[
+\operatorname{Prd}_{A,a}(t) := \chi_{\Psi(a)}(t)
+\]
+where $\chi_{\Psi(a)}(t)$ is the characteristic polynomial
+of $\Psi(a)$ in $M_n(K)$.
+
+\begin{proposition}
+The reduced characteristic polynomial
+$\operatorname{Prd}_{A,a}(t)$ has coefficients in $k$ and does not depend on
+the choice of splitting field $K$ nor the choice of isomorphism
+$A \otimes_k K \cong M_n(K)$.
+\end{proposition}
+
+\begin{proof}
+We omit the proof since this is not fundamental to our story.
+\end{proof}
+
+Writing
+\[
+\operatorname{Prd}_{A,a}(t) = t^n - e_1t^{n-1} + \cdots + (-1)^n e_n
+\]
+as a polynomial in $k[t]$, we define
+the \emph{reduced trace} $\operatorname{Trd}_A(a)=e_1$
+and \emph{reduced norm} $\operatorname{Nrd}_A(a)=e_n$.
+
+\begin{proposition}
+Let $A$ be a central simple $k$-algebra.
+Let $\chi_{A/k,a}(t)$, $\operatorname{Tr}_{A/k}(a)$, and
+$\operatorname{N}_{A/k}(a)$
+be the ``usual'' characteristic polynomial, trace, and norm
+of $a$ as an element of the $k$-algebra $A$.
+Then we have
+\[
+\chi_{A,a}(t)=\operatorname{Prd}_{A,a}^n \quad
+\operatorname{Tr}_{A/k}(a)=n\operatorname{Trd}_A(a) \quad
+\operatorname{N}_{A/k}(a)=\left(\operatorname{Nrd}_A(a)\right)^n
+\]
+where $n=\deg(A)$.
+\end{proposition}
 
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
