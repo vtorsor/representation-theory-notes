@@ -1313,13 +1313,6 @@ also compatible.
 
 We now prove Wedderburn's theorem.
 
-\begin{lemma}
-Let $A$ be a finitely generated $k$-algebra.
-If ${}_AA$ is semisimple as a left $A$-module,
-then $A$ is is isomorphic to a direct
-sum of matrix algebras over division algebras.
-\end{lemma}
-
 \begin{proof}[Proof of Theorem~\ref{thm:Wedderburn}]
 Suppose $A$ is semisimple as a $k$-algebra.
 Then ${}_AA$ is semisimple as a left $A$-module
@@ -1404,7 +1397,7 @@ $K$ is a finite field extension of $k$.
 \end{enumerate}
 
 Central simple algebras and division algebras are closely related.
-In a sense, then former is totally understood in terms of the latter:
+In one sense, the former can be totally understood in terms of the latter:
 
 \begin{proposition}
 If $A$ is a central simple $k$-algebra, then there is a unique central
@@ -1431,7 +1424,7 @@ D \cong \operatorname{End}_A(D^{\oplus n})
 \cong L
 \cong \operatorname{End}_A(E^{\oplus m}) \cong E
 \]
-and $m=n$ follows by dimension reasons.
+and $m=n$ follows by a dimension count.
 \end{proof}
 
 However, central simple algebras naturally come up in constructions that
@@ -1466,26 +1459,26 @@ $k$-algebra.
 \end{lemma}
 
 \begin{proof}
-Let $I$ be a non-trivial $2$-sided ideal in $A \otimes_k B$.
-Consider an element $x \in I$ and write it as
+Let $I$ be a non-trivial two-sided ideal in $A \otimes_k B$.
+Let $r$ be the minimal positive integer such that
+there exists an element $x \in I$ that can be written
 \[
-x = \sum_{i=1}^r a_i \otimes b_i,
+x = \sum_{i=1}^r a_i \otimes b_i.
 \]
-where $r$ is minimal.
 Since $I$ is $A$ is simple, $Aa_1A=A$.  Thus we have $y,z \in A \otimes 1$
 such that
 \[
 x'=yxz = 1 \otimes b_1 + \sum_{i=2}^r a_i' \otimes b_i
 \]
 for $a_i'=ya_iz$, where $x' \in I$ also.
-Taking $w \in A$, we see that
+For all $w \in A$, we see that
 \[
 (w \otimes 1)x' - x'(w \otimes 1) = -\sum_{i=2}^r (wa_i'-a_i'w) \otimes
-b_i
+b_i = 0
 \]
-is zero by minimality of $r$.  Thus each $a_i'$ is in the center
-$Z(A)=k$.  Thus $x'=1 \otimes b \in I$ for some $b \in B$.
-But $B$ is simple, so $BbB=B$.  Thus $1 \otimes B \subseteq I$.
+by minimality of $r$.  Thus $x' \in Z(A) \otimes_k B = k \otimes_k B$.
+Thus $x'=1 \otimes b \in I$ for some $b \in B$.
+But $B$ is simple, so $BbB=B$.  Thus $1 \otimes 1 \in I$.
 We conclude that $A \otimes B = I$ as desired.
 \end{proof}
 
@@ -1669,7 +1662,7 @@ be the ``usual'' characteristic polynomial, trace, and norm
 of $a$ as an element of the $k$-algebra $A$.
 Then we have
 \[
-\chi_{A,a}(t)=\operatorname{Prd}_{A,a}^n \quad
+\chi_{A,a}(t)=\operatorname{Prd}_{A,a}^n(t) \quad
 \operatorname{Tr}_{A/k}(a)=n\operatorname{Trd}_A(a) \quad
 \operatorname{N}_{A/k}(a)=\left(\operatorname{Nrd}_A(a)\right)^n
 \]
