@@ -1,0 +1,308 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm}
+
+% theorem styles (I like everything to have the same counter)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{exercise}[theorem]{Exercise}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% some numbering settings
+\numberwithin{equation}{section}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{15.2pt}
+\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+\setlength{\footskip}{30pt}
+\pagestyle{fancy}
+
+\makeatletter
+\let\ps@plain\ps@fancy 
+\makeatother
+
+\lhead{MATH 742}
+\chead{Representations over non-closed fields}
+\rhead{Spring 2023}
+\lfoot{Last Revised: \today}
+\cfoot{}
+\rfoot{\thepage\ of \pageref{LastPage} }
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\title{Representations over non-closed fields}
+\author{Alexander Duncan}
+
+\maketitle
+
+Throughout, $k$ is a field of characteristic $0$
+and $\overline{k}$ is the algebraic closure of $k$.
+Let $\Gamma_k$ be the absolute Galois group of $k$.
+(For those uncomfortable with infinite Galois extensions,
+one can instead replace $\overline{k}$ with the Galois closure
+of the finitely many relevant finite field extensions
+showing up in any of the contexts we discuss below.)
+
+Much of this is inspired from \cite[\S{12--13}]{Serre}.
+
+\section{Representation Ring via Modules}
+
+Let $G$ be a finite group.
+
+Recall that $kG$ is the group algebra of $G$ over $k$.
+Since $k$ has characterstic $0$, we know $kG$ is semisimple.
+We have a canonical decomposition
+\[
+kG \cong \oplus_{i=1}^r A_i
+\]
+where $A_1,\ldots,A_r$ are simple $k$-algebras.
+
+Each $A_i$ is a central simple $F_i$-algebra
+for a finite field extension $F_i/k$.
+Let $n_i = \deg(A_i)$ be the \emph{degree} of $A_i$.
+Equivalently, we have $n_i^2 = \dim_{F_i}(A_i)$
+or
+\[
+A_i \otimes_{F_i} \overline{k} \cong
+\operatorname{M}_{n_i}(\overline{k})
+\]
+as $\overline{k}$-algebras.
+
+More precisely, there exists a central division $F_i$-algebra $D_i$
+and a positive integer $m_i$ such that
+\[
+A_i \cong \operatorname{M}_{m_i}(D_i)
+\]
+as $F_i$-algebras.
+Both $m_i$ and the isomorphism class of $D_i$ are uniquely determined.
+Let $d_i := \operatorname{ind}(A_i)$ denote the Schur index of $A_i$.
+We have $d_i = \deg(D_i)$, which is equivalent to
+$d_i^2=\dim_{F_i}(D_i)$.  Also, we have $n_i=m_id_i$.
+
+Each $A_i$ has a simple module $V_i$, which is unique up to isomorphism.
+Since $V_i \cong D_i^{\oplus n_i}$, we see that
+\[
+\dim_k V_i = [F_i:k]m_id_i^2 = [F_i:k]d_in_i .
+\]
+The vector spaces $V_1,\ldots,V_r$ are precisely the
+irreducible representations of $G$ over $k$.
+The \emph{Schur index} of $V_i$ is defined to be the
+Schur index $d_i$ of the associated algebra $A_i$.
+
+Let $X_i :=
+\operatorname{Hom}_{k-\operatorname{alg}}(F_i,\overline{k})$.
+Observe that $X_i$ has a left action of $\Gamma_k$ by
+post-composition.
+Informally, $X_i$ can be thought of as the set of roots of the minimal
+polynomial of a primitive element of $F_i/k$.
+We have a $\overline{k}$-algebra isomorphism
+\[
+\omega : F_i \otimes_k \overline{k} \cong
+\bigoplus_{\sigma \in X_i} \overline{k}
+\]
+via $\omega(f \otimes \ell)_{\sigma} := \sigma(f)\ell$.
+
+For each $\sigma \in X_i$, we may define a tensor product
+$A_i \otimes_\sigma \overline{k}$ of $F_i$-algebras
+where we use the structure map $F_i \to A_i$ on the left and
+the homomorphism $\sigma : F_i \to \overline{k}$ on the right.
+Via the sequence of isomorphisms of $\overline{k}$-algebras
+\[
+A_i \otimes_k \overline{k} \cong 
+A_i \otimes_{F_i} F_i \otimes_k \overline{k}
+\cong A_i \otimes_{F_i} \bigoplus_{\sigma \in X_i} \overline{k}
+\]
+we obtain an isomorphism
+\[
+\Omega : A_i \otimes_k \overline{k} \cong
+\bigoplus_{\sigma \in X_i} A_i \otimes_\sigma \overline{k} .
+\]
+
+Let $W_{i,\sigma}$ be the irreducible representation
+of $\overline{k}G$ corresponding to $A_i \otimes_\sigma \overline{k}$.
+We conclude that we have the following decomposition
+\[
+V_i \otimes_k \overline{k} \cong
+\bigoplus_{\sigma \in X_i} W_{i,\sigma}^{\oplus d_i}
+\]
+for each irreducible representation $V_i$ of $kG$.
+
+If $\rho_{i,\sigma} : G \to \operatorname{GL}(W_{i,\sigma})$ are
+the corresponding maps, then notice that
+\[
+\tau \circ \rho_{i,\sigma} = \rho_{i,\tau(\sigma)}
+\]
+for every $\tau \in \Gamma$.
+Thus, there is a left action of $\Gamma$ on the set of irreducible
+representations of $G$ over $\overline{k}$
+with orbits corresponding to the $\Gamma$-sets $X_i$.
+
+\section{Character Theory}
+
+Here we will assume that $\overline{k}$ (and therefore $k$)
+is a specific subfield of $\mathbb{C}$.
+This is essentially harmless in view of the Lefschetz principle.
+For the suspicious, assume that $\mathbb{C}$ is just bizarre notation for
+$\overline{k}$ throughout the remainder of the document.
+
+Recall that the representation ring $R_k(G)$ of $G$ over $k$
+is the additive group of virtual representations over $k$
+with multiplication obtained extending the tensor product
+on the subrig $R_k^+(G)$.
+From above, we see that $R_k(G)$ is a free abelian group
+on the set $[V_1],\ldots,[V_r]$.
+
+The map $[V] \mapsto [V \otimes_k \overline{k}]$
+gives a canonical injective ring homomorphism
+\[
+R_k(G) \hookrightarrow R_{\mathbb{C}} = R(G)
+\]
+and therefore a canonical injective ring homomorphism
+\[
+R_k(G) \hookrightarrow C(G)
+\]
+where $C(G)$ is the set of complex class functions on $G$.
+
+Just as in the complex case, given a representation $(V,\rho)$
+of $G$ over $k$, we define the character
+$\chi_V : G \to k$
+via the trace $\chi_V(g) := \operatorname{tr}(\rho(g))$.
+This agrees with the map $R_k(G) \hookrightarrow C(G)$ defined above.
+Thus, we identify $R_k(G)$ with a subring of $R(G)$ and $C(G)$ in what
+follows.
+
+Let $\chi_1,\ldots,\chi_r$ be the irreducible representations of $G$
+over $k$ corresponding to the algebras $A_1,\ldots, A_r$ above.
+Let $\psi_{i,\sigma} : G \to \overline{k}=\mathbb{C}$ be the character
+corresponding to the irreducible representation $W_{i,\sigma}$
+defined in the previous section.
+
+\begin{theorem}
+For every $1 \le i \le r$, we have
+\[
+\chi_i = d_i \sum_{\sigma \in X_i} \psi_{i,\sigma} .
+\]
+In particular, the characters $\chi_1,\ldots, \chi_r$
+are an orthogonal basis for the subspace $R_k(G)$ of $C(G)$.
+\end{theorem}
+
+\begin{proof}
+The description of $\chi_i$ follows from the results in the previous
+section.
+The orthogonality follows from the fact that the $\psi_{i,\sigma}$
+are orthogonal.
+\end{proof}
+
+Note that we only have the $\{\chi_1,\ldots,\chi_r\}$ is an
+\emph{orthogonal} basis; it is not necessarily orthonormal.
+
+There are in fact \emph{three} different traces that one may consider
+for each irreducible representation $V_i$.
+We have the ordinary trace $\chi_i(g) \in k$ as an element of
+$\operatorname{End}_k(V_i)$.
+We may also define $\phi_i(g) \in F_i$ as the trace of $g$ in
+$\operatorname{End}_{F_i}(V_i)$.
+Finally, we have $\psi_i(g) \in F_i$ as the reduced trace
+$\operatorname{Trd}(g)$ viewing $g$ as an element of the central simple
+$F_i$-algebra $A_i$.
+These traces are all related via
+\[
+\chi_i = \operatorname{Tr}_{F_i/k} \circ \phi_i, \quad
+\phi_i = d_i \psi_i
+\]
+where we recall that $d_i$ is the Schur index of the central simple
+$F_i$-algebra $A_i$ (equivalently, the representation $V_i$).
+Finally for each $\sigma \in X_i$, we see that $\psi_{i,\sigma} = \sigma
+\circ \psi_i$.
+This gives another way of obtaining the decomposition of $V_i \otimes_k
+\overline{k}$ above.
+
+\subsection{Definability of Representations}
+
+Recall, from the previous section, that the absolute Galois group
+permutes the irreducible representations of $\overline{k}G$.
+Indeed, if $\rho_{i,\sigma} : G \to \operatorname{GL}(W_{i,\sigma})$
+is the map then we have
+\[
+\tau \circ \rho_{i,\sigma} = \rho_{i,\tau(\sigma)}
+\]
+for $\tau \in \Gamma$.
+This action is identical to the one obtained by acting on the
+characters
+\[
+\tau \circ \phi_{i,\sigma} = \phi_{i,\tau(\sigma)}
+\]
+where we recall $\phi_{i,\sigma}: G \to \overline{k}$ is just a
+particular class function.
+
+\begin{theorem}
+Let $\overline{R}_k(G)$ be the subset of $R(G)$ consisting of characters
+whose class functions whose image is defined over $k$.
+Then $\overline{R}_k(G)$ has basis
+\[
+\frac{\chi_1}{d_1},
+\frac{\chi_2}{d_2},
+\cdots,
+\frac{\chi_r}{d_r}.
+\]
+\end{theorem}
+
+Thus $\overline{R}_k(G)$ can be completely recovered from the character
+table over $\mathbb{C}$.  Namely, one can reconstruct the $\chi_i/d_i$
+as the sums of $\Gamma$-orbits of the complex characters.
+To reconstruct $\overline{R}_k(G)$, one needs to know the Schur indices.
+
+\begin{proposition}
+If $G$ is an abelian group,
+then $R_k(G) = \overline{R}_k(G)$
+\end{proposition}
+
+\begin{proof}
+If $G$ is abelian, then $kG$ is commutative, so all constituent
+division algebras are fields.  Thus all Schur indices are trivial.
+\end{proof}
+
+We are now in a position to prove an important theorem of Brauer, which
+essentially reduces the study of definability of representations of
+arbitrary fields of characteristic $0$ to the case of cyclotomic fields.
+
+\begin{theorem}
+If $G$ is a finite group of exponent $e$,
+then every representation of $G$ over an arbitrary field of
+characteristic $0$
+is conjugate to a representation defined over the
+cyclotomic field $\mathbb{Q}(\zeta_e)$.
+\end{theorem}
+
+\begin{proof}
+Let $K=\mathbb{Q}(\zeta_e)$.  We want to show that $R_K(G)=R(G)$.
+By Brauer's theorem, we may write a general element $\chi$ of $R(G)$
+in the form
+\[
+\rho = \sum_{i=1}^m c_i\operatorname{Ind}_{H_i}^G(\tau_i)
+\]
+where the $c_i$'s are integers, the $H_i$ are subgroups of $G$,
+and each $\tau_i$ is a one-dimensional representations of $R(H_i)$.
+A one-dimensional representation of $H_i$ is defined over
+$\mathbb{Q}(\zeta_e)$ since $H_i$ has exponent at most $e$.
+We conclude that $\chi$ is an integral linear combination of
+representations induced from $R_K(H_i)$, so is in $R_K(G)$ as desired.
+\end{proof}
+
+\bibliographystyle{alpha}
+\bibliography{rep_theory}
+
+\end{document}
+
+
