@@ -151,11 +151,14 @@ with orbits corresponding to the $\Gamma$-sets $X_i$.
 
 \section{Character Theory}
 
-Here we will assume that $\overline{k}$ (and therefore $k$)
-is a specific subfield of $\mathbb{C}$.
-This is essentially harmless in view of the Lefschetz principle.
-For the suspicious, assume that $\mathbb{C}$ is just bizarre notation for
-$\overline{k}$ throughout the remainder of the document.
+We have only developed character theory over $\mathbb{C}$.
+However, since we are dealing with finite-dimensional representations of
+finite groups, by the Lefschetz principle
+all the results we discussed hold over an arbitary algebraically closed
+field of character $0$.
+In particular, we may identify the representation rings
+$R(G)=R_{\mathbb{C}}(G)=R_{\overline{k}}(G)$
+where $\overline{k}$ is the algebraic closure of $k$.
 
 Recall that the representation ring $R_k(G)$ of $G$ over $k$
 is the additive group of virtual representations over $k$
@@ -167,7 +170,7 @@ on the set $[V_1],\ldots,[V_r]$.
 The map $[V] \mapsto [V \otimes_k \overline{k}]$
 gives a canonical injective ring homomorphism
 \[
-R_k(G) \hookrightarrow R_{\mathbb{C}} = R(G)
+R_k(G) \hookrightarrow R_{\overline{k}} = R(G)
 \]
 and therefore a canonical injective ring homomorphism
 \[
@@ -185,7 +188,7 @@ follows.
 
 Let $\chi_1,\ldots,\chi_r$ be the irreducible representations of $G$
 over $k$ corresponding to the algebras $A_1,\ldots, A_r$ above.
-Let $\psi_{i,\sigma} : G \to \overline{k}=\mathbb{C}$ be the character
+Let $\psi_{i,\sigma} : G \to \overline{k}$ be the character
 corresponding to the irreducible representation $W_{i,\sigma}$
 defined in the previous section.
 
@@ -508,7 +511,7 @@ bijection with the number of conjugacy classes of \textbf{elements}.
 Let $V$ be a finite-dimensional
 complex representation of a finite group $G$.
 
-\begin{proposition}
+\begin{proposition} \label{prop:Ginner}
 $V$ has a $G$-invariant inner product.
 \end{proposition}
 
@@ -551,8 +554,58 @@ on $V$.
 \end{theorem}
 
 \begin{proof}
-(The proof is short, but is omitted;
-see \cite[Theorem 31]{Serre}.)
+Suppose first that $V$ is realizable over $\mathbb{R}$.
+Let $W$ be the real representation such that $V = W \otimes_\mathbb{R}
+\mathbb{C}$.  Observe that $W$ has a $G$-invariant non-degenerate symmetric bilinear
+form $q$ by the same argument as Proposition~\ref{prop:Ginner}
+(inner products are the same as non-degenerate symmetric bilinear
+forms over $\mathbb{R}$).  Now $q \otimes_\mathbb{R} \mathbb{C}$
+is a $G$-invariant non-degenerate symmetric bilinear form on $V$.
+
+For the converse, we have a non-degenerate symmetric bilinear form $B$
+on $V$.  We also have a $G$-invariant inner product $(-,-)$.
+We define a function $\varphi : V \to V$ such that
+\[
+B(x,y)=(\varphi(x),y)
+\]
+for all $x,y \in V$
+(this is unique and well-defined since both $B$ and the inner product
+are non-degenerate).
+Observe that $\varphi$ is conjugate-linear and bijective.
+Thus $\varphi^2$ is a linear automorphism of $V$.
+
+We claim $\varphi^2$ is a positive definite Hermitian operator.
+Indeed,
+\[
+(\varphi^2(x),y)=B(\varphi(x),y)=B(y,\varphi(x))=(\varphi(y),\varphi(x))
+\]
+for all $x,y \in V$.
+Thus we have
+\[
+\overline{(\varphi(x),\varphi(y))}=\overline{(\varphi^2(y),x)}.
+\]
+Since it inner products are conjugate symmetric, we obtain
+\[
+(\varphi^2(x),y)=(x,\varphi^2(y))
+\]
+and conclude that $\varphi^2$ is Hermitian.
+Moreover, $(\varphi^2(x),x)=(\varphi(x),\varphi(x))$
+implies that we have positive definiteness.
+
+Every positive-definite Hermitian operator has a unique
+positive-definite Hermitian square root $\omega$ such that
+$\omega^2=\varphi^2$.  Moreover, $\omega$ commutes with $\varphi$.
+Let $\sigma = \varphi \omega^{-1}$.
+We see that $\sigma : V \to V$ is a conjugate-linear map with square
+equal to the identity.
+Moreover, $\sigma$ is $G$-equivariant.
+
+Since $\sigma$ is conjugate-linear, it is in particular
+$\mathbb{R}$-linear. 
+Let $V_R$ be the (real) $1$-eigenspace of $\sigma$ and let $V_I$ be the
+(real) $-1$-eigenspace of $\sigma$.  Since $\sigma$ is conjugate-linear,
+we see that $V_I=iV_R$.  We therefore have $V=V_R \oplus iV_I$
+as desired.
 \end{proof}
 
 Now assume $V$ is irreducible and let $\chi$ be its character.
@@ -578,7 +631,10 @@ $\mathbb{R}G$ and $A \cong \operatorname{M}_n(D)$ where $D$ is one of
 the three cases above.
 
 Thus, we get a trichotomy of the real behavior of complex
-representations.  Let us list some of their features.
+representations based on the division algebra to which they are
+associated.
+
+\pagebreak
 
 \noindent
 \textbf{Complex:}
