@@ -420,7 +420,9 @@ Thus, if $\chi$ is a character in $R(G)$, then
 for every $\sigma \in \Gamma$.
 \end{proof}
 
-In view of the above, we define the \emph{$\Gamma$-classes}
+Observe that we can define the $\Gamma$-action directly on the conjugacy
+classes of $G$ using the above identification.
+In view of this, we define the \emph{$\Gamma$-classes}
 (or \emph{$K$-classes}) of $G$ to be the unions of $\Gamma$-orbits of
 conjugacy classes.
 We therefore have:
@@ -437,12 +439,69 @@ The number of irreducible characters of $G$ over $k$
 is equal to the number of $\Gamma$-classes of $G$.
 \end{corollary}
 
-Observe that the $\Gamma$-classes of $G$ are totally group-theoretic.
-We don't actually need to compute the character table to determine the
-number of irreducible representations (just like over $\mathbb{C}$).
+Note that the particular action of $\Gamma$ on $G$ is determined by a
+choice of isomorphism of $\Gamma$ with its image in
+$(\mathbb{Z}/e\mathbb{Z})^\times$, but the $\Gamma$-classes do not
+depend on this choice.
+Thus the $\Gamma$-classes of $G$ are totally group-theoretic.
+In particular, we don't actually need to compute the character table
+to determine the number of irreducible representations (just like over
+$\mathbb{C}$).
 
 However, we only obtain $\overline{R}_k(G)$ from this analysis.
 More work needs to be done to identify the Schur indices.
+
+\subsection{Representations over the rationals}
+
+Here we consider the important special case where $k=\mathbb{Q}$.
+Let $G$ be a finite group with exponent $e$.
+As above, $K=\mathbb{Q}(\zeta_e)$ where $\zeta_e$ is a primitive $e$th
+root of unity.
+The Galois group $\Gamma = \operatorname{Gal}(K/k)$ is isomorphic
+to the full group $(\mathbb{Z}/e\mathbb{Z})^\times$ by standard results
+on cyclotomic fields.
+
+In this case, the $\Gamma$-classes from above have a simple description:
+
+\begin{lemma}
+Two elements $g,h \in G$ belong to the same $\mathbb{Q}$-class if and
+only if they generate conjugate cyclic subgroups.
+\end{lemma}
+
+\begin{proof}
+Observe that $\langle g \rangle = \langle h \rangle$ if and only if
+$g^s = h$ and $h^t= g$ for some integers $s$ and $t$.
+Observe that $t,s$ are relatively prime to $n=\langle g \rangle$.
+Since $n$ divides the exponent $e$ of $G$, we have a surjective group
+homomorphism
+$(\mathbb{Z}/e\mathbb{Z})^\times \to (\mathbb{Z}/n\mathbb{Z})^\times$.
+Thus, we may assume $s$ and $t$ are relatively prime to $e$.
+Since $\Gamma \cong (\mathbb{Z}/e\mathbb{Z})^\times$,
+we conclude $\langle g \rangle = \langle h \rangle$ if and only if
+$g$ and $h$ are in the same $\Gamma$-orbit.
+This respects conjugacy classes. 
+\end{proof}
+
+We conclude the following:
+
+\begin{theorem}
+The number of isomorphism classes of irreducible representations of a
+finite group $G$ over $\mathbb{Q}$ is equal to the number of conjugacy
+classes of cyclic subgroups of $G$.
+\end{theorem}
+
+We point out the following pleasant parallels with permutation
+representations and complex representations:
+
+\begin{itemize}
+\item The number of irreducible \textbf{permutation} representations are in
+bijection with the number of conjugacy classes of \textbf{subgroups}.
+\item The number of irreducible \textbf{rational} representations are in
+bijection with the number of conjugacy classes of \textbf{cyclic
+subgroups}.
+\item The number of irreducible \textbf{complex} representations are in
+bijection with the number of conjugacy classes of \textbf{elements}.
+\end{itemize}
 
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
