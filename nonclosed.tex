@@ -503,6 +503,160 @@ subgroups}.
 bijection with the number of conjugacy classes of \textbf{elements}.
 \end{itemize}
 
+\section{Representations over the reals}
+
+Let $V$ be a finite-dimensional
+complex representation of a finite group $G$.
+
+\begin{proposition}
+$V$ has a $G$-invariant inner product.
+\end{proposition}
+
+\begin{proof}
+Let $b : V \times V \to \mathbb{C}$ be an inner product (not necessarily
+$G$-invariant).
+Define a function $B : V \times V \to \mathbb{C}$ by
+\[
+B(v,w) = \sum_{g \in G}b(gv,gw)
+\]
+for $v, w \in V$.
+Observe that $B$ is also sesquilinear
+and that $B(v,v) > 0$ for all $v \ne 0$.
+Thus $B$ is also an inner product.
+\end{proof}
+
+The previous proposition has the following interpretation:
+
+\begin{corollary}
+Every finite subgroup of $\operatorname{GL}_n(\mathbb{C})$
+is conjugate to a finite subgroup of the unitary group $\operatorname{U}_n$.
+\end{corollary}
+
+Crucially, we can only produce a \emph{sesquilinear} form in general;
+there may not be a non-trivial \emph{bilinear} form.
+For example, a one-dimensional complex representation of
+$\mathbb{Z}/3\mathbb{Z}$ has no non-trivial bilinear forms.
+However, we know that sesquilinear forms and bilinear forms are
+essentially the same over real closed fields.
+It turns out this leads to an interesting theory. 
+
+We say that $V$ is \emph{realizable over $\mathbb{R}$} if there exists a
+real representation $W$ of $G$ such that $W \otimes_\mathbb{R}
+\mathbb{C} \cong V$.
+
+\begin{theorem}[Frobenius-Schur] \label{thm:FrobSchur}
+A complex representation $V$ is realizable over $\mathbb{R}$ if and only
+if there exists a $G$-invariant non-degenerate symmetric bilinear form
+on $V$.
+\end{theorem}
+
+\begin{proof}
+(The proof is short, but is omitted;
+see \cite[Theorem 31]{Serre}.)
+\end{proof}
+
+Now assume $V$ is irreducible and let $\chi$ be its character.
+
+\begin{definition}
+The \emph{Frobenius-Schur indicator} of $V$ is the number
+\[
+\iota(V) := \frac{1}{|G|}\sum_{g \in G} \chi(g^2).
+\]
+\end{definition}
+
+In order to understand representation theory over $\mathbb{R}$, it is
+worth pointing out that there are only three division
+$\mathbb{R}$-algebras:
+\begin{itemize}
+\item the real field $\mathbb{R}$,
+\item the complex field $\mathbb{C}$, and
+\item Hamilton's quaternions $\mathbb{H}$.
+\end{itemize}
+The irreducible representation $V$ is a simple module of
+$A \otimes_{\mathbb{R}} \mathbb{C}$ where $A$ is a simple subalgebra of
+$\mathbb{R}G$ and $A \cong \operatorname{M}_n(D)$ where $D$ is one of
+the three cases above.
+
+Thus, we get a trichotomy of the real behavior of complex
+representations.  Let us list some of their features.
+
+\noindent
+\textbf{Complex:}
+\begin{itemize}
+\item the division algebra corresponding to $V$ is $\mathbb{C}$,
+\item Frobenius-Schur indicator is $\iota(V)=0$,
+\item $V$ does not have a $G$-invariant non-degenerate bilinear form,
+\item $\chi$ is not real valued,
+\item $V$ is not realizable over $\mathbb{R}$, and
+\item $V$ is not isomorphic to its dual $V^\vee$.
+\end{itemize}
+
+\noindent
+\textbf{Real:}
+\begin{itemize}
+\item the division algebra corresponding to $V$ is $\mathbb{R}$,
+\item Frobenius-Schur indicator is $\iota(V)=1$,
+\item $V$ has a $G$-invariant non-degenerate symmetric bilinear form,
+\item $\chi$ is real valued,
+\item $V$ is realizable over $\mathbb{R}$, and
+\item $V \cong V^\vee$.
+\end{itemize}
+
+\noindent
+\textbf{Quaternionic:}
+\begin{itemize}
+\item the division algebra corresponding to $V$ is $\mathbb{H}$,
+\item Frobenius-Schur indicator is $\iota(V)=-1$,
+\item $V$ has a $G$-invariant non-degenerate skew-symmetric bilinear form,
+\item $\chi$ is real valued,
+\item $V$ is not realizable over $\mathbb{R}$, and
+\item $V \oplus V$ is realizable over $\mathbb{R}$, and
+\item $V \cong V^\vee$.
+\end{itemize}
+
+We merely sketch why the above characterization holds,
+leaving details to the reader (or \cite[\S{13.2}]{Serre}).
+Most of the characterizations follow quickly from Wedderburn theory,
+so we focus on the bilinear forms.
+
+Note that bilinear forms are equivalent to maps between $V$ and
+$V^\vee$, where non-triviality is equivalent to non-degeneracy by
+Schur's Lemma since we want $G$-invariance.
+Schur's Lemma also tells us $G$-invariant bilinear forms
+are unique up to scaling.
+The decomposition of a bilinear form into a symmetric and skew-symmetric
+part is $G$-invariant, so uniqueness up to scaling implies that the form
+must be either symmetric or skew-symmetric.
+Having a \emph{symmetric} bilinear form is equivalent to being realizable over
+the reals by Theorem~\ref{thm:FrobSchur} above.
+
+Finally, we consider the Frobenius-Schur indicator.
+A $G$-invariant symmetric bilinear form on $V$ is equivalent to
+having a trivial subrepresentation of $\operatorname{Sym}^2(V)$.
+Similarly, a $G$-invariant skew-symmetric bilinear form on $V$
+is equivalent to having a trivial subrepresentation of
+$\operatorname{Alt}^2(V)$.
+Recall the formulas for the characters of the
+symmetric and alternating squares:
+\[
+\chi_{\operatorname{Sym}^2(V)} = \chi_V^2 + \Psi^2(\chi_V)
+\textrm{ and }
+\chi_{\operatorname{Alt}^2(V)} = \chi_V^2 - \Psi^2(\chi_V).
+\]
+Thus, we have $(1,\chi_{\operatorname{Sym}^2(V)})=1$ iff $V$ is real,
+$(1,\chi_{\operatorname{Alt}^2(V)})=1$ iff $V$ is quaternionic,
+and they are $0$ otherwise.
+
+Now we simply observe that
+\[
+\chi_V^2 = \chi_{\operatorname{Sym}^2(V)} + \chi_{\operatorname{Alt}^2(V)}
+\]
+and
+\[
+\iota(V) := \frac{1}{|G|}\sum_{g \in G} \chi(g^2)
+=(1, \Psi^2(\chi_V)).
+\]
+
 \bibliographystyle{alpha}
 \bibliography{rep_theory}
 
