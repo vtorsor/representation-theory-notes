@@ -100,7 +100,7 @@ The \emph{Schur index} of $V_i$ is defined to be the
 Schur index $d_i$ of the associated algebra $A_i$.
 
 Let $\Gamma$ be the absolute Galois group
-$\operatorname{Gal}(\overline{k}/k$.
+$\operatorname{Gal}(\overline{k}/k)$.
 Let $X_i :=
 \operatorname{Hom}_{k-\operatorname{alg}}(F_i,\overline{k})$.
 Observe that $X_i$ has a left action of $\Gamma$ by
@@ -532,17 +532,23 @@ The previous proposition has the following interpretation:
 
 \begin{corollary}
 Every finite subgroup of $\operatorname{GL}_n(\mathbb{C})$
-is conjugate to a finite subgroup of the unitary group $\operatorname{U}_n$.
+is conjugate to a finite subgroup of the unitary group
+$\operatorname{U}(n)$.
 \end{corollary}
 
 Crucially, we can only produce a \emph{sesquilinear} form in general;
 there may not be a non-trivial \emph{bilinear} form.
-For example, a one-dimensional complex representation of
-$\mathbb{Z}/3\mathbb{Z}$ has no non-trivial bilinear forms.
+For example, a non-trivial one-dimensional complex representation of
+$G=\mathbb{Z}/3\mathbb{Z}$ has no non-trivial $G$-invariant bilinear forms;
+otherwise, we have a contradiction
+\[
+1=(v,v)=(gv,gv)=(\zeta_3v,\zeta_3,v)=\zeta_3^2(v,v)=\zeta_3^2
+\]
+for $v$ a vector of norm one and $g$ a generator of $G$.
+
 However, we know that sesquilinear forms and bilinear forms are
 essentially the same over real closed fields.
 It turns out this leads to an interesting theory. 
-
 We say that $V$ is \emph{realizable over $\mathbb{R}$} if there exists a
 real representation $W$ of $G$ such that $W \otimes_\mathbb{R}
 \mathbb{C} \cong V$.
@@ -574,7 +580,7 @@ are non-degenerate).
 Observe that $\varphi$ is conjugate-linear and bijective.
 Thus $\varphi^2$ is a linear automorphism of $V$.
 
-We claim $\varphi^2$ is a positive definite Hermitian operator.
+We claim $\varphi^2$ is a positive-definite Hermitian operator.
 Indeed,
 \[
 (\varphi^2(x),y)=B(\varphi(x),y)=B(y,\varphi(x))=(\varphi(y),\varphi(x))
@@ -584,15 +590,15 @@ Thus we have
 \[
 \overline{(\varphi(x),\varphi(y))}=\overline{(\varphi^2(y),x)}.
 \]
-Since it inner products are conjugate symmetric, we obtain
+Since inner products are conjugate-symmetric, we obtain
 \[
 (\varphi^2(x),y)=(x,\varphi^2(y))
 \]
 and conclude that $\varphi^2$ is Hermitian.
 Moreover, $(\varphi^2(x),x)=(\varphi(x),\varphi(x))$
-implies that we have positive definiteness.
+implies that we have positive-definiteness.
 
-Every positive-definite Hermitian operator has a unique
+Every positive-definite Hermitian operator $\varphi^2$ has a unique
 positive-definite Hermitian square root $\omega$ such that
 $\omega^2=\varphi^2$.  Moreover, $\omega$ commutes with $\varphi$.
 Let $\sigma = \varphi \omega^{-1}$.
@@ -620,11 +626,9 @@ The \emph{Frobenius-Schur indicator} of $V$ is the number
 In order to understand representation theory over $\mathbb{R}$, it is
 worth pointing out that there are only three division
 $\mathbb{R}$-algebras:
-\begin{itemize}
-\item the real field $\mathbb{R}$,
-\item the complex field $\mathbb{C}$, and
-\item Hamilton's quaternions $\mathbb{H}$.
-\end{itemize}
+the real field $\mathbb{R}$,
+the complex field $\mathbb{C}$, and
+Hamilton's quaternions $\mathbb{H}$.
 The irreducible representation $V$ is a simple module of
 $A \otimes_{\mathbb{R}} \mathbb{C}$ where $A$ is a simple subalgebra of
 $\mathbb{R}G$ and $A \cong \operatorname{M}_n(D)$ where $D$ is one of
@@ -639,7 +643,7 @@ associated.
 \noindent
 \textbf{Complex:}
 \begin{itemize}
-\item the division algebra corresponding to $V$ is $\mathbb{C}$,
+\item The division algebra corresponding to $V$ is $\mathbb{C}$,
 \item Frobenius-Schur indicator is $\iota(V)=0$,
 \item $V$ does not have a $G$-invariant non-degenerate bilinear form,
 \item $\chi$ is not real valued,
@@ -650,7 +654,7 @@ associated.
 \noindent
 \textbf{Real:}
 \begin{itemize}
-\item the division algebra corresponding to $V$ is $\mathbb{R}$,
+\item The division algebra corresponding to $V$ is $\mathbb{R}$,
 \item Frobenius-Schur indicator is $\iota(V)=1$,
 \item $V$ has a $G$-invariant non-degenerate symmetric bilinear form,
 \item $\chi$ is real valued,
@@ -661,11 +665,11 @@ associated.
 \noindent
 \textbf{Quaternionic:}
 \begin{itemize}
-\item the division algebra corresponding to $V$ is $\mathbb{H}$,
+\item The division algebra corresponding to $V$ is $\mathbb{H}$,
 \item Frobenius-Schur indicator is $\iota(V)=-1$,
 \item $V$ has a $G$-invariant non-degenerate skew-symmetric bilinear form,
 \item $\chi$ is real valued,
-\item $V$ is not realizable over $\mathbb{R}$, and
+\item $V$ is not realizable over $\mathbb{R}$, but
 \item $V \oplus V$ is realizable over $\mathbb{R}$, and
 \item $V \cong V^\vee$.
 \end{itemize}
